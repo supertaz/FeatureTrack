@@ -44,8 +44,13 @@ class IterationsController < ApplicationController
         @completion_date = iteration.finish.to_date
         @story_count = iteration.stories.count
       rescue => e
-        flash.now[:error] = "Pivotal returned an exception: #{e.response}<br />Trying again in 15 seconds."
-        @refresh = 15
+        if e.response.nil?
+          flash.now[:error] = "Pivotal returned a #{e.type} exception.<br />Trying again in 15 seconds."
+          @refresh = 15
+        else
+          flash.now[:error] = "Pivotal returned an exception: #{e.response}<br />Trying again in 15 seconds."
+          @refresh = 15
+        end
       end
     end
   end
