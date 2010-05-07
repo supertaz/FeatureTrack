@@ -1,6 +1,7 @@
 - semantic_form_for([:admin, @user]) do |f|
   = f.error_messages
   - f.inputs do
+    %h3 User details
     = f.input :firstname, :label => 'First name'
     = f.input :lastname, :label => 'Last name'
     = f.input :nickname, :label => 'Nickname or preferred name'
@@ -10,6 +11,16 @@
     = f.input :home, :label => 'Home phone'
     = f.input :password, :label => 'Password'
     = f.input :password_confirmation, :label => 'Password confirmation'
-    = f.input :active, :label => 'Active'
+    %h3 User permissions
+    = f.input :active, :label => 'Can log in'
+    = f.input :defect_reporter, :as => :boolean, :label => 'Can report defects'
+    = f.input :defect_viewer, :as => :boolean, :label => 'Can view defect lists'
+    %h3 User roles
+    = f.input :business_user, :as => :boolean
+    = f.input :technology_team, :as => :boolean
+    = f.input :developer, :as => :boolean
+    = f.input :qa, :as => :boolean, :label => 'QA'
+    = f.input :scrum_master, :as => :boolean
+    = f.input :global_admin, :as => :boolean
   - f.buttons do
     = f.submit "Submit"
