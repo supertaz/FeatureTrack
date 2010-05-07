@@ -1,4 +1,6 @@
 class Admin::EnvironmentsController < ApplicationController
+  before_filter :require_global_admin
+
   def index
     @environments = Environment.all
   end
