@@ -13,10 +13,10 @@ class IterationsController < ApplicationController
       end
     rescue => e
       if e.response.nil?
-        flash.now[:error] = "Pivotal returned a #{e.type} exception.<br />Trying again in 15 seconds."
+        flash.now[:error] = "#{e.type} exception, trying again in 15 seconds."
         @refresh = 15
       else
-        flash.now[:error] = "Pivotal returned an exception: #{e.response}<br />Trying again in 15 seconds."
+        flash.now[:error] = "Remote source returned an exception: #{e.response}&nbsp;&nbsp;Will try again in 15 seconds."
         @refresh = 15
       end
     end
@@ -55,10 +55,10 @@ class IterationsController < ApplicationController
         @story_count = iteration.stories.count
       rescue => e
         if e.response.nil?
-          flash.now[:error] = "Pivotal returned a #{e.type} exception.<br />Trying again in 15 seconds."
+          flash.now[:error] = "#{e.type} exception, trying again in 15 seconds."
           @refresh = 15
         else
-          flash.now[:error] = "Pivotal returned an exception: #{e.response}<br />Trying again in 15 seconds."
+          flash.now[:error] = "Remote source returned an exception: #{e.response}&nbsp;&nbsp;Will try again in 15 seconds."
           @refresh = 15
         end
       end
@@ -83,10 +83,10 @@ class IterationsController < ApplicationController
         @story_count = iteration.stories.count
       rescue => e
         if e.response.nil?
-          flash.now[:error] = "Pivotal returned a #{e.type} exception.<br />Trying again in 15 seconds."
+          flash.now[:error] = "#{e.type} exception, trying again in 15 seconds."
           @refresh = 15
         else
-          flash.now[:error] = "Pivotal returned an exception: #{e.response}<br />Trying again in 15 seconds."
+          flash.now[:error] = "Remote source returned an exception: #{e.response}&nbsp;&nbsp;Will try again in 15 seconds."
           @refresh = 15
         end
       end
