@@ -5,10 +5,20 @@ class IterationsController < ApplicationController
     key_object = current_user.get_api_key('pivotal')
     PivotalTracker::Client.token = key_object.api_key
     projects = Project.find_by_source('pivotal')
-    if projects.instance_of? Array
-      @iterations = PivotalTracker::Iteration.all(projects.first)
-    else
-      @iterations = PivotalTracker::Iteration.all(projects)
+    begin
+      if projects.instance_of? Array
+        @iterations = PivotalTracker::Iteration.all(projects.first)
+      else
+        @iterations = PivotalTracker::Iteration.all(projects)
+      end
+    rescue => e
+      if e.response.nil?
+        flash.now[:error] = "Pivotal returned a #{e.type} exception.<br />Trying again in 15 seconds."
+        @refresh = 15
+      else
+        flash.now[:error] = "Pivotal returned an exception: #{e.response}<br />Trying again in 15 seconds."
+        @refresh = 15
+      end
     end
   end
 
@@ -62,14 +72,24 @@ class IterationsController < ApplicationController
     key_object = current_user.get_api_key('pivotal')
     PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
     Project.active.each do |project|
-      iteration = PivotalTracker::Iteration.current(project.get_source_project)
-      iteration.stories.each do |story|
-        owner = (story.owned_by.nil? || story.owned_by.empty?) ? 'Unassigned' : story.owned_by
-        add_to_lane_hash(@workers, owner, story)
+      begin
+        iteration = PivotalTracker::Iteration.current(project.get_source_project)
+        iteration.stories.each do |story|
+          owner = (story.owned_by.nil? || story.owned_by.empty?) ? 'Unassigned' : story.owned_by
+          add_to_lane_hash(@workers, owner, story)
+        end
+        @iteration_number = iteration.number
+        @completion_date = iteration.finish.to_date
+        @story_count = iteration.stories.count
+      rescue => e
+        if e.response.nil?
+          flash.now[:error] = "Pivotal returned a #{e.type} exception.<br />Trying again in 15 seconds."
+          @refresh = 15
+        else
+          flash.now[:error] = "Pivotal returned an exception: #{e.response}<br />Trying again in 15 seconds."
+          @refresh = 15
+        end
       end
-      @iteration_number = iteration.number
-      @completion_date = iteration.finish.to_date
-      @story_count = iteration.stories.count
     end
   end
 
