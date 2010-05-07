@@ -18,7 +18,7 @@ class IterationsController < ApplicationController
 
     @lanes = Hash.new
     key_object = current_user.get_api_key('pivotal')
-    PivotalTracker::Client.token = key_object.api_key
+    PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
     Project.active.each do |project|
       begin
         iteration = PivotalTracker::Iteration.current(project.get_source_project)
@@ -55,7 +55,7 @@ class IterationsController < ApplicationController
     @refresh = params[:refresh].nil? ? @default_refresh : params[:refresh].to_i
     @workers = Hash.new
     key_object = current_user.get_api_key('pivotal')
-    PivotalTracker::Client.token = key_object.api_key
+    PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
     Project.active.each do |project|
       iteration = PivotalTracker::Iteration.current(project.get_source_project)
       iteration.stories.each do |story|
