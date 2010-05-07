@@ -51,8 +51,12 @@
         - if current_user
           = link_to 'current', current_iteration_url
           = link_to 'assignments', assignments_url
-          = link_to 'defects', defects_url
-          = link_to 'report a defect', new_defect_url
+          - if current_user.global_admin || current_user.scrum_master || current_user.business_user || current_user.technology_team || current_user.defect_reporter
+            = link_to 'report a defect', new_defect_url
+          - if current_user.global_admin || current_user.scrum_master || current_user.business_user || current_user.technology_team || current_user.defect_viewer
+            = link_to 'defects', defects_url
+          - if current_user.global_admin
+            = link_to 'administration', admin_url
 
       - if show_title?
         %h1=h yield(:title)
