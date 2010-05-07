@@ -1,0 +1,16 @@
+- semantic_form_for [:admin, @project] do |f|
+  - f.inputs do
+    = f.input :name, :label => 'Name'
+    = f.input :source, :label => 'Source', :as => :select, :collection => ['pivotal', 'internal'], :include_blank => false
+    = f.input :source_id, :label => 'Source ID (for external sources)', :as => :string, :input_html => {:size => 20, :maxlength => 20}
+    = f.input :active, :label => 'Active'
+    = f.input :archived, :label => 'Archived'
+    = f.input :test_project, :label => 'Test project'
+    = f.input :allow_features, :label => 'Allow features'
+    = f.input :allow_bugs, :label => 'Allow bugs'
+    = f.input :allow_chores, :label => 'Allow chores'
+    = f.input :allow_releases, :label => 'Allow releases'
+    = f.input :start_at, :label => 'Start at'
+    = f.input :end_at, :label => 'End at'
+  - f.buttons do
+    = f.submit 'Save'

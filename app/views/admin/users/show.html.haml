@@ -1,0 +1,41 @@
+- title "User Details"
+
+%p
+  %strong First name:
+  =h @user.firstname
+%p
+  %strong Last name:
+  =h @user.lastname
+%p
+  %strong Nickname/preferred name:
+  =h @user.nickname
+%p
+  %strong Email:
+  =h @user.email
+%p
+  %strong Work phone:
+  =h @user.work
+%p
+  %strong Mobile phone:
+  =h @user.mobile
+%p
+  %strong Home phone:
+  =h @user.home
+%p
+  %strong Active:
+  = @user.active?
+%p
+  %strong Current Login At:
+  =h @user.current_login_at
+%p
+  %strong Last Login At:
+  =h @user.last_login_at
+%p
+  %strong Current Login Ip:
+  =h @user.current_login_ip
+%p
+  %strong Last Login Ip:
+  =h @user.last_login_ip
+
+%p
+  = link_to "Edit user account", edit_admin_user_path

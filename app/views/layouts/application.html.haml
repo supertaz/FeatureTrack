@@ -1,0 +1,70 @@
+!!! Strict
+%html{html_attrs}
+
+  %head
+    %title
+      = h(yield(:title) || "Untitled")
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
+    - unless @refresh.nil? || @refresh < 1
+      %meta{"http-equiv"=>'Refresh', :content=>@refresh.to_s}
+    = stylesheet_link_tag 'application', 'overlay', 'formtastic'
+    = javascript_include_tag 'jquery-1.3.2.min', 'jquery.tools.min', 'application'
+    = yield(:head)
+
+  %body
+    #summary
+      #usernav
+        #user_identity
+          - if current_user && current_user.is_global_admin?
+            = link_to image_tag('/images/icons/user-admin.png'), admin_url
+          - elsif current_user
+            = image_tag '/images/icons/user.png'
+          - else
+            = image_tag '/images/icons/user-unknown.png'
+          - if current_user
+            Welcome, #{current_user.nickname.nil? ? current_user.firstname : current_user.nickname}
+            %br
+            = link_to 'My account', user_url
+            %span
+              |
+            = link_to 'Log out', logout_url
+          - else
+            You are not currently logged in.
+            %br
+            = link_to 'Click here to log in', login_url
+
+        #refresh_options
+          #refresh_option_text
+            = image_tag '/images/icons/extinct.png'
+            Refresh interval:
+            %br
+            - if defined? @default_refresh
+              %a{:href => url_for(request.request_uri.gsub(/(.*)\?.*/,'\1'))} #{pluralize(@default_refresh / 60.00, 'min')}
+              - unless @default_refresh == 900
+                %span
+                  |
+                %a{:href => url_for(request.request_uri.gsub(/(.*)\?.*/,'\1') + '?refresh=900')} 15 mins
+            - else
+              %i Manual refresh only
+
+      #globalnav
+        - if current_user
+          = link_to 'current', current_iteration_url
+          = link_to 'assignments', assignments_url
+          = link_to 'defects', defects_url
+          = link_to 'report a defect', new_defect_url
+
+      - if show_title?
+        %h1=h yield(:title)
+
+      -if yield(:summary_info)
+        = yield(:summary_info)
+
+      .nav_tabs
+        =yield(:navigation_links)
+
+    #container
+      #overview
+        - flash.each do |name, msg|
+          = content_tag :div, msg, :id => "flash_#{name}"
+        = yield

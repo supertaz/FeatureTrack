@@ -1,0 +1,40 @@
+- title "Manage Projects"
+- content_for :summary_info do
+  Manage projects and visibility
+
+%table
+  %tr.head
+    %th.nowrap Project Name
+    %th Source
+    %th.nowrap Source ID
+    %th Active
+    %th.nowrap Allows New...
+    %th.nowrap Start Date
+    %th.nowrap End Date
+    %th Archived
+    %th.nowrap Test Project
+    %th Actions
+  - for project in @projects
+    %tr{:class => cycle('grey', nil)}
+      %td.left.right= h project.name
+      %td.right= h project.source
+      %td.right= h project.source_id
+      %td.right= project.active?
+      %td.right
+        - if project.allow_features? || project.allow_bugs? || project.allow_chores? || project.allow_releases?
+          #{project.allow_features? ? 'features' : nil}
+          #{project.allow_bugs? ? 'bugs' : nil}
+          #{project.allow_chores? ? 'chores' : nil}
+          #{project.allow_releases? ? 'releases' : nil}
+        - else
+          none (closed)
+      %td.right= project.start_at
+      %td.right= project.end_at
+      %td.right= project.archived?
+      %td.right= project.test_project?
+      %td.right
+        = link_to 'Show', admin_project_url(project), :class => 'action'
+        = link_to 'Edit', edit_admin_project_url(project), :class => 'action'
+        = link_to 'Destroy', admin_project_url(project), :confirm => 'Are you sure you want to delete this project? (This action can\'t be undone!)', :method => :delete, :class => 'action'
+
+%p= link_to "New Project", new_admin_project_url

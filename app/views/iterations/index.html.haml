@@ -1,0 +1,24 @@
+- title "Iterations"
+
+%table
+  %tr
+    %th Number
+    %th Start
+    %th Finish
+    %th Stories
+  - for iteration in @iterations
+    %tr
+      %td= h iteration.number
+      %td= h iteration.start.to_date
+      %td= h iteration.finish.to_date
+      %td
+        #{h iteration.stories.count} stories in this iteration
+        %br
+        = iteration.stories.each do |story|
+          (
+          = h story.story_type
+          )&nbsp;&nbsp;
+          = h story.name
+          \-
+          = show_story_state(story.current_state)
+          %br

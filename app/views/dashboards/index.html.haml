@@ -1,0 +1,9 @@
+- title "Dashboards"
+
+%table
+  %tr
+    %th Name
+  - for dashboard in @dashboards
+    %tr
+      %td= h dashboard.name
+

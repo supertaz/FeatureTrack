@@ -1,0 +1,8 @@
+- title "Edit Defect"
+
+= render :partial => 'form'
+
+%p
+  = link_to "Show", defect_path(@defect)
+  |
+  = link_to "View All", defects_path

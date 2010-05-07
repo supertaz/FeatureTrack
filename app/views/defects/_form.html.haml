@@ -1,0 +1,21 @@
+%p
+  %h3 Defect Description
+  %br
+  - semantic_form_for @defect do |f|
+    = f.error_messages
+    - f.inputs do
+      - unless @defect.id.nil?
+        = f.input :status, :label => 'Status', :as => :select, :collection => [] , :include_blank => false
+      = f.input :title, :label => 'Title'
+      = f.input :description, :label => 'Problem Description'
+      %h3 Impact Analysis
+      %br
+      = f.input :severity, :label => 'Severity', :as => :select, :collection => get_severities
+      -if current_user.is_technology_team? || current_user.is_global_admin?
+        = f.input :risk, :label => 'Technical risk', :as => :select, :collection => get_risk_levels
+      -if current_user.is_business_user? || current_user.is_global_admin?
+        = f.input :priority, :label => 'Priority', :as => :select, :collection => get_priorities
+      = f.input :affected, :label => 'Affected parties', :as  => :radio, :collection => get_affected_parties
+      = f.input :functional_area, :as => :select, :collection => get_functional_areas
+    - f.buttons do
+      = f.submit "Submit"

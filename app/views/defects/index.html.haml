@@ -1,0 +1,55 @@
+- title "Defects"
+
+%table
+  %tr.head
+    %th.nowrap Status
+    %th.nowrap Reported against
+    %th.nowrap Defect title
+    %th.nowrap Reported by
+    %th.nowrap Current owner
+    %th.nowrap Developer
+    %th.nowrap Tester
+    %th.nowrap Dev started
+    %th.nowrap Last assigned at
+    %th.nowrap Actions
+  - for defect in @defects
+    %tr{:class => cycle('grey', nil)}
+      %td.left.right= h defect.status
+      %td.right
+        - unless defect.story_source.nil? && defect.against_story_id.nil?
+          #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}#{h defect.against_story_id}
+        - else
+          No story
+      %td.right= link_to "#{h defect.title}", defect_url(defect)
+      %td.right.nowrap= h defect.reporter.fullname
+      %td.right.nowrap
+        - unless defect.owner.nil?
+          = h defect.owner
+        - else
+          Not assigned
+      %td.right.nowrap
+        - unless defect.developer.nil?
+          = h developer.owner
+        - else
+          Not assigned
+      %td.right.nowrap
+        - unless defect.tester.nil?
+          = h tester.owner
+        - else
+          Not assigned
+      %td.right
+        - unless defect.started_at.nil?
+          = defect.started_at
+        - else
+          Not started
+      %td.right
+        - unless defect.last_assigned_at.nil?
+          = defect.last_assigned_at
+        - else
+          Not assigned
+      %td.right.nowrap
+        = link_to 'Edit', edit_defect_path(defect), :class => 'action'
+        - if current_user.is_global_admin? || current_user.is_scrum_master? || (defect.created_at > Time.zone.now - 15.minutes && defect.reporter == current_user)
+          = link_to 'Delete', defect, :confirm => 'Are you sure you want to remove this defect? (This action can\'t be undone!)', :method => :delete, :class => 'action'
+
+%p= link_to "Report a new defect", new_defect_path

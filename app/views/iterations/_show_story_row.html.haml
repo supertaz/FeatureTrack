@@ -1,0 +1,19 @@
+%tr{:class => ((i + 1) % 2) > 0 ? nil : 'grey'}
+  %td.left
+    .task_type
+      =image_tag(get_task_type_icon story.story_type)
+      &nbsp;
+  %td
+    -#%a{:href=>story.url, :rel => '#overlay'}= h story.name
+    %a{:href=>story.url, :target => '_new'} #{h story.name}
+  %td.status
+    .status=show_story_state(story.current_state, image_tag(get_state_icon story.current_state))
+  %td.right.nowrap
+    - weeks = get_schedule_week(story)
+    - if weeks.nitems > 0
+      = pluralize(weeks.nitems, 'Week').split(' ')[1]
+      = weeks[0]
+      - if weeks.nitems > 1
+        \- #{weeks[1]}
+  %td.right.nowrap= h story.requested_by
+  %td.right.nowrap= h story.owned_by

@@ -1,0 +1,38 @@
+- slug = slugify(lane[1]['name'])
+- content_for :navigation_links do
+  %a{:href => "##{slug}", :rel => 'scrollTo'}= h lane[1]['name']
+%h2{:id => slug}
+  #{h lane[1]['name']}
+  (#{pluralize(lane[1]['features'].nil? ? 0 : lane[1]['features'].count, 'story')},
+  #{pluralize(((lane[1]['defects'].nil? ? 0 : lane[1]['defects'].count) + (lane[1]['priority'].nil? ? 0 : lane[1]['priority'].count)), 'defect')},
+  #{pluralize(lane[1]['chores'].nil? ? 0 : lane[1]['chores'].count, 'chore')},
+  #{pluralize(lane[1]['other'].nil? ? 0 : lane[1]['other'].count, 'other')})
+%table
+  %tr.head
+    %th &nbsp;
+    %th.title Story title
+    %th Status
+    %th.nowrap Scheduled for
+    %th.nowrap Requested by
+    %th.nowrap Current owner
+  - i = 0
+  - unless lane[1]['priority'].nil?
+    - lane[1]['priority'].sort{|a,b| sort_defect_score(a,b)}.each do |story|
+      - i += 1
+      =render :partial => 'show_story_row', :locals => {:story => story, :i => i}
+  - unless lane[1]['chores'].nil?
+    - lane[1]['chores'].sort{|a,b| get_state_step(b.current_state) <=> get_state_step(a.current_state)}.each do |story|
+      - i += 1
+      =render :partial => 'show_story_row', :locals => {:story => story, :i => i}
+  - unless lane[1]['features'].nil?
+    - lane[1]['features'].sort{|a,b| get_state_step(b.current_state) <=> get_state_step(a.current_state)}.each do |story|
+      - i += 1
+      =render :partial => 'show_story_row', :locals => {:story => story, :i => i}
+  - unless lane[1]['defects'].nil?
+    - lane[1]['defects'].sort{|a,b| sort_defect_score(a,b)}.each do |story|
+      - i += 1
+      =render :partial => 'show_story_row', :locals => {:story => story, :i => i}
+  - unless lane[1]['other'].nil?
+    - lane[1]['other'].sort{|a,b| get_state_step(b.current_state) <=> get_state_step(a.current_state)}.each do |story|
+      - i += 1
+      =render :partial => 'show_story_row', :locals => {:story => story, :i => i}

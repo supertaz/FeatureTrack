@@ -1,0 +1,329 @@
+!primary_color = #7EA6BB
+
+body
+  :background-color = !primary_color
+  :padding 0px
+  :font
+    :family Verdana, Geneva, Tahoma, sans-serif
+    :size 14px
+
+h1
+  :margin 0em
+  :padding 0
+  :font-size 20px
+h2
+  :margin 0em
+  :padding 0
+  :font-size 18px
+h3
+  :margin 0em
+  :padding 0
+  :font-size 16px
+h4
+  :margin 0em
+  :padding 0
+  :font-size 14px
+h5
+  :margin 0em
+  :padding 0
+  :font-size 12px
+h6
+  :margin 0em
+  :padding 0
+  :font-size 10px
+a
+  :color #0000FF
+  img
+    :border none
+
+.clear
+  :clear both
+  :height 0
+  :overflow hidden
+
+#container
+  :position relative
+  :width 97%
+  :margin 0 auto
+  :background #fff
+  :padding 0px
+  :border solid 1px black
+  #overview
+    :padding 0px 20px 0px 20px
+    :margin-top 6.7em
+    :margin-bottom 0px
+#summary
+  :display block
+  :position fixed
+  :left 0px
+  :top 0px
+  :z-index 10000
+  :width 100%
+  :height 65px
+  :padding 10px 20px 20px 20px
+  :margin-bottom 1em
+  :border-bottom solid 1px #000
+  :background #ffd
+.nav_tabs
+  :padding 0em
+  :width 95%
+  :text-align center
+  a
+    :position relative
+    :bottom -11px
+    :background #fff
+    :color #000
+    :padding .3em 1.2em 5px 1.2em
+    :border-top solid 1px #000
+    :border-left solid 1px #000
+    :border-right solid 1px #000
+    :border-bottom none
+    :text-decoration none
+    :font-weight bold
+    &:hover
+      :background #77a
+      :color #fff
+
+#flash_notice,
+#flash_error
+  :padding 5px 8px
+  :margin 10px 0
+
+#flash_notice
+  :background-color #CFC
+  :border solid 1px #6C6
+
+#flash_error
+  :background-color #FCC
+  :border solid 1px #C66
+
+.fieldWithErrors
+  :display inline
+
+#errorExplanation
+  :width 400px
+  :border 2px solid #CF0000
+  :padding 0
+  :padding-bottom 12px
+  :margin-bottom 20px
+  :background-color #f0f0f0
+  h2
+    :text-align left
+    :padding 5px 5px 5px 15px
+    :margin 0
+    :font
+      :weight bold
+      :size 12px
+    :background-color #c00
+    :color #fff
+  p
+    :color #333
+    :margin-bottom 0
+    :padding 8px
+  ul
+    :margin 2px 24px
+    li
+      :font-size 12px
+      :list-style disc
+
+.status
+  :position relative
+  img
+    :position absolute
+    :vertical-align text-bottom
+    :left .3em
+    :padding-top .1em
+    :padding-bottom .1em
+  .accepted
+    :background-color #0a0
+    :color #fff
+    :font-weight bold
+    :padding .2em .1em .2em 1em
+    :width 8em
+    :text-align center
+    :margin 0
+    :border-right 1px solid #999
+    :border-left 1px solid #999
+  .rejected
+    :background-color #f00
+    :color #fff
+    :font-weight bold
+    :padding .2em .1em .2em 1em
+    :width 8em
+    :text-align center
+    :margin 0
+    :border-right 1px solid #999
+    :border-left 1px solid #999
+  .delivered
+    :background-color #d70
+    :color #fff
+    :font-weight bold
+    :padding .2em .1em .2em 1em
+    :width 8em
+    :text-align center
+    :margin 0
+    :border-right 1px solid #999
+    :border-left 1px solid #999
+  .finished
+    :background-color #ee0
+    :color #000
+    :font-weight bold
+    :padding .2em .1em .2em 1em
+    :width 8em
+    :text-align center
+    :margin 0
+    :border-right 1px solid #999
+    :border-left 1px solid #999
+  .started
+    :background-color #069
+    :color #fff
+    :font-weight bold
+    :padding .2em .1em .2em 1em
+    :width 8em
+    :text-align center
+    :margin 0
+    :border-right 1px solid #999
+    :border-left 1px solid #999
+  .unstarted
+    :background-color #000
+    :color #fff
+    :font-style italic
+    :padding .2em .1em .2em 1em
+    :width 8em
+    :text-align center
+    :margin 0
+    :border-right 1px solid #999
+    :border-left 1px solid #999
+.task_type
+  :position relative
+  :width 1.5em
+  img
+    :position absolute
+    :vertical-align text-bottom
+    :left .3em
+    :top .1em
+.title
+  :width 100%
+#usernav
+  :position absolute
+  :top -1px
+  :right 5em
+  :float right
+  :background-color #fff
+  :padding .3em .5em .3em .3em
+  :border #000 solid 1px
+  #user_identity
+    :float left
+    :padding-left 38px
+    :margin-right 10px
+    :text-align center
+    a
+      :text-decoration none
+      :color #444
+      :font-weight bold
+      &:hover
+        :color #666
+        :text-decoration underline
+    img
+      :position absolute
+      :vertical-align text-bottom
+      :top 4px
+      :left 3px
+  #refresh_options
+    :background transparent
+    :float right
+    #refresh_option_text
+      :position relative
+      :text-align center
+      :padding-left 35px
+      a
+        :font-weight bold
+        :color #444
+        :text-decoration none
+        &:hover
+          :color #666
+          :text-decoration underline
+      span
+        :color #999
+      img
+        :position absolute
+        :vertical-align text-bottom
+        :top 0px
+        :left 3px
+#globalnav
+  :position relative
+  :margin-right 40px
+  :top -5px
+  :background transparent
+  a
+    :position relative
+    :top -3px
+    :background #fff
+    :color #000
+    :padding .2em .6em .2em .6em
+    :border-bottom solid 1px #000
+    :border-left solid 1px #000
+    :border-right solid 1px #000
+    :border-top none
+    :text-decoration none
+    :font-weight bold
+    &:hover
+      :background #77a
+      :color #fff
+
+#main_detail
+  :padding .1em 0em 0em 0em
+#status_info
+  :float right
+  :height 200px
+  :width 16em
+  :margin 0px 0px 0px 2em
+  :padding 0px
+table
+  :border-spacing 0px
+  :margin-bottom 20px
+  a
+    :display block
+    :text-decoration none
+    :color inherit
+  a.action
+    :display inline
+    :text-decoration none
+    :color inherit
+    &:hover
+      :text-decoration underline
+  th
+    :font-family Garamond, “Hoefler Text”, Palatino, “Palatino Linotype”, serif
+    :font-weight bold
+    :font-variant small-caps
+    :text-transform capitalize
+    :padding .2em .6em 0em .6em
+    :border-bottom 1px solid #999
+    &:hover
+      :background #fff
+      :color #000
+  tr.head
+    &:hover
+      :background #fff
+      :color #000
+  tr:hover
+    :background #77a
+    :color #fff
+  td
+    :font-size 13px
+    :padding 0em .2em 0em .2em
+    :border-bottom 1px solid #999
+  td.left
+    :border-left 1px solid #999
+  td.right
+    :border-right 1px solid #999
+    :text-align center
+  tr.grey
+    &:hover
+      td
+        :background #77a
+        :color #fff
+    td
+      :background #eee
+.nowrap
+  :white-space nowrap

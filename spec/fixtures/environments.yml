@@ -1,0 +1,13 @@
+one:
+  name: MyString
+  enable_at: 2010-05-06 18:37:49
+  disable_at: 2010-05-06 18:37:49
+  restricted_to: MyString
+  description: MyText
+
+two:
+  name: MyString
+  enable_at: 2010-05-06 18:37:49
+  disable_at: 2010-05-06 18:37:49
+  restricted_to: MyString
+  description: MyText

@@ -1,0 +1,29 @@
+one:
+  status: MyString
+  story_source: MyString
+  story_id: 1
+  title: MyString
+  reporter: 1
+  owner: 1
+  tester: 1
+  approved_at: 2010-04-15 15:15:26
+  rejected_at: 2010-04-15 15:15:26
+  finished_at: 2010-04-15 15:15:26
+  delivered_at: 2010-04-15 15:15:26
+  started_at: 2010-04-15 15:15:26
+  last_assigned_at: 2010-04-15 15:15:26
+
+two:
+  status: MyString
+  story_source: MyString
+  story_id: 1
+  title: MyString
+  reporter: 1
+  owner: 1
+  tester: 1
+  approved_at: 2010-04-15 15:15:26
+  rejected_at: 2010-04-15 15:15:26
+  finished_at: 2010-04-15 15:15:26
+  delivered_at: 2010-04-15 15:15:26
+  started_at: 2010-04-15 15:15:26
+  last_assigned_at: 2010-04-15 15:15:26

@@ -1,0 +1,43 @@
+- title "Manage Users"
+- content_for :summary_info do
+  Manage users and their roles
+
+%table
+  %tr.head
+    %th.nowrap First name
+    %th.nowrap Last name
+    %th.nowrap Nickname
+    %th.nowrap Email
+    %th.nowrap Work phone
+    %th.nowrap Mobile phone
+    %th.nowrap Home phone
+    %th.nowrap Active
+    %th.nowrap Current login at
+    %th.nowrap Current login IP
+    %th.nowrap Last login at
+    %th.nowrap Last login IP
+    %th.nowrap Actions
+  - for user in @users
+    %tr{:class => cycle('grey', nil)}
+      %td.left.right= h user.firstname
+      %td.right= h user.lastname
+      %td.right= h user.nickname
+      %td.right= h user.email
+      %td.right= h user.work
+      %td.right= h user.mobile
+      %td.right= h user.home
+      %td.right= h user.active?
+      %td.right= h user.current_login_at
+      %td.right= h user.current_login_ip
+      %td.right= h user.last_login_at
+      %td.right= h user.last_login_ip
+      %td.right
+        = link_to 'Show', admin_user_url(user), :class => 'action'
+        = link_to 'Edit', edit_admin_user_url(user), :class => 'action'
+        - if user.active?
+          = link_to 'Deactivate', admin_user_url(user), :confirm => 'Are you sure you want to deactivate this account?', :method => :delete, :class => 'action'
+        - else
+          = link_to 'Activate', activate_admin_user_url(user), :confirm => 'Are you sure you want to activate this account?', :class => 'action'
+
+
+%p= link_to "Add a New User", new_admin_user_url

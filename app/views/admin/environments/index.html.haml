@@ -1,0 +1,21 @@
+- title "Environments"
+
+%table
+  %tr
+    %th Name
+    %th Enable at
+    %th Disable at
+    %th Restricted to
+    %th Description
+  - for environment in @environments
+    %tr
+      %td= h environment.name
+      %td= h environment.enable_at
+      %td= h environment.disable_at
+      %td= h environment.restricted_to
+      %td= h environment.description
+      %td= link_to 'Show', environment
+      %td= link_to 'Edit', edit_environment_path(environment)
+      %td= link_to 'Destroy', environment, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Environment", new_environment_path

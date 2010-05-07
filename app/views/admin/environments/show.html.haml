@@ -1,0 +1,24 @@
+- title "Environment"
+
+%p
+  %strong Name:
+  =h @environment.name
+%p
+  %strong Enable At:
+  =h @environment.enable_at
+%p
+  %strong Disable At:
+  =h @environment.disable_at
+%p
+  %strong Restricted To:
+  =h @environment.restricted_to
+%p
+  %strong Description:
+  =h @environment.description
+
+%p
+  = link_to "Edit", edit_environment_path(@environment)
+  |
+  = link_to "Destroy", @environment, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", environments_path

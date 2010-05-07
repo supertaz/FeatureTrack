@@ -1,0 +1,24 @@
+- form_for @environment do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :enable_at
+    %br
+    = f.datetime_select :enable_at
+  %p
+    = f.label :disable_at
+    %br
+    = f.datetime_select :disable_at
+  %p
+    = f.label :restricted_to
+    %br
+    = f.text_field :restricted_to
+  %p
+    = f.label :description
+    %br
+    = f.text_area :description
+  %p
+    = f.submit "Submit"

@@ -1,0 +1,8 @@
+- title "Current Iteration View"
+
+- content_for :summary_info do
+  %h6 Pivotal iteration #{h @iteration_number} (#{h @completion_date}), #{h @story_count} items
+- @lanes.sort.each do |lane|
+  =render :partial => 'show_stories_table', :locals =>{:lane =>lane}
+#overlay.overlay
+  .contentWrap

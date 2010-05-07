@@ -1,0 +1,75 @@
+- title "Defect Details"
+- content_for :summary_info do
+  %h6
+    %i
+      Defect ID #{@defect.id}: #{@defect.title}
+
+#status_info
+  %p
+    %strong Current status:
+    =h @defect.status
+  %p
+    %strong Current owner:
+    #{@defect.owner.nil? ? '<i>Not assigned</i>' : "#{h @defect.owner.fullname}"}
+    %br
+    %strong Reporter:
+    =h @defect.reporter.fullname
+    %br
+    %strong Developer:
+    #{@defect.developer.nil? ? '<i>Not assigned</i>' : "#{h @defect.developer.fullname}"}
+    %br
+    %strong Tester:
+    #{@defect.tester.nil? ? '<i>Not assigned</i>' : "#{h @defect.tester.fullname}"}
+    %br
+    %strong Last assigned:
+    =h @defect.last_assigned_at
+  %p
+    %strong Started:
+    =h @defect.started_at
+    %br
+    %strong Finished:
+    =h @defect.finished_at
+    %br
+    %strong Delivered:
+    =h @defect.delivered_at
+    %br
+    %strong Approved:
+    =h @defect.approved_at
+    %br
+    %strong Rejected:
+    =h @defect.rejected_at
+#main_detail
+  %p
+    %strong Affected party:
+    =h @defect.affected
+  %p
+    %strong Functional area:
+    =h @defect.functional_area
+  %p
+    %strong Severity:
+    =get_severities[@defect.severity - 1][0]
+  %p
+    %strong Technical risk:
+    =get_risk_levels[@defect.risk - 1][0]
+  %p
+    %strong Business impact:
+    =get_priorities[@defect.priority - 1][0]
+  %p
+    %strong Reported against:
+    #{h @defect.story_source}#{@defect.story_source.nil? ? nil : ': '}
+    #{@defect.against_story_id.nil? ? '<i>No story</i>' : "#{h @defect.against_story_id}"}
+  %p
+    %strong Title:
+    =h @defect.title
+  %p
+    %strong Description:
+    %br
+    =h @defect.description
+
+%p
+  = link_to "Edit", edit_defect_path(@defect)
+  |
+  - if current_user.is_global_admin? || current_user.is_scrum_master? || (@defect.created_at > Time.zone.now - 15.minutes && @defect.reporter == current_user)
+    = link_to 'Delete', defect_url(@defect), :confirm => 'Are you sure you want to remove this defect? (This action can\'t be undone!)', :method => :delete
+    |
+  = link_to "View All", defects_path

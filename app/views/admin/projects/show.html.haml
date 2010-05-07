@@ -1,0 +1,48 @@
+- title "Project Details"
+
+%p
+  %strong Name:
+  =h @project.name
+%p
+  %strong Source:
+  =h @project.source
+%p
+  %strong Source ID:
+  =h @project.source_id
+%p
+  %strong Active:
+  =h @project.active?
+%p
+  %strong Allows new:
+  %ul
+    %li
+      Features:
+      = @project.allow_features?
+    %li
+      Bugs:
+      = @project.allow_bugs?
+    %li
+      Chores:
+      = @project.allow_chores?
+    %li
+      Releases:
+      = @project.allow_releases?
+%p
+  %strong Start Date:
+  =h @project.start_at
+%p
+  %strong End Date:
+  =h @project.end_at
+%p
+  %strong Archived:
+  =h @project.archived?
+%p
+  %strong Test Project:
+  =h @project.test_project?
+
+%p
+  = link_to "Edit", edit_admin_project_path(@project)
+  |
+  = link_to "Destroy", admin_project_url(@project), :confirm => 'Are you sure you want to delete this project? (This action can\'t be undone!)', :method => :delete
+  |
+  = link_to "View All", admin_projects_path

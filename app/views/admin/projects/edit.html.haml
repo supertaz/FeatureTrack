@@ -1,0 +1,8 @@
+- title "Edit Project"
+
+= render :partial => 'form'
+
+%p
+  = link_to "Show", admin_project_path(@project)
+  |
+  = link_to "View All", admin_projects_path
