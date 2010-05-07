@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
     end
 
     def require_global_admin
-      unless current_user && current_user.is_global_admin?
+      unless current_user && current_user.global_admin
         store_location
         flash[:notice] = "You must be an administrator to access that page"
         redirect_to root_url
