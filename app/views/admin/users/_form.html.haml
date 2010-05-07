@@ -1,5 +1,4 @@
 - semantic_form_for([:admin, @user]) do |f|
-  = f.error_messages
   - f.inputs do
     %h3 User details
     = f.input :firstname, :label => 'First name'
@@ -22,5 +21,9 @@
     = f.input :qa, :as => :boolean, :label => 'QA'
     = f.input :scrum_master, :as => :boolean
     = f.input :global_admin, :as => :boolean
+    %h3 User API keys
+    - f.semantic_fields_for :source_api_keys do |key|
+      = key.input :source, :label => 'Source', :as => :select, :collection => ['pivotal', 'internal'], :include_blank => false
+      = key.input :api_key, :label => 'API key'
   - f.buttons do
     = f.submit "Submit"

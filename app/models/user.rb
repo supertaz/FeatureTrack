@@ -9,6 +9,22 @@ class User < ActiveRecord::Base
   acts_as_authorizable
 
   has_many :source_api_keys
+  accepts_nested_attributes_for :source_api_keys
+
+  validates_presence_of :firstname
+  validates_length_of :firstname, :minimum => 2
+  validates_presence_of :lastname
+  validates_length_of :lastname, :minimum => 2
+  validates_format_of :password, :with => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@\#$%^&*\(\)\[\]\\\/\,\.<>]).{6,32}$/, :if => :require_password? && :global_admin_override_nil,
+                                 :message => 'password must include a combination of upper- and lower-case characters, numbers, and symbols'
+
+  def set_global_admin_override
+    @global_admin_override = true
+  end
+
+  def global_admin_override_nil
+    @global_admin_override.nil?
+  end
 
   def defect_reporter
     self.is_defect_reporter?
@@ -118,3 +134,4 @@ class User < ActiveRecord::Base
     "#{self.firstname} #{self.lastname}"
   end
 end
+
