@@ -22,7 +22,7 @@
           - else
             = image_tag '/images/icons/user-unknown.png'
           - if current_user
-            Welcome, #{current_user.nickname.nil? ? current_user.firstname : current_user.nickname}
+            Welcome, #{(current_user.nickname.nil? || current_user.nickname.empty?) ? current_user.firstname : current_user.nickname}
             %br
             = link_to 'My account', user_url
             %span
