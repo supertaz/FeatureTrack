@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100506205455) do
+ActiveRecord::Schema.define(:version => 20100506233749) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(:version => 20100506205455) do
     t.integer  "against_story_id"
     t.string   "against_story_source"
     t.integer  "developer_id"
+    t.integer  "environment_id"
+  end
+
+  create_table "environments", :force => true do |t|
+    t.string   "name"
+    t.datetime "enable_at"
+    t.datetime "disable_at"
+    t.string   "restricted_to"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", :force => true do |t|
