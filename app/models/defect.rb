@@ -1,7 +1,7 @@
 class Defect < ActiveRecord::Base
   attr_accessible :status, :story_source, :story_id, :title, :description, :reporter, :owner, :tester, :approver,
                   :approved_at, :rejected_at, :finished_at, :delivered_at, :started_at, :last_assigned_at, :severity,
-                  :risk, :priority, :affected, :functional_area, :execution_priority
+                  :risk, :priority, :affected, :functional_area, :execution_priority, :environment
 
   belongs_to :reporter, :class_name => 'User'
   belongs_to :owner, :class_name => 'User'
@@ -19,6 +19,7 @@ class Defect < ActiveRecord::Base
   validates_length_of :title, :within => 6..255
   validates_presence_of :description
   validates_length_of :description, :minimum => 50
+  validates_presence_of :environment
 
   def self.affected_parties
     [
