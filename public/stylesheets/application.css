@@ -1,5 +1,5 @@
 body {
-  background-color: #7ea6bb;
+  background: #7ea6bb;
   padding: 0px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px; }
@@ -35,7 +35,7 @@ h6 {
   font-size: 10px; }
 
 a {
-  color: #0000FF; }
+  color: blue; }
   a img {
     border: none; }
 
@@ -48,7 +48,7 @@ a {
   position: relative;
   width: 97%;
   margin: 0 auto;
-  background: #fff;
+  background: white;
   padding: 0px;
   border: solid 1px black; }
   #container #overview {
@@ -66,8 +66,8 @@ a {
   height: 65px;
   padding: 10px 20px 20px 20px;
   margin-bottom: 1em;
-  border-bottom: solid 1px #000;
-  background: #ffd; }
+  border-bottom: solid 1px black;
+  background: #ffffdd; }
 
 .nav_tabs {
   padding: 0em;
@@ -76,18 +76,18 @@ a {
   .nav_tabs a {
     position: relative;
     bottom: -11px;
-    background: #fff;
-    color: #000;
-    padding: .3em 1.2em 5px 1.2em;
-    border-top: solid 1px #000;
-    border-left: solid 1px #000;
-    border-right: solid 1px #000;
+    background: white;
+    color: black;
+    padding: 0.3em 1.2em 5px 1.2em;
+    border-top: solid 1px black;
+    border-left: solid 1px black;
+    border-right: solid 1px black;
     border-bottom: none;
     text-decoration: none;
     font-weight: bold; }
     .nav_tabs a:hover {
-      background: #77a;
-      color: #fff; }
+      background: #7777aa;
+      color: white; }
 
 #flash_notice,
 #flash_error {
@@ -95,19 +95,19 @@ a {
   margin: 10px 0; }
 
 #flash_notice {
-  background-color: #CFC;
-  border: solid 1px #6C6; }
+  background-color: #ccffcc;
+  border: solid 1px #66cc66; }
 
 #flash_error {
-  background-color: #FCC;
-  border: solid 1px #C66; }
+  background-color: #ffcccc;
+  border: solid 1px #cc6666; }
 
 .fieldWithErrors {
   display: inline; }
 
 #errorExplanation {
   width: 400px;
-  border: 2px solid #CF0000;
+  border: 2px solid #cf0000;
   padding: 0;
   padding-bottom: 12px;
   margin-bottom: 20px;
@@ -118,10 +118,10 @@ a {
     margin: 0;
     font-weight: bold;
     font-size: 12px;
-    background-color: #c00;
-    color: #fff; }
+    background-color: #cc0000;
+    color: white; }
   #errorExplanation p {
-    color: #333;
+    color: #333333;
     margin-bottom: 0;
     padding: 8px; }
   #errorExplanation ul {
@@ -135,69 +135,69 @@ a {
   .status img {
     position: absolute;
     vertical-align: text-bottom;
-    left: .3em;
-    padding-top: .1em;
-    padding-bottom: .1em; }
+    left: 0.3em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em; }
   .status .accepted {
-    background-color: #0a0;
-    color: #fff;
+    background-color: #00aa00;
+    color: white;
     font-weight: bold;
-    padding: .2em .1em .2em 1em;
+    padding: 0.2em 0.1em 0.2em 1em;
     width: 8em;
     text-align: center;
     margin: 0;
-    border-right: 1px solid #999;
-    border-left: 1px solid #999; }
+    border-right: 1px solid #999999;
+    border-left: 1px solid #999999; }
   .status .rejected {
-    background-color: #f00;
-    color: #fff;
+    background-color: red;
+    color: white;
     font-weight: bold;
-    padding: .2em .1em .2em 1em;
+    padding: 0.2em 0.1em 0.2em 1em;
     width: 8em;
     text-align: center;
     margin: 0;
-    border-right: 1px solid #999;
-    border-left: 1px solid #999; }
+    border-right: 1px solid #999999;
+    border-left: 1px solid #999999; }
   .status .delivered {
-    background-color: #d70;
-    color: #fff;
+    background-color: #dd7700;
+    color: white;
     font-weight: bold;
-    padding: .2em .1em .2em 1em;
+    padding: 0.2em 0.1em 0.2em 1em;
     width: 8em;
     text-align: center;
     margin: 0;
-    border-right: 1px solid #999;
-    border-left: 1px solid #999; }
+    border-right: 1px solid #999999;
+    border-left: 1px solid #999999; }
   .status .finished {
-    background-color: #ee0;
-    color: #000;
+    background-color: #eeee00;
+    color: black;
     font-weight: bold;
-    padding: .2em .1em .2em 1em;
+    padding: 0.2em 0.1em 0.2em 1em;
     width: 8em;
     text-align: center;
     margin: 0;
-    border-right: 1px solid #999;
-    border-left: 1px solid #999; }
+    border-right: 1px solid #999999;
+    border-left: 1px solid #999999; }
   .status .started {
-    background-color: #069;
-    color: #fff;
+    background-color: #006699;
+    color: white;
     font-weight: bold;
-    padding: .2em .1em .2em 1em;
+    padding: 0.2em 0.1em 0.2em 1em;
     width: 8em;
     text-align: center;
     margin: 0;
-    border-right: 1px solid #999;
-    border-left: 1px solid #999; }
+    border-right: 1px solid #999999;
+    border-left: 1px solid #999999; }
   .status .unstarted {
-    background-color: #000;
-    color: #fff;
+    background-color: black;
+    color: white;
     font-style: italic;
-    padding: .2em .1em .2em 1em;
+    padding: 0.2em 0.1em 0.2em 1em;
     width: 8em;
     text-align: center;
     margin: 0;
-    border-right: 1px solid #999;
-    border-left: 1px solid #999; }
+    border-right: 1px solid #999999;
+    border-left: 1px solid #999999; }
 
 .task_type {
   position: relative;
@@ -205,8 +205,8 @@ a {
   .task_type img {
     position: absolute;
     vertical-align: text-bottom;
-    left: .3em;
-    top: .1em; }
+    left: 0.3em;
+    top: 0.1em; }
 
 .title {
   width: 100%; }
@@ -216,9 +216,9 @@ a {
   top: -1px;
   right: 5em;
   float: right;
-  background-color: #fff;
-  padding: .3em .5em .3em .3em;
-  border: #000 solid 1px; }
+  background-color: white;
+  padding: 0.3em 0.5em 0.3em 0.3em;
+  border: black solid 1px; }
   #usernav #user_identity {
     float: left;
     padding-left: 38px;
@@ -226,10 +226,10 @@ a {
     text-align: center; }
     #usernav #user_identity a {
       text-decoration: none;
-      color: #444;
+      color: #444444;
       font-weight: bold; }
       #usernav #user_identity a:hover {
-        color: #666;
+        color: #666666;
         text-decoration: underline; }
     #usernav #user_identity img {
       position: absolute;
@@ -245,13 +245,13 @@ a {
       padding-left: 35px; }
       #usernav #refresh_options #refresh_option_text a {
         font-weight: bold;
-        color: #444;
+        color: #444444;
         text-decoration: none; }
         #usernav #refresh_options #refresh_option_text a:hover {
-          color: #666;
+          color: #666666;
           text-decoration: underline; }
       #usernav #refresh_options #refresh_option_text span {
-        color: #999; }
+        color: #999999; }
       #usernav #refresh_options #refresh_option_text img {
         position: absolute;
         vertical-align: text-bottom;
@@ -266,21 +266,21 @@ a {
   #globalnav a {
     position: relative;
     top: -3px;
-    background: #fff;
-    color: #000;
-    padding: .2em .6em .2em .6em;
-    border-bottom: solid 1px #000;
-    border-left: solid 1px #000;
-    border-right: solid 1px #000;
+    background: white;
+    color: black;
+    padding: 0.2em 0.6em 0.2em 0.6em;
+    border-bottom: solid 1px black;
+    border-left: solid 1px black;
+    border-right: solid 1px black;
     border-top: none;
     text-decoration: none;
     font-weight: bold; }
     #globalnav a:hover {
-      background: #77a;
-      color: #fff; }
+      background: #7777aa;
+      color: white; }
 
 #main_detail {
-  padding: .1em 0em 0em 0em; }
+  padding: 0.1em 0em 0em 0em; }
 
 #status_info {
   float: right;
@@ -307,31 +307,31 @@ table {
     font-weight: bold;
     font-variant: small-caps;
     text-transform: capitalize;
-    padding: .2em .6em 0em .6em;
-    border-bottom: 1px solid #999; }
+    padding: 0.2em 0.6em 0em 0.6em;
+    border-bottom: 1px solid #999999; }
     table th:hover {
-      background: #fff;
-      color: #000; }
+      background: white;
+      color: black; }
   table tr.head:hover {
-    background: #fff;
-    color: #000; }
+    background: white;
+    color: black; }
   table tr:hover {
-    background: #77a;
-    color: #fff; }
+    background: #7777aa;
+    color: white; }
   table td {
     font-size: 13px;
-    padding: 0em .2em 0em .2em;
-    border-bottom: 1px solid #999; }
+    padding: 0em 0.2em 0em 0.2em;
+    border-bottom: 1px solid #999999; }
   table td.left {
-    border-left: 1px solid #999; }
+    border-left: 1px solid #999999; }
   table td.right {
-    border-right: 1px solid #999;
+    border-right: 1px solid #999999;
     text-align: center; }
   table tr.grey:hover td {
-    background: #77a;
-    color: #fff; }
+    background: #7777aa;
+    color: white; }
   table tr.grey td {
-    background: #eee; }
+    background: #eeeeee; }
 
 .nowrap {
   white-space: nowrap; }
