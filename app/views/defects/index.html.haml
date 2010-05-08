@@ -19,34 +19,34 @@
         - unless defect.story_source.nil? && defect.against_story_id.nil?
           #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}#{h defect.against_story_id}
         - else
-          No story
-      %td.right= link_to "#{h defect.title}", defect_url(defect)
+          %i No story specified
+      %td.right= link_to "#{h defect.title}", defect_url(defect), :class => 'action'
       %td.right.nowrap= h defect.reporter.fullname
       %td.right.nowrap
         - unless defect.owner.nil?
           = h defect.owner
         - else
-          Not assigned
+          %i Not assigned
       %td.right.nowrap
         - unless defect.developer.nil?
           = h developer.owner
         - else
-          Not assigned
+          %i Not assigned
       %td.right.nowrap
         - unless defect.tester.nil?
           = h tester.owner
         - else
-          Not assigned
+          %i Not assigned
       %td.right
         - unless defect.started_at.nil?
           = defect.started_at
         - else
-          Not started
+          %i Not started
       %td.right
         - unless defect.last_assigned_at.nil?
           = defect.last_assigned_at
         - else
-          Not assigned
+          %i Not assigned
       %td.right.nowrap
         = link_to 'Edit', edit_defect_path(defect), :class => 'action'
         - if current_user.is_global_admin? || current_user.is_scrum_master? || (defect.created_at > Time.zone.now - 15.minutes && defect.reporter == current_user)
