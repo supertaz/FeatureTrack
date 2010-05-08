@@ -9,12 +9,12 @@
     %strong Current status:
     =h @defect.status
   %p
-    %strong Current owner:
-    #{@defect.owner.nil? ? '<i>Not assigned</i>' : "#{h @defect.owner.fullname}"}
-    %br
     %strong Reporter:
     =h @defect.reporter.fullname
     %br
+    %strong Current owner:
+    #{@defect.owner.nil? ? '<i>Not assigned</i>' : "#{h @defect.owner.fullname}"}
+  %p
     %strong Developer:
     #{@defect.developer.nil? ? '<i>Not assigned</i>' : "#{h @defect.developer.fullname}"}
     %br
@@ -40,6 +40,9 @@
     =h @defect.rejected_at
 #main_detail
   %p
+    %strong Environment:
+    =h @defect.environment.name
+  %p
     %strong Affected party:
     =h @defect.affected
   %p
@@ -50,14 +53,14 @@
     =get_severities[@defect.severity - 1][0]
   %p
     %strong Technical risk:
-    =get_risk_levels[@defect.risk - 1][0]
+    =@defect.risk.nil? ? '<i>Not yet assessed</i>' : get_risk_levels[@defect.risk - 1][0]
   %p
     %strong Business impact:
-    =get_priorities[@defect.priority - 1][0]
+    =@defect.priority.nil? ? '<i>Not yet assessed</i>' : get_priorities[@defect.priority - 1][0]
   %p
     %strong Reported against:
     #{h @defect.story_source}#{@defect.story_source.nil? ? nil : ': '}
-    #{@defect.against_story_id.nil? ? '<i>No story</i>' : "#{h @defect.against_story_id}"}
+    #{@defect.against_story_id.nil? ? '<i>No story specified</i>' : "#{h @defect.against_story_id}"}
   %p
     %strong Title:
     =h @defect.title
