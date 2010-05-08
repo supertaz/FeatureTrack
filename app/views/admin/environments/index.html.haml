@@ -1,21 +1,22 @@
 - title "Environments"
 
 %table
-  %tr
+  %tr.head
     %th Name
-    %th Enable at
-    %th Disable at
-    %th Restricted to
     %th Description
+    %th.nowrap Restricted to
+    %th.nowrap Enable at
+    %th.nowrap Disable at
+    %th Actions
   - for environment in @environments
     %tr
-      %td= h environment.name
-      %td= h environment.enable_at
-      %td= h environment.disable_at
-      %td= h environment.restricted_to
-      %td= h environment.description
-      %td= link_to 'Show', environment
-      %td= link_to 'Edit', edit_environment_path(environment)
-      %td= link_to 'Destroy', environment, :confirm => 'Are you sure?', :method => :delete
+      %td.left.right= link_to "#{h environment.name}", admin_environment_url(environment)
+      %td.right= h environment.description
+      %td.right= h environment.restricted_to
+      %td.right= h environment.enable_at
+      %td.right= h environment.disable_at
+      %td.right
+        = link_to 'Edit', edit_admin_environment_path(environment), :class => 'action'
+        = link_to 'Destroy', admin_environment_url(environment), :confirm => 'Are you sure?', :method => :delete, :class => 'action'
 
-%p= link_to "New Environment", new_environment_path
+%p= link_to "New Environment", new_admin_environment_path

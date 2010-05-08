@@ -1,24 +1,9 @@
-- form_for @environment do |f|
-  = f.error_messages
-  %p
-    = f.label :name
-    %br
-    = f.text_field :name
-  %p
-    = f.label :enable_at
-    %br
-    = f.datetime_select :enable_at
-  %p
-    = f.label :disable_at
-    %br
-    = f.datetime_select :disable_at
-  %p
-    = f.label :restricted_to
-    %br
-    = f.text_field :restricted_to
-  %p
-    = f.label :description
-    %br
-    = f.text_area :description
-  %p
+- semantic_form_for [:admin, @environment] do |f|
+  - f.inputs do
+    = f.input :name, :label => 'Name'
+    = f.input :description, :label => 'Description'
+    = f.input :restricted_to, :label => 'Restricted to'
+    = f.input :enable_at, :label => 'Enable at'
+    = f.input :disable_at, :label => 'Disable at'
+  - f.buttons do
     = f.submit "Submit"

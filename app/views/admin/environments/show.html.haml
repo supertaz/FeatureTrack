@@ -4,21 +4,20 @@
   %strong Name:
   =h @environment.name
 %p
+  %strong Description:
+  =h @environment.description
+%p
+  %strong Restricted To:
+  =h @environment.restricted_to
+%p
   %strong Enable At:
   =h @environment.enable_at
 %p
   %strong Disable At:
   =h @environment.disable_at
 %p
-  %strong Restricted To:
-  =h @environment.restricted_to
-%p
-  %strong Description:
-  =h @environment.description
-
-%p
-  = link_to "Edit", edit_environment_path(@environment)
+  = link_to "Edit", edit_admin_environment_path(@environment)
   |
-  = link_to "Destroy", @environment, :confirm => 'Are you sure?', :method => :delete
+  = link_to "Delete", admin_environment_path(@environment), :confirm => 'Are you sure you want to remove this environment? (This action can\'t be undone!)', :method => :delete
   |
-  = link_to "View All", environments_path
+  = link_to "View All", admin_environments_path
