@@ -280,11 +280,11 @@ a {
       color: white; }
 
 #main_detail {
-  padding: 0.1em 0em 0em 0em; }
+  padding: 0.1em 0em 0em 0em;
+  width: 800px; }
 
 #status_info {
   float: right;
-  height: 200px;
   width: 16em;
   margin: 0px 0px 0px 2em;
   padding: 0px; }

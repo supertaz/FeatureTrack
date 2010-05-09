@@ -3,8 +3,8 @@
 %table
   %tr.head
     %th.nowrap Status
-    %th.nowrap Reported against
     %th.nowrap Defect title
+    %th.nowrap Reported against
     %th.nowrap Reported by
     %th.nowrap Current owner
     %th.nowrap Developer
@@ -15,12 +15,12 @@
   - for defect in @defects
     %tr{:class => cycle('grey', nil)}
       %td.left.right= h defect.status
+      %td.right= link_to "#{h defect.title}", defect_url(defect), :class => 'action'
       %td.right
         - unless defect.story_source.nil? && defect.against_story_id.nil?
           #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}#{h defect.against_story_id}
         - else
           %i No story specified
-      %td.right= link_to "#{h defect.title}", defect_url(defect), :class => 'action'
       %td.right.nowrap= h defect.reporter.fullname
       %td.right.nowrap
         - unless defect.owner.nil?

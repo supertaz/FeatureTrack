@@ -22,7 +22,7 @@
     #{@defect.tester.nil? ? '<i>Not assigned</i>' : "#{h @defect.tester.fullname}"}
     %br
     %strong Last assigned:
-    =h @defect.last_assigned_at
+    #{@defect.last_assigned_at.nil? ? '<i>Never assigned</i>' : @defect.developer.last_assigned_at}
   %p
     %strong Started:
     =h @defect.started_at
