@@ -1,4 +1,8 @@
 - title "Edit User"
+- content_for :summary_info do
+  %h6
+    %i
+      User: #{@user.fullname} &lt;#{@user.email}&gt;
 
 = render :partial => 'form'
 

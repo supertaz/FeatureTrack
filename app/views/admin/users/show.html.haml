@@ -1,5 +1,10 @@
 - title "User Details"
+- content_for :summary_info do
+  %h6
+    %i
+      User: #{@user.fullname} &lt;#{@user.email}&gt;
 
+%h2 General info
 %p
   %strong First name:
   =h @user.firstname
@@ -21,9 +26,43 @@
 %p
   %strong Home phone:
   =h @user.home
+%br
+%h2 Permissions and Roles
 %p
   %strong Active:
   = @user.active?
+%p
+  %strong Defect reporter:
+  = @user.defect_reporter
+%p
+  %strong Defect viewer:
+  = @user.defect_viewer
+%p
+  %strong Business user:
+  = @user.business_user
+%p
+  %strong Technology team:
+  = @user.technology_team
+%p
+  %strong Developer:
+  = @user.developer
+%p
+  %strong Development manager:
+  = @user.development_manager
+%p
+  %strong QA:
+  = @user.qa
+%p
+  %strong QA Manager:
+  = @user.qa_manager
+%p
+  %strong Scrum master:
+  = @user.scrum_master
+%p
+  %strong Global admin:
+  = @user.global_admin
+%br
+%h2 Activity
 %p
   %strong Current Login At:
   =h @user.current_login_at
@@ -31,11 +70,13 @@
   %strong Last Login At:
   =h @user.last_login_at
 %p
-  %strong Current Login Ip:
+  %strong Current Login IP:
   =h @user.current_login_ip
 %p
-  %strong Last Login Ip:
+  %strong Last Login IP:
   =h @user.last_login_ip
 
 %p
   = link_to "Edit user account", edit_admin_user_path
+  |
+  = link_to "Back to list", admin_users_path
