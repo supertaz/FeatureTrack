@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100506233749) do
+ActiveRecord::Schema.define(:version => 20100510205855) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(:version => 20100506233749) do
     t.integer  "environment_id"
   end
 
+  add_index "defects", ["against_story_source", "against_story_id", "status", "id"], :name => "dfct_story_stat"
+  add_index "defects", ["developer_id", "status", "id"], :name => "dfct_dev_stat"
+  add_index "defects", ["environment_id", "status", "id"], :name => "dfct_env_stat"
+  add_index "defects", ["execution_priority", "status", "id"], :name => "dfct_execpri_stat"
+  add_index "defects", ["owner_id", "status", "id"], :name => "dfct_owner_stat"
+  add_index "defects", ["priority", "status", "id"], :name => "dfct_pri_stat"
+  add_index "defects", ["reporter_id", "status", "id"], :name => "dfct_rpt_stat"
+  add_index "defects", ["risk", "execution_priority", "id"], :name => "dfct_risk_execpri"
+  add_index "defects", ["severity", "status", "id"], :name => "dfct_sev_stat"
+  add_index "defects", ["status", "severity", "execution_priority", "id"], :name => "dfct_stat_sev_execpri"
+  add_index "defects", ["tester_id", "status", "id"], :name => "dfct_tester_stat"
+
   create_table "environments", :force => true do |t|
     t.string   "name"
     t.datetime "enable_at"
@@ -50,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20100506233749) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "environments", ["name", "id"], :name => "index_environments_on_name_and_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -68,6 +82,11 @@ ActiveRecord::Schema.define(:version => 20100506233749) do
     t.date     "end_at"
   end
 
+  add_index "projects", ["active", "id"], :name => "index_projects_on_active_and_id"
+  add_index "projects", ["active", "name", "id"], :name => "index_projects_on_active_and_name_and_id"
+  add_index "projects", ["test_project", "active", "id"], :name => "prj_test_act"
+  add_index "projects", ["test_project", "active", "name", "id"], :name => "prj_tst_act_nm"
+
   create_table "roles", :force => true do |t|
     t.string   "name",              :limit => 40
     t.string   "authorizable_type", :limit => 40
@@ -76,12 +95,20 @@ ActiveRecord::Schema.define(:version => 20100506233749) do
     t.datetime "updated_at"
   end
 
+  add_index "roles", ["id", "name"], :name => "index_roles_on_id_and_name"
+  add_index "roles", ["name", "authorizable_type", "authorizable_id", "id"], :name => "name_auth_info_id", :unique => true
+  add_index "roles", ["name", "authorizable_type", "id"], :name => "name_auth_type_id", :unique => true
+  add_index "roles", ["name", "id"], :name => "index_roles_on_name_and_id"
+
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "roles_users", ["role_id", "user_id"], :name => "index_roles_users_on_role_id_and_user_id", :unique => true
+  add_index "roles_users", ["user_id", "role_id"], :name => "index_roles_users_on_user_id_and_role_id", :unique => true
 
   create_table "source_api_keys", :force => true do |t|
     t.integer  "user_id"
@@ -90,6 +117,9 @@ ActiveRecord::Schema.define(:version => 20100506233749) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "source_api_keys", ["source", "user_id", "id"], :name => "sak_src_usr"
+  add_index "source_api_keys", ["user_id", "source", "id"], :name => "sak_usr_src"
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -117,5 +147,11 @@ ActiveRecord::Schema.define(:version => 20100506233749) do
     t.string   "nickname"
     t.boolean  "active"
   end
+
+  add_index "users", ["active", "id"], :name => "index_users_on_active_and_id"
+  add_index "users", ["email", "firstname", "lastname", "nickname", "id"], :name => "users_by_email_name_id"
+  add_index "users", ["email", "id"], :name => "index_users_on_email_and_id", :unique => true
+  add_index "users", ["firstname", "lastname", "id"], :name => "users_by_name"
+  add_index "users", ["id", "email", "firstname", "lastname", "nickname"], :name => "users_by_id_email_name"
 
 end
