@@ -33,22 +33,7 @@ class IterationsController < ApplicationController
       begin
         iteration = PivotalTracker::Iteration.current(project.get_source_project)
         iteration.stories.each do |story|
-          unless story.labels.nil?
-            found_lane = false
-            labels = story.labels.split(',')
-            labels.each_with_index do |label, i|
-              unless label.match(/.+ lane/).nil?
-                add_to_lane_hash(@lanes, label, story)
-                found_lane = true
-              else
-                if !found_lane && i == (labels.count - 1)
-                  add_to_lane_hash(@lanes, 'No lane assigned', story)
-                end
-              end
-            end
-          else
-            add_to_lane_hash(@lanes, 'No lane assigned', story)
-          end
+          add_to_lane_hash(@lanes, project.name, story)
         end
         @iteration_number = iteration.number
         @completion_date = iteration.finish.to_date
