@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     if current_user
+      request.format = :html
       @user = current_user
     else
       redirect_to login_url
@@ -11,6 +12,7 @@ class UsersController < ApplicationController
 
   def edit
     if current_user
+      request.format = :html
       @user = current_user
     else
       redirect_to login_url
@@ -21,6 +23,7 @@ class UsersController < ApplicationController
     if current_user
       @user = current_user
       if @user.update_attributes(params[:user])
+        request.format = :html
         flash[:notice] = "Successfully updated user."
         redirect_to account_url
       else
