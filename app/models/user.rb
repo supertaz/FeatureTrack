@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates_length_of :firstname, :minimum => 2
   validates_presence_of :lastname
   validates_length_of :lastname, :minimum => 2
-  validates_format_of :password, :with => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@\#$%^&*\(\)\[\]\\\/\,\.<>]).{6,32}$/, :if => :require_password? && :global_admin_override_nil,
+  validates_format_of :password, :with => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@\#$%^&*\(\)\[\]\\\/\,\.<>]).{6,32}$/, :if => :require_password? && :global_admin_override_nil && :password_populated,
                                  :message => 'password must include a combination of upper- and lower-case characters, numbers, and symbols'
 
   def set_global_admin_override
@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
 
   def global_admin_override_nil
     @global_admin_override.nil?
+  end
+
+  def password_populated
+    !self.password.nil?
   end
 
   def defect_reporter
