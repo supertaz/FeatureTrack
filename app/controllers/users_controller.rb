@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       if @user.update_attributes(params[:user])
         request.format = :html
         flash[:notice] = "Successfully updated user."
-        redirect_to account_url
+        redirect_to user_url
       else
         request.format = :html
         flash.now[:error] = "Account not updated, please correct the #{ActionController::Base.helpers.pluralize @user.errors.count, 'error'} below."
