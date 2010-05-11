@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100510205855) do
+ActiveRecord::Schema.define(:version => 20100511205420) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20100510205855) do
     t.string   "against_story_source"
     t.integer  "developer_id"
     t.integer  "environment_id"
+    t.integer  "project_id"
   end
 
   add_index "defects", ["against_story_source", "against_story_id", "status", "id"], :name => "dfct_story_stat"

@@ -1,7 +1,7 @@
 class Defect < ActiveRecord::Base
   attr_accessible :status, :story_source, :story_id, :title, :description, :reporter, :owner, :tester, :approver,
                   :approved_at, :rejected_at, :finished_at, :delivered_at, :started_at, :last_assigned_at, :severity,
-                  :risk, :priority, :affected, :functional_area, :execution_priority, :environment
+                  :risk, :priority, :affected, :functional_area, :execution_priority, :environment, :project
 
   belongs_to :reporter, :class_name => 'User'
   belongs_to :owner, :class_name => 'User'
@@ -9,6 +9,7 @@ class Defect < ActiveRecord::Base
   belongs_to :approver, :class_name => 'User'
   belongs_to :developer, :class_name => 'User'
   belongs_to :environment
+  belongs_to :project
 
   validates_presence_of :status
   validates_presence_of :reporter
