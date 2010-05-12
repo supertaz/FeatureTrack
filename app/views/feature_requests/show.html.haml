@@ -11,10 +11,10 @@
   =h @feature_request.description
 %p
   %strong Priority:
-  =h @feature_request.priority
+  = @feature_request.priority.nil? ? '<i>Not yet assessed</i>' : get_priorities[@feature_request.priority - 1][0]
 %p
   %strong Risk:
-  =h @feature_request.risk
+  = @feature_request.risk.nil? ? '<i>Not yet assessed</i>' : get_risk_levels[@feature_request.risk - 1][0]
 %p
   %strong Affected:
   =h @feature_request.affected
@@ -23,10 +23,11 @@
   =h @feature_request.functional_area
 %p
   %strong Requestor:
-  =h @feature_request.requestor_id
+  =h @feature_request.requestor.fullname
 %p
   %strong Approver:
-  =h @feature_request.approver_id
+  - unless @feature_request.approver.nil?
+    =h @feature_request.approver.fullname
 %p
   %strong Approved/Rejected at:
   - if @feature_request.approved_at.nil? && @feature_request.rejected_at.nil?
@@ -50,5 +51,10 @@
     = link_to "Edit", edit_feature_request_path(@feature_request)
     |
     = link_to "Destroy", @feature_request, :confirm => 'Are you sure?', :method => :delete
+    |
+  - if current_user.scrum_master || current_user.global_admin
+    = link_to "Approve", approve_feature_request_url(@feature_request)
+    |
+    = link_to "Reject", reject_feature_request_url(@feature_request)
     |
   = link_to "View All", feature_requests_path

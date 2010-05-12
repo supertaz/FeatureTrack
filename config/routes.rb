@@ -14,7 +14,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :defects
 
-  map.resources :feature_requests
+  map.resources :feature_requests, :member => {:approve => :get, :reject => :get}
 
   map.login '/login', :controller => 'user_sessions', :action => 'new'
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'

@@ -39,11 +39,47 @@ class FeatureRequestsController < ApplicationController
       render :action => 'edit'
     end
   end
-  
+
   def destroy
     @feature_request = FeatureRequest.find(params[:id])
     @feature_request.destroy
     flash[:notice] = "Successfully deleted feature request."
     redirect_to feature_requests_url
+  end
+
+  def approve
+    if current_user.scrum_master || current_user.global_admin
+      unless feature.project.nil?
+        feature = FeatureRequest.find(params[:id])
+        project = feature.project.get_source_project
+        new_feature = project.stories.create(:name => feature.title,
+                                             :description => feature.description,
+                                             :story_type => feature.story_type.nil? ? 'feature' : feature.story_type)
+        feature.story_source = feature.project.source
+        feature.story_id = new_feature.id
+        feature.approver = current_user
+        feature.approved_at = Time.zone.now
+        feature.status = 'Approved'
+        feature.save
+      else
+        flash[:error] = 'Feature request needs to be assigned to a project before it can be approved.'
+      end
+    else
+      flash[:error] = 'You don\'t have access to that functionality.'
+      redirect_to feature_requests_url
+    end
+  end
+
+  def reject
+    if current_user.scrum_master || current_user.global_admin
+      feature = FeatureRequest.find(params[:id])
+      feature.approver = current_user
+      feature.rejected_at = Time.zone.now
+      feature.status = 'Rejected'
+      feature.save
+    else
+      flash[:error] = 'You don\'t have access to that functionality.'
+      redirect_to feature_requests_url
+    end
   end
 end

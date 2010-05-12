@@ -2,9 +2,12 @@
   - f.inputs do
     = f.input :title, :label => 'Title'
     = f.input :description, :label => 'Description'
-    = f.input :priority, :label => 'Priority'
-    = f.input :risk, :label => 'Risk'
-    = f.input :affected, :label => 'Impacted parties'
-    = f.input :functional_area, :label => 'Functional area'
+    = f.input :priority, :label => 'Priority', :as => :select, :collection => get_priorities
+    = f.input :risk, :label => 'Risk', :as => :select, :collection => get_risk_levels
+    = f.input :affected, :label => 'Impacted parties', :as  => :radio, :collection => get_affected_parties
+    = f.input :functional_area, :label => 'Functional area', :as => :select, :collection => get_functional_areas
+    - if current_user.scrum_master || current_user.global_admin
+      = f.input :project
+      = f.input :story_type, :collection => ['feature', 'chore', 'bug']
   - f.buttons do
     = f.submit

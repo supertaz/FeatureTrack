@@ -1,7 +1,7 @@
 - title "Feature Requests"
 
 %table
-  %tr
+  %tr.head
     %th Status
     %th Title
     %th Priority
@@ -16,17 +16,19 @@
     %th Actions
   - for feature_request in @feature_requests
     %tr
-      %td= h feature_request.status
-      %td= h feature_request.title
-      %td= h feature_request.priority
-      %td= h feature_request.risk
-      %td= h feature_request.affected
-      %td= h feature_request.functional_area
-      %td= h feature_request.story_source
-      %td= h feature_request.story_id
-      %td= h feature_request.requestor_id
-      %td= h feature_request.approver_id
-      %td
+      %td.left.right= h feature_request.status
+      %td.right= link_to feature_request.title, feature_request
+      %td.right= feature_request.priority.nil? ? '<i>Not yet assessed</i>' : get_priorities[feature_request.priority - 1][0]
+      %td.right= feature_request.risk.nil? ? '<i>Not yet assessed</i>' : get_risk_levels[feature_request.risk - 1][0]
+      %td.right= h feature_request.affected
+      %td.right= h feature_request.functional_area
+      %td.right= h feature_request.story_source
+      %td.right= h feature_request.story_id
+      %td.right= h feature_request.requestor.fullname
+      %td.right
+        -unless feature_request.approver.nil?
+          = h feature_request.approver.fullname
+      %td.right
         - if feature_request.approved_at.nil? && feature_request.rejected_at.nil?
           Not determined
         - elsif !feature_request.approved_at.nil? && feature_request.rejected_at.nil?
@@ -35,10 +37,9 @@
           Rejected: #{feature_request.rejected_at}
         - elsif !feature_request.rejected_at.nil? && !feature_request.approved_at.nil?
           #{feature_request.approved_at > feature_request.rejected_at ? "Approved: #{feature_request.approved_at}" : "Rejected: #{feature_request.rejected_at}"}
-      %td
-        = link_to 'Show', feature_request
-        - if current_user == @feature_request.requestor || current_user.scrum_master || current_user.global_admin
-          = link_to 'Edit', edit_feature_request_path(feature_request)
-          = link_to 'Delete', feature_request, :confirm => 'Are you sure you want to delete this feature request?', :method => :delete
+      %td.right
+        - if current_user == feature_request.requestor || current_user.scrum_master || current_user.global_admin
+          = link_to 'Edit', edit_feature_request_path(feature_request), :class => 'action'
+          = link_to 'Delete', feature_request, :confirm => 'Are you sure you want to delete this feature request?', :method => :delete, :class => 'action'
 
 %p= link_to "New Feature Request", new_feature_request_path

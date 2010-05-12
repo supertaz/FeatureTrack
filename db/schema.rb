@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100512160414) do
+ActiveRecord::Schema.define(:version => 20100512171501) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(:version => 20100512160414) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
+    t.string   "story_type"
   end
 
   add_index "feature_requests", ["affected", "id"], :name => "index_feature_requests_on_affected_and_id"

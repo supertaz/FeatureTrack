@@ -49,7 +49,8 @@ class Defect < ActiveRecord::Base
           'Job posting',
           'Sitter search',
           'Job search',
-          'Job response'
+          'Job response',
+          'Other'
     ]
   end
 
