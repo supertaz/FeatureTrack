@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100511205420) do
+ActiveRecord::Schema.define(:version => 20100512160414) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20100511205420) do
   add_index "defects", ["severity", "status", "id"], :name => "dfct_sev_stat"
   add_index "defects", ["status", "severity", "execution_priority", "id"], :name => "dfct_stat_sev_execpri"
   add_index "defects", ["tester_id", "status", "id"], :name => "dfct_tester_stat"
+  add_index "defects", ["title", "id"], :name => "index_defects_on_title_and_id"
 
   create_table "environments", :force => true do |t|
     t.string   "name"
@@ -65,6 +66,34 @@ ActiveRecord::Schema.define(:version => 20100511205420) do
   end
 
   add_index "environments", ["name", "id"], :name => "index_environments_on_name_and_id"
+
+  create_table "feature_requests", :force => true do |t|
+    t.string   "status"
+    t.string   "story_source"
+    t.integer  "story_id"
+    t.string   "title"
+    t.integer  "requestor_id"
+    t.integer  "approver_id"
+    t.datetime "approved_at"
+    t.datetime "rejected_at"
+    t.integer  "priority"
+    t.integer  "risk"
+    t.string   "affected"
+    t.string   "functional_area"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feature_requests", ["affected", "id"], :name => "index_feature_requests_on_affected_and_id"
+  add_index "feature_requests", ["approver_id", "id"], :name => "index_feature_requests_on_approver_id_and_id"
+  add_index "feature_requests", ["functional_area", "id"], :name => "index_feature_requests_on_functional_area_and_id"
+  add_index "feature_requests", ["priority", "id"], :name => "index_feature_requests_on_priority_and_id"
+  add_index "feature_requests", ["requestor_id", "id"], :name => "index_feature_requests_on_requestor_id_and_id"
+  add_index "feature_requests", ["risk", "id"], :name => "index_feature_requests_on_risk_and_id"
+  add_index "feature_requests", ["status", "id"], :name => "index_feature_requests_on_status_and_id"
+  add_index "feature_requests", ["story_source", "story_id", "id"], :name => "index_feature_requests_on_story_source_and_story_id_and_id"
+  add_index "feature_requests", ["title", "id"], :name => "index_feature_requests_on_title_and_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"
