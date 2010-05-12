@@ -31,7 +31,8 @@ Rails::Initializer.run do |config|
   config.gem 'validation_reflection'
   config.gem 'pivotal-tracker'
   config.gem 'authlogic'
-
+  config.gem 'compass'
+  config.gem 'searchlogic'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
