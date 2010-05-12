@@ -1,0 +1,29 @@
+one:
+  status: MyString
+  story_source: MyString
+  story_id: 1
+  title: MyString
+  requestor_id: 1
+  approver_id: 1
+  approved_at: 2010-05-12 11:04:14
+  rejected_at: 2010-05-12 11:04:14
+  priority: 1
+  risk: 1
+  affected: 
+  functional_area: MyString
+  description: MyText
+
+two:
+  status: MyString
+  story_source: MyString
+  story_id: 1
+  title: MyString
+  requestor_id: 1
+  approver_id: 1
+  approved_at: 2010-05-12 11:04:14
+  rejected_at: 2010-05-12 11:04:14
+  priority: 1
+  risk: 1
+  affected: 
+  functional_area: MyString
+  description: MyText

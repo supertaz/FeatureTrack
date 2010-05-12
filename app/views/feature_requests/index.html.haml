@@ -1,0 +1,37 @@
+- title "Feature Requests"
+
+%table
+  %tr
+    %th Status
+    %th Story source
+    %th Story
+    %th Title
+    %th Requestor
+    %th Approver
+    %th Approved at
+    %th Rejected at
+    %th Priority
+    %th Risk
+    %th Affected
+    %th Functional area
+    %th Description
+  - for feature_request in @feature_requests
+    %tr
+      %td= h feature_request.status
+      %td= h feature_request.story_source
+      %td= h feature_request.story_id
+      %td= h feature_request.title
+      %td= h feature_request.requestor_id
+      %td= h feature_request.approver_id
+      %td= h feature_request.approved_at
+      %td= h feature_request.rejected_at
+      %td= h feature_request.priority
+      %td= h feature_request.risk
+      %td= h feature_request.affected
+      %td= h feature_request.functional_area
+      %td= h feature_request.description
+      %td= link_to 'Show', feature_request
+      %td= link_to 'Edit', edit_feature_request_path(feature_request)
+      %td= link_to 'Destroy', feature_request, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Feature Request", new_feature_request_path

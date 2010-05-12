@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-
   map.root :controller => 'iterations', :action => 'current'
 
   map.namespace(:admin) do |admin|
@@ -14,6 +13,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :dashboard
 
   map.resources :defects
+
+  map.resources :feature_requests
 
   map.login '/login', :controller => 'user_sessions', :action => 'new'
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
