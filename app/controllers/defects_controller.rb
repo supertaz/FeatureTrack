@@ -1,6 +1,6 @@
 class DefectsController < ApplicationController
   before_filter :require_user
-  
+
   def index
     @defects = Defect.all
   end
@@ -18,6 +18,11 @@ class DefectsController < ApplicationController
     @defect.status = 'New'
     @defect.reporter = current_user
     @defect.environment = Environment.find(params[:defect].delete('environment_id'))
+    unless @defect.project.nil? || @defect.project.blank?
+      unless @defect.against_story_id.nil? || @defect.against_story_id.blank?
+        @defect.against_story_source = @defect.project.source
+      end
+    end
     if @defect.save
       flash[:notice] = "Successfully created defect."
       redirect_to @defect
@@ -33,6 +38,11 @@ class DefectsController < ApplicationController
   def update
     @defect = Defect.find(params[:id])
     @defect.environment = Environment.find(params[:defect].delete('environment_id'))
+    unless @defect.project.nil? || @defect.project.blank?
+      unless @defect.against_story_id.nil? || @defect.against_story_id.blank?
+        @defect.against_story_source = @defect.project.source
+      end
+    end
     if @defect.update_attributes(params[:defect])
       flash[:notice] = "Successfully updated defect."
       redirect_to @defect

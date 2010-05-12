@@ -29,6 +29,7 @@ class Admin::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @user.set_global_admin_override
   end
 
   def update

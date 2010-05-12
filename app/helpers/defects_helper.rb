@@ -19,6 +19,10 @@ module DefectsHelper
     Defect.functional_areas
   end
 
+  def get_active_projects
+    Project.active
+  end
+
   def get_allowable_statuses(defect, user)
     statuses = Array.new
     case defect.status
