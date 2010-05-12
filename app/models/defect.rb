@@ -1,13 +1,15 @@
 class Defect < ActiveRecord::Base
   attr_accessible :status, :story_source, :story_id, :title, :description, :reporter, :owner, :tester, :approver,
                   :approved_at, :rejected_at, :finished_at, :delivered_at, :started_at, :last_assigned_at, :severity,
-                  :risk, :priority, :affected, :functional_area, :execution_priority, :environment, :project
+                  :risk, :priority, :affected, :functional_area, :execution_priority, :environment, :project_id,
+                  :reviewer, :story_type, :against_story_id
 
   belongs_to :reporter, :class_name => 'User'
   belongs_to :owner, :class_name => 'User'
   belongs_to :tester, :class_name => 'User'
   belongs_to :approver, :class_name => 'User'
   belongs_to :developer, :class_name => 'User'
+  belongs_to :reviewer, :class_name => 'User'
   belongs_to :environment
   belongs_to :project
 
@@ -21,6 +23,21 @@ class Defect < ActiveRecord::Base
   validates_presence_of :description
   validates_length_of :description, :minimum => 50
   validates_presence_of :environment
+
+  def get_story_url
+    unless self.project.nil?
+      case self.story_source
+        when 'pivotal'
+          project = self.project.get_source_project
+          story = project.stories.find(self.story_id)
+          story.url
+        else
+          nil
+      end
+    else
+      nil
+    end
+  end
 
   def self.affected_parties
     [

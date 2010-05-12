@@ -4,6 +4,7 @@
   %tr.head
     %th.nowrap Status
     %th.nowrap Defect title
+    %th.nowrap Defect story
     %th.nowrap Reported against
     %th.nowrap Reported by
     %th.nowrap Current owner
@@ -16,6 +17,12 @@
     %tr{:class => cycle('grey', nil)}
       %td.left.right= h defect.status
       %td.right= link_to "#{h defect.title}", defect_url(defect), :class => 'action'
+      %td.right
+        - unless defect.story_id.nil?
+          #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}
+          = link_to "#{defect.story_id}", defect.get_story_url, :target => '_new', :class => 'action'
+        - else
+          None yet
       %td.right
         - unless defect.story_source.nil? && defect.against_story_id.nil?
           #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}#{h defect.against_story_id}

@@ -50,7 +50,7 @@ class FeatureRequestsController < ApplicationController
   def approve
     if current_user.scrum_master || current_user.global_admin
       feature = FeatureRequest.find(params[:id])
-        unless feature.project.nil?
+      unless feature.project.nil?
         key_object = current_user.get_api_key('pivotal')
         PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
         project = feature.project.get_source_project

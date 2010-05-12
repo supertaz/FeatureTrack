@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :dashboard
 
-  map.resources :defects
+  map.resources :defects, :member => {:promote => :get}
 
   map.resources :feature_requests, :member => {:approve => :get, :reject => :get}
 
