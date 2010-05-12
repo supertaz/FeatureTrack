@@ -5,15 +5,15 @@ class FeatureRequestsController < ApplicationController
   def index
     @feature_requests = FeatureRequest.all
   end
-  
+
   def show
     @feature_request = FeatureRequest.find(params[:id])
   end
-  
+
   def new
     @feature_request = FeatureRequest.new
   end
-  
+
   def create
     @feature_request = FeatureRequest.new(params[:feature_request])
     @feature_request.status = 'New'
@@ -25,11 +25,11 @@ class FeatureRequestsController < ApplicationController
       render :action => 'new'
     end
   end
-  
+
   def edit
     @feature_request = FeatureRequest.find(params[:id])
   end
-  
+
   def update
     @feature_request = FeatureRequest.find(params[:id])
     if @feature_request.update_attributes(params[:feature_request])
@@ -49,8 +49,10 @@ class FeatureRequestsController < ApplicationController
 
   def approve
     if current_user.scrum_master || current_user.global_admin
-      unless feature.project.nil?
-        feature = FeatureRequest.find(params[:id])
+      feature = FeatureRequest.find(params[:id])
+        unless feature.project.nil?
+        key_object = current_user.get_api_key('pivotal')
+        PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
         project = feature.project.get_source_project
         new_feature = project.stories.create(:name => feature.title,
                                              :description => feature.description,
@@ -61,8 +63,11 @@ class FeatureRequestsController < ApplicationController
         feature.approved_at = Time.zone.now
         feature.status = 'Approved'
         feature.save
+        flash[:notice] = 'Feature successfully promoted to story.'
+        redirect_to feature_request_url(feature)
       else
         flash[:error] = 'Feature request needs to be assigned to a project before it can be approved.'
+        redirect_to feature_request_url(feature)
       end
     else
       flash[:error] = 'You don\'t have access to that functionality.'
@@ -77,6 +82,8 @@ class FeatureRequestsController < ApplicationController
       feature.rejected_at = Time.zone.now
       feature.status = 'Rejected'
       feature.save
+      flash[:notice] = 'Feature rejected.'
+      redirect_to feature_request_url(feature)
     else
       flash[:error] = 'You don\'t have access to that functionality.'
       redirect_to feature_requests_url
