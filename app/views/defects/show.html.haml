@@ -67,7 +67,7 @@
     =@defect.priority.nil? ? '<i>Not yet assessed</i>' : get_priorities[@defect.priority - 1][0]
   %p
     %strong Reported against:
-    #{h @defect.story_source}#{@defect.story_source.nil? ? nil : ': '}
+    #{@defect.against_story_source.nil? ? nil : "#{h @defect.against_story_source}: "}
     #{@defect.against_story_id.nil? ? '<i>No story specified</i>' : "#{h @defect.against_story_id}"}
   %p
     %strong Title:

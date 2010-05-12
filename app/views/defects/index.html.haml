@@ -24,12 +24,10 @@
           #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}
           = link_to "#{defect.story_id}", defect.get_story_url, :target => '_new', :class => 'action'
         - else
-          None yet
+          Not promoted
       %td.right
-        - unless defect.story_source.nil? && defect.against_story_id.nil?
-          #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}#{h defect.against_story_id}
-        - else
-          %i No story specified
+        #{defect.against_story_source.nil? ? nil : "#{h defect.against_story_source}: "}
+        #{defect.against_story_id.nil? ? '<i>No story specified</i>' : "#{h defect.against_story_id}"}
       %td.right.nowrap= h defect.reporter.fullname
       %td.right.nowrap
         - unless defect.owner.nil?
