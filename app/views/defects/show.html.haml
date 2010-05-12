@@ -16,6 +16,9 @@
       %strong Story ID:
       #{h @defect.story_source}#{@defect.story_source.nil? ? nil : ': '}
       = link_to "#{@defect.story_id}", @defect.get_story_url, :target => '_new'
+      %br
+      %strong Project:
+      = @defect.project.name
   %p
     %strong Reporter:
     =h @defect.reporter.fullname
