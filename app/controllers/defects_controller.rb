@@ -4,7 +4,7 @@ class DefectsController < ApplicationController
   before_filter :current_user_can_create_defects, :only => [:new, :create]
 
   def index
-    @defects = Defect.all
+    @defects = Defect.all.sort {|a,b| a.calculate_execution_priority <=> b.calculate_execution_priority}
   end
 
   def show
@@ -69,7 +69,8 @@ class DefectsController < ApplicationController
         key_object = current_user.get_api_key('pivotal')
         PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
         project = defect.project.get_source_project
-        new_defect = project.stories.create(:name => defect.title,
+        new_defect = project.stories.create(:name => "P#{defect.display_priority} - " + defect.title,
+                                             :labels => "p#{defect.display_priority}",
                                              :description => defect.description,
                                              :story_type => defect.story_type.nil? ? 'bug' : defect.story_type)
         defect.story_source = defect.project.source

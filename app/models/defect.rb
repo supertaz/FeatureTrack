@@ -39,6 +39,53 @@ class Defect < ActiveRecord::Base
     end
   end
 
+  def calculate_execution_priority
+    exec_pri = self.severity * 1000
+    unless self.priority.nil?
+      if self.priority.between?(1, 4)
+        if exec_pri > 1999
+          exec_pri = 1000 + (self.priority * 90)
+        else
+          exec_pri += (self.priority * 90)
+        end
+      elsif self.priority.between?(5, 6)
+        if exec_pri > 2999
+          exec_pri = 2000 + (self.priority * 90)
+        else
+          exec_pri += (self.priority * 90)
+        end
+      else
+        exec_pri += (self.priority * 90)
+      end
+    end
+    unless self.risk.nil?
+      exec_pri += (self.risk * 50)
+    end
+    case self.status
+      when 'New'
+        exec_pri += 10000
+      when 'Reviewed'
+        exec_pri += 20000
+      when 'Prioritized'
+        exec_pri += 30000
+      when 'Rejected'
+        exec_pri += 40000
+      when 'In Dev'
+        exec_pri += 50000
+      when 'In QA'
+        exec_pri += 60000
+      when 'Approved'
+        exec_pri += 90000
+      else
+        exec_pri += 80000
+    end
+    exec_pri
+  end
+
+  def display_priority
+    self.calculate_execution_priority.to_s[1,1]
+  end
+
   def self.affected_parties
     [
           'Sitters',

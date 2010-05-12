@@ -6,6 +6,9 @@
 
 #status_info
   %p
+    %strong Priority:
+    P#{@defect.display_priority}
+    %br
     %strong Current status:
     =h @defect.status
     - unless @defect.story_id.nil?

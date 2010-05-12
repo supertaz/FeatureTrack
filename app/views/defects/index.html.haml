@@ -3,6 +3,7 @@
 %table
   %tr.head
     %th.nowrap Status
+    %th.nowrap Priority
     %th.nowrap Defect title
     %th.nowrap Defect story
     %th.nowrap Reported against
@@ -16,6 +17,7 @@
   - for defect in @defects
     %tr{:class => cycle('grey', nil)}
       %td.left.right= h defect.status
+      %td.right P#{defect.display_priority}
       %td.right= link_to "#{h defect.title}", defect_url(defect), :class => 'action'
       %td.right
         - unless defect.story_id.nil?
