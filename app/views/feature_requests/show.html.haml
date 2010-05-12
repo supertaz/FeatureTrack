@@ -22,6 +22,9 @@
   %strong Functional Area:
   =h @feature_request.functional_area
 %p
+  %strong Project:
+  = @feature_request.project.nil? ? '<i>Not specified</i>' : @feature_request.project.name
+%p
   %strong Requestor:
   =h @feature_request.requestor.fullname
 %p
