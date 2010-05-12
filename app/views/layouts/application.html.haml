@@ -55,6 +55,8 @@
             = link_to 'defects', defects_url
           - if current_user.global_admin || current_user.scrum_master || current_user.business_user || current_user.technology_team || current_user.defect_reporter
             = link_to 'report a defect', new_defect_url
+          - if current_user_can_access_feature_requests
+            = link_to 'feature requests', feature_requests_url
           - if current_user.global_admin
             = link_to 'administration', admin_url
 

@@ -4,26 +4,11 @@
   %strong Status:
   =h @feature_request.status
 %p
-  %strong Story Source:
-  =h @feature_request.story_source
-%p
-  %strong Story:
-  =h @feature_request.story_id
-%p
   %strong Title:
   =h @feature_request.title
 %p
-  %strong Requestor:
-  =h @feature_request.requestor_id
-%p
-  %strong Approver:
-  =h @feature_request.approver_id
-%p
-  %strong Approved At:
-  =h @feature_request.approved_at
-%p
-  %strong Rejected At:
-  =h @feature_request.rejected_at
+  %strong Description:
+  =h @feature_request.description
 %p
   %strong Priority:
   =h @feature_request.priority
@@ -37,12 +22,33 @@
   %strong Functional Area:
   =h @feature_request.functional_area
 %p
-  %strong Description:
-  =h @feature_request.description
+  %strong Requestor:
+  =h @feature_request.requestor_id
+%p
+  %strong Approver:
+  =h @feature_request.approver_id
+%p
+  %strong Approved/Rejected at:
+  - if @feature_request.approved_at.nil? && @feature_request.rejected_at.nil?
+    Not determined
+  - elsif !@feature_request.approved_at.nil? && @feature_request.rejected_at.nil?
+    Approved: #{@feature_request.approved_at}
+  - elsif !@feature_request.rejected_at.nil? && @feature_request.approved_at.nil?
+    Rejected: #{@feature_request.rejected_at}
+  - elsif !@feature_request.rejected_at.nil? && !@feature_request.approved_at.nil?
+    #{@feature_request.approved_at > @feature_request.rejected_at ? "Approved: #{@feature_request.approved_at}" : "Rejected: #{@feature_request.rejected_at}"}
+- unless @feature_request.approved_at.nil?
+  %p
+    %strong Story Source:
+    =h @feature_request.story_source
+  %p
+    %strong Story:
+    =h @feature_request.story_id
 
 %p
-  = link_to "Edit", edit_feature_request_path(@feature_request)
-  |
-  = link_to "Destroy", @feature_request, :confirm => 'Are you sure?', :method => :delete
-  |
+  - if current_user == @feature_request.requestor || current_user.scrum_master || current_user.global_admin
+    = link_to "Edit", edit_feature_request_path(@feature_request)
+    |
+    = link_to "Destroy", @feature_request, :confirm => 'Are you sure?', :method => :delete
+    |
   = link_to "View All", feature_requests_path

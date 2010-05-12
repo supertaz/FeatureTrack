@@ -3,7 +3,8 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
-  helper_method :current_user, :current_user_session, :redirect_back_or_default, :store_location, :get_defect_level, :slugify
+  helper_method :current_user, :current_user_session, :redirect_back_or_default, :store_location, :get_defect_level, :slugify,
+                :current_user_can_access_feature_requests
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   filter_parameter_logging :password
@@ -57,6 +58,16 @@ class ApplicationController < ActionController::Base
         flash[:notice] = "You must be an administrator to access that page"
         redirect_to root_url
         return false
+      end
+    end
+
+    def current_user_can_access_feature_requests
+      unless current_user && (current_user.business_user || current_user.development_manager || current_user.qa_manager || current_user.scrum_master || current_user.global_admin)
+        flash[:notice] = "You don't have access to that page."
+        redirect_to root_url
+        return false
+      else
+        return true
       end
     end
 

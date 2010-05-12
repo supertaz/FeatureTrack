@@ -1,4 +1,7 @@
 class FeatureRequestsController < ApplicationController
+  before_filter :require_user
+  before_filter :current_user_can_access_feature_requests
+
   def index
     @feature_requests = FeatureRequest.all
   end
@@ -13,6 +16,8 @@ class FeatureRequestsController < ApplicationController
   
   def create
     @feature_request = FeatureRequest.new(params[:feature_request])
+    @feature_request.status = 'New'
+    @feature_request.requestor = current_user
     if @feature_request.save
       flash[:notice] = "Successfully created feature request."
       redirect_to @feature_request
@@ -38,7 +43,7 @@ class FeatureRequestsController < ApplicationController
   def destroy
     @feature_request = FeatureRequest.find(params[:id])
     @feature_request.destroy
-    flash[:notice] = "Successfully destroyed feature request."
+    flash[:notice] = "Successfully deleted feature request."
     redirect_to feature_requests_url
   end
 end
