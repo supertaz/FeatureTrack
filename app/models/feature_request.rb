@@ -16,27 +16,22 @@ class FeatureRequest < ActiveRecord::Base
   validates_length_of :description, :minimum => 40
 
   def get_risk_level_string
+    l = nil
     Defect.risk_levels.each do |level|
       if level[1] == self.risk
-        level[0]
+        l = level[0]
       end
     end
+    l
   end
 
   def get_priority_string
+    p = nil
     Defect.priorities.each do |pri|
       if pri[1] == self.priority
-        pri[0]
+        p = pri[0]
       end
     end
+    p
   end
-
-  def get_severity_string
-    Defect.severities.each do |sev|
-      if sev[1] == self.severity
-        sev[0]
-      end
-    end
-  end
-
 end

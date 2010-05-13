@@ -87,27 +87,33 @@ class Defect < ActiveRecord::Base
   end
 
   def get_risk_level_string
+    l = nil
     Defect.risk_levels.each do |level|
       if level[1] == self.risk
-        level[0]
+        l = level[0]
       end
     end
+    l
   end
 
   def get_priority_string
+    p = nil
     Defect.priorities.each do |pri|
       if pri[1] == self.priority
-        pri[0]
+        p = pri[0]
       end
     end
+    p
   end
 
   def get_severity_string
+    s = nil
     Defect.severities.each do |sev|
       if sev[1] == self.severity
-        sev[0]
+        s = sev[0]
       end
     end
+    s
   end
 
   def self.affected_parties
