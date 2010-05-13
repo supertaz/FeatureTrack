@@ -59,7 +59,7 @@ class Defect < ActiveRecord::Base
       end
     end
     unless self.risk.nil?
-      exec_pri += (self.risk * 50)
+      exec_pri += (self.risk * 20)
     end
     case self.status
       when 'New'
@@ -93,6 +93,7 @@ class Defect < ActiveRecord::Base
           'Corporate parents',
           'Customer support',
           'Administrators',
+          'External',
           'Everybody'
     ]
   end
@@ -114,6 +115,7 @@ class Defect < ActiveRecord::Base
           'Sitter search',
           'Job search',
           'Job response',
+          'Job feeds',
           'Other'
     ]
   end
@@ -134,7 +136,8 @@ class Defect < ActiveRecord::Base
           ['Could take site down', 1],
           ['Could break major functionality', 2],
           ['Could break minor functionality', 3],
-          ['Could create cosmetic flaws', 4]
+          ['Could create cosmetic flaws', 4],
+          ['No appreciable risk', 9]
     ]
   end
 
