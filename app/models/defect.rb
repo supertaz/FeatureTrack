@@ -86,6 +86,30 @@ class Defect < ActiveRecord::Base
     self.calculate_execution_priority.to_s[1,1]
   end
 
+  def get_risk_level_string
+    Defect.risk_levels.each do |level|
+      if level[1] == self.risk
+        level[0]
+      end
+    end
+  end
+
+  def get_priority_string
+    Defect.priorities.each do |pri|
+      if pri[1] == self.priority
+        pri[0]
+      end
+    end
+  end
+
+  def get_severity_string
+    Defect.severities.each do |sev|
+      if sev[1] == self.severity
+        sev[0]
+      end
+    end
+  end
+
   def self.affected_parties
     [
           'Sitters',

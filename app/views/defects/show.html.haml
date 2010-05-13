@@ -61,13 +61,13 @@
     =h @defect.functional_area
   %p
     %strong Severity:
-    =get_severities[@defect.severity - 1][0]
+    =@defect.get_severity_string
   %p
     %strong Technical risk:
-    =@defect.risk.nil? ? '<i>Not yet assessed</i>' : get_risk_levels[@defect.risk - 1][0]
+    =@defect.risk.nil? ? '<i>Not yet assessed</i>' : @defect.get_risk_level_string
   %p
     %strong Business impact:
-    =@defect.priority.nil? ? '<i>Not yet assessed</i>' : get_priorities[@defect.priority - 1][0]
+    =@defect.priority.nil? ? '<i>Not yet assessed</i>' : @defect.get_priority_string
   %p
     %strong Reported against:
     #{@defect.against_story_source.nil? ? nil : "#{h @defect.against_story_source}: "}

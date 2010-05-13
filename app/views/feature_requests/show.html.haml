@@ -11,10 +11,10 @@
   =h @feature_request.description
 %p
   %strong Priority:
-  = @feature_request.priority.nil? ? '<i>Not yet assessed</i>' : get_priorities[@feature_request.priority - 1][0]
+  = @feature_request.priority.nil? ? '<i>Not yet assessed</i>' : @feature_request.get_priority_string
 %p
   %strong Risk:
-  = @feature_request.risk.nil? ? '<i>Not yet assessed</i>' : get_risk_levels[@feature_request.risk - 1][0]
+  = @feature_request.risk.nil? ? '<i>Not yet assessed</i>' : @feature_request.get_risk_level_string
 %p
   %strong Affected:
   =h @feature_request.affected

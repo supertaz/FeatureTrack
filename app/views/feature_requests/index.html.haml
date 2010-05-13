@@ -18,8 +18,8 @@
     %tr
       %td.left.right= h feature_request.status
       %td.right= link_to feature_request.title, feature_request
-      %td.right= feature_request.priority.nil? ? '<i>Not yet assessed</i>' : get_priorities[feature_request.priority - 1][0]
-      %td.right= feature_request.risk.nil? ? '<i>Not yet assessed</i>' : get_risk_levels[feature_request.risk - 1][0]
+      %td.right= feature_request.priority.nil? ? '<i>Not yet assessed</i>' : feature_request.get_priority_string
+      %td.right= feature_request.risk.nil? ? '<i>Not yet assessed</i>' : feature_request.get_risk_level_string
       %td.right= h feature_request.affected
       %td.right= h feature_request.functional_area
       %td.right= h feature_request.story_source
