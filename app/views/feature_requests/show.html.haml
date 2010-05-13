@@ -8,7 +8,8 @@
   =h @feature_request.title
 %p
   %strong Description:
-  =h @feature_request.description
+  %br
+  %pre=h @feature_request.description
 %p
   %strong Priority:
   = @feature_request.priority.nil? ? '<i>Not yet assessed</i>' : @feature_request.get_priority_string
