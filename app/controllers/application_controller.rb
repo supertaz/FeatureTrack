@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     def require_user
       unless current_user
         store_location
-        flash[:notice] = "You must be logged in to access this page"
+        flash[:error] = "You must be logged in to access this page"
         redirect_to login_url
         return false
       end
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     def require_no_user
       if current_user
         store_location
-        flash[:notice] = "You must be logged out to access this page"
+        flash[:error] = "You must be logged out to access this page"
         redirect_to user_url(current_user)
         return false
       end
@@ -56,23 +56,25 @@ class ApplicationController < ActionController::Base
     def require_global_admin
       unless current_user && current_user.global_admin
         store_location
-        flash[:notice] = "You must be an administrator to access that page"
+        flash[:error] = "You must be an administrator to access that page"
         redirect_to root_url
         return false
       end
     end
 
-    def current_user_can_access_feature_requests
+    def current_user_can_access_feature_requests(redirect = true)
       unless current_user && (current_user.business_user || current_user.development_manager || current_user.qa_manager || current_user.scrum_master || current_user.global_admin)
-        flash[:notice] = "You don't have access to that page."
-        redirect_to root_url
+        if redirect
+          flash[:error] = "You don't have access to that page."
+          redirect_to root_url
+        end
         return false
       else
         return true
       end
     end
 
-    def current_user_can_request_features
+    def current_user_can_request_features(redirect = true)
       unless current_user && (current_user.business_user ||
               current_user.developer ||
               current_user.qa ||
@@ -80,15 +82,17 @@ class ApplicationController < ActionController::Base
               current_user.qa_manager ||
               current_user.scrum_master ||
               current_user.global_admin)
-        flash[:notice] = "You don't have access to that page."
-        redirect_to root_url
+        if redirect
+          flash[:error] = "You don't have access to that page."
+          redirect_to root_url
+        end
         return false
       else
         return true
       end
     end
 
-    def current_user_can_see_defects
+    def current_user_can_see_defects(redirect = true)
       unless current_user && (
                       current_user.defect_viewer ||
                       current_user.business_user ||
@@ -98,15 +102,17 @@ class ApplicationController < ActionController::Base
                       current_user.qa_manager ||
                       current_user.scrum_master ||
                       current_user.global_admin)
-        flash[:notice] = "You don't have access to that page."
-        redirect_to root_url
+        if redirect
+          flash[:error] = "You don't have access to that page."
+          redirect_to root_url
+        end
         return false
       else
         return true
       end
     end
 
-    def current_user_can_create_defects
+    def current_user_can_create_defects(redirect = true)
       unless current_user && (
                       current_user.defect_reporter ||
                       current_user.business_user ||
@@ -116,8 +122,10 @@ class ApplicationController < ActionController::Base
                       current_user.qa_manager ||
                       current_user.scrum_master ||
                       current_user.global_admin)
-        flash[:notice] = "You don't have access to that page."
-        redirect_to root_url
+        if redirect
+          flash[:error] = "You don't have access to that page."
+          redirect_to root_url
+        end
         return false
       else
         return true
