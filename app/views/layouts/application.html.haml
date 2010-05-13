@@ -57,6 +57,8 @@
             = link_to 'report a defect', new_defect_url
           - if current_user_can_access_feature_requests
             = link_to 'feature requests', feature_requests_url
+          - elsif current_user_can_request_features
+            = link_to 'request a feature', new_feature_request_url
           - if current_user.global_admin
             = link_to 'administration', admin_url
 

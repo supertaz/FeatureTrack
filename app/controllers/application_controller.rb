@@ -4,7 +4,8 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user, :current_user_session, :redirect_back_or_default, :store_location, :get_defect_level, :slugify,
-                :current_user_can_access_feature_requests, :current_user_can_see_defects, :current_user_can_create_defects
+                :current_user_can_access_feature_requests, :current_user_can_see_defects, :current_user_can_create_defects,
+                :current_user_can_request_features
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   filter_parameter_logging :password
@@ -63,6 +64,22 @@ class ApplicationController < ActionController::Base
 
     def current_user_can_access_feature_requests
       unless current_user && (current_user.business_user || current_user.development_manager || current_user.qa_manager || current_user.scrum_master || current_user.global_admin)
+        flash[:notice] = "You don't have access to that page."
+        redirect_to root_url
+        return false
+      else
+        return true
+      end
+    end
+
+    def current_user_can_request_features
+      unless current_user && (current_user.business_user ||
+              current_user.developer ||
+              current_user.qa ||
+              current_user.development_manager ||
+              current_user.qa_manager ||
+              current_user.scrum_master ||
+              current_user.global_admin)
         flash[:notice] = "You don't have access to that page."
         redirect_to root_url
         return false
