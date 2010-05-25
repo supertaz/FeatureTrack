@@ -63,9 +63,12 @@ class DefectsController < ApplicationController
   end
 
   def promote
-    if current_user.scrum_master || current_user.global_admin
-      defect = Defect.find(params[:id])
+    defect = Defect.find(params[:id])
+    if (current_user.developer && defect.display_priority.to_i >= 3) || current_user.development_manager || current_user.scrum_master || current_user.global_admin
       unless defect.project.nil?
+        unless defect.against_story_id.nil? || defect.against_story_id.blank?
+          defect.against_story_source = defect.project.source
+        end
         key_object = current_user.get_api_key('pivotal')
         PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
         project = defect.project.get_source_project
