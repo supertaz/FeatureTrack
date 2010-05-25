@@ -22,7 +22,8 @@
       %td.right
         - unless defect.story_id.nil?
           #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}
-          = link_to "#{defect.story_id}", defect.get_story_url, :target => '_new', :class => 'action'
+          #{defect.story_id}
+          =# link_to "#{defect.story_id}", defect.get_story_url, :target => '_new', :class => 'action'
         - else
           Not promoted
       %td.right
