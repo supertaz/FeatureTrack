@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller => 'iterations', :action => 'current'
+  map.root :controller => 'dashboards', :action => 'index'
 
   map.namespace(:admin) do |admin|
     admin.resources :projects
@@ -9,8 +9,6 @@ ActionController::Routing::Routes.draw do |map|
   map.admin '/admin', :controller => 'admin/dashboard', :action => 'index'
 
   map.resource :user, :controller => 'users', :as => 'account'
-
-  map.resource :dashboard
 
   map.resources :defects, :member => {:promote => :get}
 

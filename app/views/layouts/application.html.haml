@@ -49,8 +49,10 @@
 
       #globalnav
         - if current_user
-          = link_to 'current', current_iteration_url
-          = link_to 'assignments', assignments_url
+          = link_to 'dashboard', root_url
+          - if current_user_can_see_stories(false)
+            = link_to 'current', current_iteration_url
+            = link_to 'assignments', assignments_url
           - if current_user_can_see_defects(false)
             = link_to 'defects', defects_url
           - if current_user_can_create_defects(false)

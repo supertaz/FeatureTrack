@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user, :current_user_session, :redirect_back_or_default, :store_location, :get_defect_level, :slugify,
                 :current_user_can_access_feature_requests, :current_user_can_see_defects, :current_user_can_create_defects,
-                :current_user_can_request_features
+                :current_user_can_request_features, :current_user_can_see_stories
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   filter_parameter_logging :password
@@ -132,19 +132,38 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def get_defect_level(defect)
-      pri = 10
-      defect.labels.split(',').each do |label|
-        if label.match(/^p[0-9]$/)
-          unless label.gsub(/^p([0-9])$/, '\1').nil?
-            pri = label.gsub(/p([0-9])/, '\1').to_i
-          end
+    def current_user_can_see_stories(redirect = true)
+      unless current_user && (
+                      current_user.business_user ||
+                      current_user.developer ||
+                      current_user.development_manager ||
+                      current_user.qa ||
+                      current_user.qa_manager ||
+                      current_user.scrum_master ||
+                      current_user.global_admin)
+        if redirect
+          flash[:error] = "You don't have access to that page."
+          redirect_to root_url
         end
+        return false
+      else
+        return true
       end
-      pri
     end
 
-    def slugify(string)
-      string.downcase.gsub(/^\W*/, '').gsub(/\W*$/, '').gsub(/\W+/, '-')
-    end
+    def get_defect_level(defect)
+        pri = 10
+        defect.labels.split(',').each do |label|
+          if label.match(/^p[0-9]$/)
+            unless label.gsub(/^p([0-9])$/, '\1').nil?
+              pri = label.gsub(/p([0-9])/, '\1').to_i
+            end
+          end
+        end
+        pri
+      end
+
+      def slugify(string)
+        string.downcase.gsub(/^\W*/, '').gsub(/\W*$/, '').gsub(/\W+/, '-')
+      end
 end
