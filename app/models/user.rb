@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
                   :login_count, :failed_login_count, :last_request_at, :current_login_at, :last_login_at, :current_login_ip, :last_login_ip,
                   :password, :password_confirmation, :firstname, :lastname, :work, :home, :mobile, :nickname, :active,
                   :defect_viewer, :defect_reporter, :business_user, :technology_team, :developer, :qa, :scrum_master, :global_admin,
-                  :development_manager, :qa_manager, :source_api_keys_attributes
+                  :development_manager, :qa_manager, :source_api_keys_attributes, :story_viewer
 
   acts_as_authentic
   acts_as_authorized_user
