@@ -134,6 +134,7 @@ class ApplicationController < ActionController::Base
 
     def current_user_can_see_stories(redirect = true)
       unless current_user && (
+                      current_user.story_viewer ||
                       current_user.business_user ||
                       current_user.developer ||
                       current_user.development_manager ||

@@ -56,6 +56,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def story_viewer
+    self.is_story_viewer?
+  end
+
+  def story_viewer=(pv)
+    if dv.to_i == 1
+      self.is_story_viewer
+    else
+      self.is_not_story_viewer
+    end
+  end
+
   def business_user
     self.is_business_user?
   end
