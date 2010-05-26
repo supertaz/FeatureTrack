@@ -60,8 +60,8 @@ class User < ActiveRecord::Base
     self.is_story_viewer?
   end
 
-  def story_viewer=(pv)
-    if dv.to_i == 1
+  def story_viewer=(sv)
+    if sv.to_i == 1
       self.is_story_viewer
     else
       self.is_not_story_viewer
