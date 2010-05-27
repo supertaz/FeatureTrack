@@ -34,18 +34,35 @@ $(function() {
         $('html, body').animate({scrollTop:scrollLoc}, 500);
     });
 
-    var acceptedVisible = true;
+
+    acceptedVisible = $.cookies.get('acceptedVisible');
+
+    if (acceptedVisible == null)
+    {
+        acceptedVisible = true;
+        $.cookies.set('acceptedVisible', true);
+    }
+    if (acceptedVisible)
+    {
+        $(".accepted").show();
+    }
+    else
+    {
+        $(".accepted").hide();
+    }
     $("a[rel='toggle_accepted_stories']").click(function(event){
         event.preventDefault();
         if (acceptedVisible)
         {
             $(".accepted").hide();
             acceptedVisible = false;
+            $.cookies.set('acceptedVisible', false);
         }
         else
         {
             $(".accepted").show();
             acceptedVisible = true;
+            $.cookies.set('acceptedVisible', true);
         }
     })
 });
