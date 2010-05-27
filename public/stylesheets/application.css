@@ -285,9 +285,13 @@ a {
 
 #status_info {
   float: right;
-  width: 16em;
+  width: 21em;
   margin: 0px 0px 0px 2em;
-  padding: 0px; }
+  padding: 0px;
+  font-size: 0.9em;
+  white-space: nowrap; }
+  #status_info strong {
+    font-size: 1.1em; }
 
 table {
   border-spacing: 0px;

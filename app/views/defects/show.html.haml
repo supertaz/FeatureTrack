@@ -35,20 +35,23 @@
     %strong Last assigned:
     #{@defect.last_assigned_at.nil? ? '<i>Never assigned</i>' : @defect.developer.last_assigned_at}
   %p
+    %strong Reported:
+    = @defect.created_at
+    %br
     %strong Started:
-    =h @defect.started_at
+    = @defect.started_at
     %br
     %strong Finished:
-    =h @defect.finished_at
+    = @defect.finished_at
     %br
     %strong Delivered:
-    =h @defect.delivered_at
+    = @defect.delivered_at
     %br
     %strong Approved:
-    =h @defect.approved_at
+    = @defect.approved_at
     %br
     %strong Rejected:
-    =h @defect.rejected_at
+    = @defect.rejected_at
 #main_detail
   %p
     %strong Environment:
