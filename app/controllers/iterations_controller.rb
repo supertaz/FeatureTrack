@@ -41,9 +41,6 @@ class IterationsController < ApplicationController
           iteration.stories.each do |story|
             add_to_lane_hash(@lanes, project.name, story)
           end
-          @iteration_number = iteration.number
-          @completion_date = iteration.finish.to_date
-          @story_count = iteration.stories.count
         rescue => e
           if !(defined? e.response) || e.response.nil?
             flash.now[:error] = "#{e.type} exception, trying again in 15 seconds."
@@ -74,9 +71,6 @@ class IterationsController < ApplicationController
             owner = (story.owned_by.nil? || story.owned_by.empty?) ? 'Unassigned' : story.owned_by
             add_to_lane_hash(@workers, owner, story)
           end
-          @iteration_number = iteration.number
-          @completion_date = iteration.finish.to_date
-          @story_count = iteration.stories.count
         rescue => e
           if !(defined? e.response) || e.response.nil?
             flash.now[:error] = "#{e.type} exception, trying again in 15 seconds."
@@ -95,30 +89,72 @@ class IterationsController < ApplicationController
 
   protected
 
-  def add_to_lane_hash(lanes, label, story)
+  def add_to_lane_hash(lanes, label, story, accepted_bubble_up = true)
     unless lanes.has_key?(label)
       lanes[label] = Hash.new
       lanes[label]['name'] = label.capitalize
-      lanes[label]['other'] = Array.new
-      lanes[label]['features'] = Array.new
-      lanes[label]['priority'] = Array.new
-      lanes[label]['defects'] = Array.new
-      lanes[label]['chores'] = Array.new
+      lanes[label]['total_items'] = 0
+      lanes[label]['total_features'] = 0
+      lanes[label]['total_defects'] = 0
+      lanes[label]['total_chores'] = 0
+      lanes[label]['total_others'] = 0
+      lanes[label]['open_items'] = 0
+      lanes[label]['open_features'] = 0
+      lanes[label]['open_defects'] = 0
+      lanes[label]['open_chores'] = 0
+      lanes[label]['open_others'] = 0
+      accepted_other = Array.new
+      accepted_features = Array.new
+      accepted_priority = Array.new
+      accepted_defects = Array.new
+      accepted_chores = Array.new
+      todo_other = Array.new
+      todo_features = Array.new
+      todo_priority = Array.new
+      todo_defects = Array.new
+      todo_chores = Array.new
+      lanes[label]['accepted'] = {'other' => accepted_other,
+                                  'features' => accepted_features,
+                                  'priority' => accepted_priority,
+                                  'defects' => accepted_defects,
+                                  'chores' => accepted_chores
+      }
+      lanes[label]['todo'] = {    'other' => todo_other,
+                                  'features' => todo_features,
+                                  'priority' => todo_priority,
+                                  'defects' => todo_defects,
+                                  'chores' => todo_chores
+      }
     end
 
+    if accepted_bubble_up && story.current_state == 'accepted'
+      target = lanes[label]['accepted']
+    else
+      target = lanes[label]['todo']
+    end
+    lanes[label]['total_items'] += 1
+    lanes[label]['open_items'] += 1 unless story.current_state == 'accepted'
     case story.story_type
       when 'feature'
-        lanes[label]['features'] << story
+        target['features'] << story
+        lanes[label]['total_features'] += 1
+        lanes[label]['open_features'] += 1 unless story.current_state == 'accepted'
       when 'bug'
         if get_defect_level(story) > 2
-          lanes[label]['defects'] << story
+          target['defects'] << story
         else
-          lanes[label]['priority'] << story
+          target['priority'] << story
         end
+        lanes[label]['total_defects'] += 1
+        lanes[label]['open_defects'] += 1 unless story.current_state == 'accepted'
       when 'chore'
-        lanes[label]['chores'] << story
+        target['chores'] << story
+        lanes[label]['total_chores'] += 1
+        lanes[label]['open_chores'] += 1 unless story.current_state == 'accepted'
       else
-        lanes[label]['other'] << story
+        target['other'] << story
+        lanes[label]['total_others'] += 1
+        lanes[label]['open_others'] += 1 unless story.current_state == 'accepted'
     end
 
   end

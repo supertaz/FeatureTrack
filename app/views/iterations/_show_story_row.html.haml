@@ -1,4 +1,9 @@
-%tr{:class => ((i + 1) % 2) > 0 ? nil : 'grey'}
+-row_classes = ((i + 1) % 2) > 0 ? nil : 'grey'
+-if row_classes.nil? && accepted
+  -row_classes = 'accepted'
+-elsif accepted
+  -row_classes = 'grey accepted'
+%tr{:class => row_classes}
   %td.left
     .task_type
       =image_tag(get_task_type_icon story.story_type)
