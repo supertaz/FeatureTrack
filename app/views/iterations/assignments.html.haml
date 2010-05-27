@@ -1,7 +1,8 @@
 - title "Current Assignments"
 
 - content_for :summary_info do
-  %h6 Pivotal iteration #{h @iteration_number} (#{h @completion_date}), #{h @story_count} items
+  %h6
+    %a{:href=>'#', :rel => 'toggle_accepted_stories'}Toggle accepted stories
 
 - @workers.sort.each do |worker|
   =render :partial => 'show_stories_table', :locals =>{:lane =>worker}

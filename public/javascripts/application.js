@@ -33,4 +33,19 @@ $(function() {
         // scroll the visible area to reveal the target
         $('html, body').animate({scrollTop:scrollLoc}, 500);
     });
+
+    var acceptedVisible = true;
+    $("a[rel='toggle_accepted_stories']").click(function(event){
+        event.preventDefault();
+        if (acceptedVisible)
+        {
+            $(".accepted").hide();
+            acceptedVisible = false;
+        }
+        else
+        {
+            $(".accepted").show();
+            acceptedVisible = true;
+        }
+    })
 });
