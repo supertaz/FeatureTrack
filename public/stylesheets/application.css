@@ -13,6 +13,9 @@ h2 {
   margin: 0em;
   padding: 0;
   font-size: 18px; }
+  h2 span {
+    font-size: 0.6em;
+    bottom: -3px; }
 
 h3 {
   margin: 0em;
@@ -129,6 +132,18 @@ a {
     #errorExplanation ul li {
       font-size: 12px;
       list-style: disc; }
+
+#status_summary {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #eeeeff;
+  padding: 5px;
+  border: solid 1px #999999; }
+  #status_summary #status_summary_items {
+    margin-top: 5px; }
+    #status_summary #status_summary_items img {
+      vertical-align: text-bottom; }
 
 .status {
   position: relative; }

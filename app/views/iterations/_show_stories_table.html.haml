@@ -12,7 +12,7 @@
       - if defined?(show_lane_progress) && show_lane_progress
         #{lane[1]['total_items'] - lane[1]['open_items']} /
       #{pluralize(lane[1]['total_items'], 'item')}
-      %span{:style => 'font-size:.6em'}
+      %span
         (
         -unless lane[1]['total_features'] == 0
           - if defined?(show_lane_progress) && show_lane_progress
