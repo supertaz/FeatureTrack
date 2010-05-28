@@ -83,6 +83,23 @@ module ApplicationHelper
     end
   end
 
+  def get_state_name(state)
+    case state
+      when 'accepted'
+        'Accepted'
+      when 'rejected'
+        'Rejected'
+      when 'delivered'
+        'In UAT'
+      when 'finished'
+        'In QA'
+      when 'started'
+        'In Dev'
+      when 'unstarted'
+        'Not Started'
+    end
+  end
+
   def get_task_type_icon(task_type)
     case task_type
       when 'chore'
