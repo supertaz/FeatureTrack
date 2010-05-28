@@ -2,7 +2,7 @@ class DashboardsController < ApplicationController
   before_filter :require_user
 
   def index
-    @default_refresh = 300
+    @default_refresh = 90
     @refresh = params[:refresh].nil? ? @default_refresh : params[:refresh].to_i
     @statuses = Hash.new
     key_object = current_user.get_api_key('pivotal')
