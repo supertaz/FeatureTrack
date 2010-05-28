@@ -33,6 +33,8 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic'
   config.gem 'compass'
   config.gem 'searchlogic'
+  config.gem 'rdiscount'
+  config.gem 'sanitize'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

@@ -11,6 +11,8 @@ class DefectsController < ApplicationController
     key_object = current_user.get_api_key('pivotal')
     PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
     @defect = Defect.find(params[:id])
+    markdown = RDiscount.new(@defect.description)
+    @defect_description = Sanitize.clean(markdown.to_html, Sanitize::Config::BASIC)
   end
 
   def new
