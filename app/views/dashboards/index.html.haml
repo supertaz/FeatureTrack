@@ -1,4 +1,20 @@
 - title "Dashboard"
 
-%p
-  If you're looking for information about the current iteration or assignments, please look at the "current" or "assignments" tab (if you have access to them above).
+- content_for :summary_info do
+  %h6
+    %a{:href=>'#', :rel => 'toggle_accepted_stories'}Toggle accepted stories
+
+- content_for :navigation_links do
+  %a{:href => "#summary", :rel => 'scrollTo', :class => 'status_summary'} Summary
+
+#status_summary.status_summary.nowrap
+  %h2 Status Summary
+  - @statuses.sort.each do |status|
+    %img{:src => get_state_icon(status[1]['name'].downcase)}
+    #{status[1]['name']}: #{status[1]['total_items']}
+    &nbsp;&nbsp;&nbsp;&nbsp;
+  %br
+  %br
+
+- @statuses.sort.each do |status|
+  =render :partial => 'iterations/show_stories_table', :locals =>{:lane =>status, :show_lane_progress => false}

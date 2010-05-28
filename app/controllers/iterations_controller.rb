@@ -15,7 +15,7 @@ class IterationsController < ApplicationController
         end
       rescue => e
         if e.response.nil?
-          flash.now[:error] = "#{e.type} exception, trying again in 15 seconds."
+          flash.now[:error] = "#{e.class} exception, trying again in 15 seconds."
           @refresh = 15
         else
           flash.now[:error] = "Remote source returned an exception: #{e.response}&nbsp;&nbsp;Will try again in 15 seconds."
@@ -43,7 +43,7 @@ class IterationsController < ApplicationController
           end
         rescue => e
           if !(defined? e.response) || e.response.nil?
-            flash.now[:error] = "#{e.type} exception, trying again in 15 seconds."
+            flash.now[:error] = "#{e.class} exception, trying again in 15 seconds."
             @refresh = 15
           else
             flash.now[:error] = "Remote source returned an exception: #{e.response}&nbsp;&nbsp;Will try again in 15 seconds."
@@ -73,7 +73,7 @@ class IterationsController < ApplicationController
           end
         rescue => e
           if !(defined? e.response) || e.response.nil?
-            flash.now[:error] = "#{e.type} exception, trying again in 15 seconds."
+            flash.now[:error] = "#{e.class} exception, trying again in 15 seconds."
             @refresh = 15
           else
             flash.now[:error] = "Remote source returned an exception: #{e.response}&nbsp;&nbsp;Will try again in 15 seconds."
@@ -86,7 +86,5 @@ class IterationsController < ApplicationController
       redirect_to dashboard_url
     end
   end
-
-  protected
 
 end

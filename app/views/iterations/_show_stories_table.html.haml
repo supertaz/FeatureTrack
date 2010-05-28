@@ -9,17 +9,27 @@
   .story_table{:class => lane_accepted ? 'accepted' : nil}
     %h2{:id => slug}
       #{h lane[1]['name']}:
-      #{lane[1]['total_items'] - lane[1]['open_items']}/#{pluralize(lane[1]['total_items'], 'item')}
+      - if defined?(show_lane_progress) && show_lane_progress
+        #{lane[1]['total_items'] - lane[1]['open_items']} /
+      #{pluralize(lane[1]['total_items'], 'item')}
       %span{:style => 'font-size:.6em'}
         (
         -unless lane[1]['total_features'] == 0
-          #{lane[1]['total_features'] - lane[1]['open_features']}/#{pluralize(lane[1]['total_features'], 'feature')}
+          - if defined?(show_lane_progress) && show_lane_progress
+            #{lane[1]['total_features'] - lane[1]['open_features']} /
+          #{pluralize(lane[1]['total_features'], 'feature')}
         -unless lane[1]['total_defects'] == 0
-          #{lane[1]['total_defects'] - lane[1]['open_defects']}/#{pluralize(lane[1]['total_defects'], 'defect')}
+          - if defined?(show_lane_progress) && show_lane_progress
+            #{lane[1]['total_defects'] - lane[1]['open_defects']} /
+          #{pluralize(lane[1]['total_defects'], 'defect')}
         -unless lane[1]['total_chores'] == 0
-          #{lane[1]['total_chores'] - lane[1]['open_chores']}/#{pluralize(lane[1]['total_chores'], 'chore')}
+          - if defined?(show_lane_progress) && show_lane_progress
+            #{lane[1]['total_chores'] - lane[1]['open_chores']} /
+          #{pluralize(lane[1]['total_chores'], 'chore')}
         -unless lane[1]['total_others'] == 0
-          #{lane[1]['total_others'] - lane[1]['open_others']}/#{pluralize(lane[1]['total_others'], 'other')}
+          - if defined?(show_lane_progress) && show_lane_progress
+            #{lane[1]['total_others'] - lane[1]['open_others']} /
+          #{pluralize(lane[1]['total_others'], 'other')}
         )
     %table
       %tr.head
@@ -35,20 +45,20 @@
         - unless category['priority'].nil?
           - category['priority'].sort{|a,b| sort_defect_score(a,b)}.each do |story|
             - i += 1
-            =render :partial => 'show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
+            =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
         - unless category['chores'].nil?
           - category['chores'].sort{|a,b| get_state_step(b.current_state) <=> get_state_step(a.current_state)}.each do |story|
             - i += 1
-            =render :partial => 'show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
+            =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
         - unless category['features'].nil?
           - category['features'].sort{|a,b| get_state_step(b.current_state) <=> get_state_step(a.current_state)}.each do |story|
             - i += 1
-            =render :partial => 'show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
+            =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
         - unless category['defects'].nil?
           - category['defects'].sort{|a,b| sort_defect_score(a,b)}.each do |story|
             - i += 1
-            =render :partial => 'show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
+            =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
         - unless category['other'].nil?
           - category['other'].sort{|a,b| get_state_step(b.current_state) <=> get_state_step(a.current_state)}.each do |story|
             - i += 1
-            =render :partial => 'show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
+            =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
