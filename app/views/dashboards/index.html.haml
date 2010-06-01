@@ -7,19 +7,20 @@
 - content_for :navigation_links do
   %a{:href => "#status_summary", :rel => 'scrollTo', :class => 'status_summary'} Summary
 
-#status_summary.status_summary.nowrap
-  - total_items = 0
-  - @statuses.each do |status|
-    -total_items += status[1]['total_items'] - status[1]['total_others']
-  %h2
-    Status Summary
-    %span ( #{total_items} total stories )
-  #status_summary_items
-    - @statuses.sort.each do |status|
-      %img{:src => get_state_icon(status[1]['name'].downcase)}
-      %strong #{get_state_name(status[1]['name'].downcase)}:
-      #{status[1]['total_items'] - status[1]['total_others']}
-      &nbsp;
+- content_for :status_summary do
+  #status_summary.status_summary.nowrap
+    - total_items = 0
+    - @statuses.each do |status|
+      -total_items += status[1]['total_items'] - status[1]['total_others']
+    %h2
+      Status Summary
+      %span ( #{total_items} total stories )
+    #status_summary_items
+      - @statuses.sort.each do |status|
+        %img{:src => get_state_icon(status[1]['name'].downcase)}
+        %strong #{get_state_name(status[1]['name'].downcase)}:
+        #{status[1]['total_items'] - status[1]['total_others']}
+        &nbsp;
 
 - @statuses.sort.each do |status|
   =render :partial => 'iterations/show_stories_table', :locals =>{:lane =>status, :show_lane_progress => false}
