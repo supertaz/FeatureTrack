@@ -54,9 +54,11 @@ a {
   padding: 0px;
   border: solid 1px black; }
   #container #overview {
-    padding: 0px 20px 0px 20px;
+    padding: 0px 10px 0px 20px;
     margin-top: 6.7em;
     margin-bottom: 0px; }
+    #container #overview #messages {
+      padding-top: 15px; }
 
 #summary {
   display: block;
@@ -133,7 +135,6 @@ a {
       list-style: disc; }
 
 #status_summary {
-  margin-top: 100px;
   margin-bottom: 20px;
   text-align: center;
   background-color: #eeeeff;
