@@ -57,10 +57,8 @@
             = link_to 'defects', defects_url
           - if current_user_can_create_defects(false)
             = link_to 'report a defect', new_defect_url
-          - if current_user_can_access_feature_requests(false)
+          - if current_user_can_request_features(false)
             = link_to 'feature requests', feature_requests_url
-          - elsif current_user_can_request_features(false)
-            = link_to 'request a feature', new_feature_request_url
           - if current_user.global_admin
             = link_to 'administration', admin_url
 
@@ -75,6 +73,9 @@
 
     #container
       #overview
-        - flash.each do |name, msg|
-          = content_tag :div, msg, :id => "flash_#{name}"
+        #messages
+          - flash.each do |name, msg|
+            = content_tag :div, msg, :id => "flash_#{name}"
+          - if yield(:status_summary)
+            = yield(:status_summary)
         = yield

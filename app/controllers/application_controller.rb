@@ -62,8 +62,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def current_user_can_access_feature_requests(redirect = true)
-      unless current_user && (current_user.business_user || current_user.development_manager || current_user.qa_manager || current_user.scrum_master || current_user.global_admin)
+    def current_user_can_modify_feature_requests(redirect = true)
+      unless current_user && (current_user.business_user ||
+              current_user.development_manager ||
+              current_user.qa_manager ||
+              current_user.scrum_master ||
+              current_user.global_admin)
         if redirect
           flash[:error] = "You don't have access to that page."
           redirect_to root_url

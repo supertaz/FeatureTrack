@@ -1,6 +1,6 @@
 class FeatureRequestsController < ApplicationController
   before_filter :require_user
-  before_filter :current_user_can_access_feature_requests, :except => [:new, :create]
+  before_filter :current_user_can_modify_feature_requests, :except => [:new, :create, :index, :show]
   before_filter :current_user_can_request_features, :only => [:new, :create]
 
   def index
