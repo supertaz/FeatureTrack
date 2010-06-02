@@ -49,7 +49,21 @@ class DefectsController < ApplicationController
         @defect.against_story_source = @defect.project.source
       end
     end
+    if @defect.description != params[:defect]['description']
+      description_changed = true
+    else
+      description_changed = false
+    end
     if @defect.update_attributes(params[:defect])
+      unless @defect.project.nil? || @defect.story_id.nil?
+        if description_changed
+          key_object = current_user.get_api_key('pivotal')
+          PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
+          project = @defect.project.get_source_project
+          story = project.stories.find(@defect.story_id)
+          story.update({'description' => @defect.description})
+        end
+      end
       flash[:notice] = "Successfully updated defect."
       redirect_to @defect
     else
