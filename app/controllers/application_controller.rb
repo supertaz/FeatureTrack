@@ -4,11 +4,22 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user, :current_user_session, :redirect_back_or_default, :store_location, :get_defect_level, :slugify,
-                :current_user_can_access_feature_requests, :current_user_can_see_defects, :current_user_can_create_defects,
+                :current_user_can_modify_feature_requests, :current_user_can_see_defects, :current_user_can_create_defects,
                 :current_user_can_request_features, :current_user_can_see_stories
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  include SslRequirement
 
   filter_parameter_logging :password
+
+  protected
+
+  def ssl_required?
+    if Rails.env == 'production'
+      return true
+    else
+      return false
+    end
+  end
 
   private
 
