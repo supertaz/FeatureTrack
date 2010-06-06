@@ -28,7 +28,6 @@ class DashboardsController < ApplicationController
       end
     else
       flash[:error] = "You don't have a pivotal API key."
-      redirect_to dashboard_url
     end
   end
 end
