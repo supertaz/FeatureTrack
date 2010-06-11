@@ -57,6 +57,7 @@ class FeatureRequestsController < ApplicationController
         project = feature.project.get_source_project
         new_feature = project.stories.create(:name => feature.title,
                                              :description => feature.description,
+                                             :requested_by => feature.requestor.firstname,
                                              :story_type => feature.story_type.nil? ? 'feature' : feature.story_type)
         feature.story_source = feature.project.source
         feature.story_id = new_feature.id

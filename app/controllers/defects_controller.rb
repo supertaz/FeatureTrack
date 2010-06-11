@@ -90,6 +90,7 @@ class DefectsController < ApplicationController
         project = defect.project.get_source_project
         new_defect = project.stories.create(:name => "P#{defect.display_priority} - " + defect.title,
                                              :labels => "p#{defect.display_priority}",
+                                             :requested_by => defect.reporter.firstname,
                                              :description => defect.description,
                                              :story_type => defect.story_type.nil? ? 'bug' : defect.story_type)
         defect.story_source = defect.project.source
