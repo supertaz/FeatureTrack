@@ -23,6 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :iterations
 
   map.resources :stories
+  map.move_story '/stories/:source/:project_id/:story_id/move', :controller => 'stories', :action => 'move'
 
 #  map.connect ':controller/:action/:id'
 #  map.connect ':controller/:action/:id.:format'

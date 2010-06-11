@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
                   :archived, :test_project, :start_at, :end_at
 
   named_scope :active, :conditions => {:active => true, :test_project => false}
+  named_scope :unarchived, :conditions => {:archived => false, :test_project => false}
 
   def get_source_project
     case self.source
@@ -10,15 +11,6 @@ class Project < ActiveRecord::Base
         PivotalTracker::Project.find(self.source_id)
       when 'internal'
         self
-    end
-  end
-
-  def move_story_to_sibling(story, project)
-    if project.allows_story_type?(story.story_type)
-      story.project_id = project.get_source_project.id
-      story.save
-    else
-      false
     end
   end
 
@@ -36,4 +28,13 @@ class Project < ActiveRecord::Base
         false
     end
   end
+
+  def self.move_story_to_project(story, project)
+    if project.allows_story_type?(story.story_type)
+      story.update({:project_id => project.get_source_project.id})
+    else
+      false
+    end
+  end
+
 end
