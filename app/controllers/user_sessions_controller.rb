@@ -12,6 +12,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = "Login successful!"
       redirect_back_or_default root_url
     else
+      flash[:error] = "Login information incorrect, please try to log in again."
       render :action => :new
     end
   end
