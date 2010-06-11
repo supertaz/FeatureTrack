@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user, :current_user_session, :redirect_back_or_default, :store_location, :get_defect_level, :slugify,
                 :current_user_can_modify_feature_requests, :current_user_can_see_defects, :current_user_can_create_defects,
-                :current_user_can_request_features, :current_user_can_see_stories
+                :current_user_can_request_features, :current_user_can_see_stories, :current_user_can_move_stories, :get_story_source
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   include SslRequirement
 
@@ -167,6 +167,20 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def current_user_can_move_stories(redirect = true)
+      unless current_user && (current_user.development_manager ||
+              current_user.scrum_master ||
+              current_user.global_admin)
+        if redirect
+          flash[:error] = "You don't have access to that page."
+          redirect_to root_url
+        end
+        return false
+      else
+        return true
+      end
+    end
+
     def get_defect_level(defect)
       pri = 10
       defect.labels.split(',').each do |label|
@@ -177,6 +191,15 @@ class ApplicationController < ActionController::Base
         end
       end
       pri
+    end
+
+    def get_story_source(story)
+      class_string = story.class.to_s
+      if class_string.include? 'PivotalTracker'
+        return 'pivotal'
+      else
+        return 'internal'
+      end
     end
 
     def slugify(string)
@@ -251,4 +274,5 @@ class ApplicationController < ActionController::Base
           lanes[label]['open_others'] += 1 unless story.current_state == 'accepted'
       end
     end
+
 end

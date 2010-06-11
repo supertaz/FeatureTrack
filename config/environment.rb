@@ -26,12 +26,12 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
 
-  config.gem 'haml'
+  config.gem 'haml', :version => '>=3.0.10'
   config.gem 'formtastic', :version => '>=0.9.8'
   config.gem 'validation_reflection'
-  config.gem 'pivotal-tracker'
+  config.gem 'pivotal-tracker', :version => '>= 0.1.32'
   config.gem 'authlogic'
-  config.gem 'compass'
+  config.gem 'compass', :version => '>=0.10.2'
   config.gem 'searchlogic'
   config.gem 'rdiscount'
   config.gem 'sanitize'

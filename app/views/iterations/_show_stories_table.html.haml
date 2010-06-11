@@ -36,9 +36,9 @@
         %th &nbsp;
         %th.title Story title
         %th Status
-        %th.nowrap Scheduled for
         %th.nowrap Requested by
         %th.nowrap Current owner
+        %th.nowrap Actions
       - i = 0
       -lane[1].values_at('accepted','todo').each_with_index do |category, index|
         - index == 0 ? accepted = true : accepted = false

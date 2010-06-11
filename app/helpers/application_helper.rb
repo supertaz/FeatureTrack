@@ -42,28 +42,16 @@ module ApplicationHelper
 
   def get_defect_priority(defect)
     pri = 1000
-    defect.labels.split(',').each do |label|
-      if label.match(/^p[0-9]$/)
-        unless label.gsub(/^p([0-9])$/, '\1').nil? || get_state_step(defect.current_state).nil?
-          pri = (6000 - (label.gsub(/p([0-9])/, '\1').to_i * 1000)) + get_state_step(defect.current_state)
+    unless defect.labels.nil?
+      defect.labels.split(',').each do |label|
+        if label.match(/^p[0-9]$/)
+          unless label.gsub(/^p([0-9])$/, '\1').nil? || get_state_step(defect.current_state).nil?
+            pri = (6000 - (label.gsub(/p([0-9])/, '\1').to_i * 1000)) + get_state_step(defect.current_state)
+          end
         end
       end
     end
     pri
-  end
-
-  def get_schedule_week(story)
-    start, finish = nil
-    unless story.labels.nil?
-      story.labels.split(',').each do |label|
-        if label.match(/^w[0-9]+(-?[0-9]+){1}$/)
-          start, finish = label.gsub(/^w([0-9]+)(-?([0-9]+)){1}$/, '\1,\3').split(',')
-        elsif label.match(/^w[0-9]+$/)
-          start = label.gsub(/^w([0-9]+)$/, '\1')
-        end
-      end
-    end
-    [start, finish]
   end
 
   def get_state_icon(state)
@@ -135,6 +123,10 @@ module ApplicationHelper
 
   def get_active_projects
     Project.active
+  end
+
+  def get_unarchived_projects
+    Project.unarchived
   end
 
 end

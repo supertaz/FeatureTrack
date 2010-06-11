@@ -1,0 +1,5 @@
+- semantic_form_for @story, :url => move_story_url, :method => :post do |f|
+  - f.inputs do
+    = f.input :project_id, :label => 'Move to project', :as => :select, :collection => get_unarchived_projects
+  - f.buttons do
+    = f.submit 'Move'
