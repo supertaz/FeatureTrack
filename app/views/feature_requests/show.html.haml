@@ -56,7 +56,7 @@
     |
     = link_to "Delete", @feature_request, :confirm => 'Are you sure you want to delete this request?', :method => :delete
     |
-  - if current_user.scrum_master || current_user.global_admin
+  - if @feature_request.status == 'New' && (current_user.scrum_master || current_user.global_admin)
     = link_to "Approve", approve_feature_request_url(@feature_request)
     |
     = link_to "Reject", reject_feature_request_url(@feature_request)
