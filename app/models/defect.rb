@@ -30,7 +30,7 @@ class Defect < ActiveRecord::Base
         when 'pivotal'
           project = self.project.get_source_project
           story = project.stories.find(self.story_id)
-          unless story.nil
+          unless story.nil?
             story.url
           else
             nil
