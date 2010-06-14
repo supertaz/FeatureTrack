@@ -375,6 +375,8 @@ table {
   table td.right {
     border-right: 1px solid #999999;
     text-align: center; }
+  table td.left_justify {
+    text-align: left; }
   table tr.grey:hover td {
     background: #7777aa;
     color: white; }
