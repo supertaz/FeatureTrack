@@ -1,5 +1,5 @@
 body {
-  background: #7ea6bb;
+  background: #fafaff;
   padding: 0px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 14px; }
@@ -50,9 +50,9 @@ a {
   position: relative;
   width: 97%;
   margin: 0 auto;
-  background: white;
+  background: transparent;
   padding: 0px;
-  border: solid 1px black; }
+  border: none; }
   #container #overview {
     padding: 0px 10px 0px 20px;
     margin-top: 6.7em;
