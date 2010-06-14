@@ -16,5 +16,5 @@
   %td.right.nowrap= h story.requested_by
   %td.right.nowrap= h story.owned_by
   %td.right.nowrap
-    - if current_user_can_move_stories(false)
-      = link_to 'move', move_story_url(:source => get_story_source(story), :project_id => story.project_id, :story_id => story.id)
+-#    - if current_user_can_move_stories(false)
+-#      = link_to 'move', move_story_url(:source => get_story_source(story), :project_id => story.project_id, :story_id => story.id)
