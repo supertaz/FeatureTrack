@@ -73,24 +73,33 @@ a {
   border-bottom: solid 1px black;
   background: #ffffdd; }
 
-.nav_tabs {
+#nav_tabs {
+  position: fixed;
+  display: block;
+  left: 0em;
+  top: 100%;
   padding: 0em;
-  width: 95%;
-  text-align: center; }
-  .nav_tabs a {
-    position: relative;
-    bottom: 5px;
-    background: white;
-    color: black;
-    padding: 0.3em 1.2em 5px 1.2em;
-    border-top: solid 1px black;
-    border-left: solid 1px black;
-    border-right: solid 1px black;
-    border-bottom: none;
-    text-decoration: none; }
-    .nav_tabs a:hover {
-      background: #7777aa;
-      color: white; }
+  margin: 0em;
+  text-align: center;
+  z-index: 10000; }
+  #nav_tabs #nav_tab_abs {
+    position: absolute;
+    width: 650px; }
+    #nav_tabs #nav_tab_abs a {
+      position: relative;
+      margin-left: -1px;
+      float: right;
+      background: white;
+      color: black;
+      padding: 0.3em 0.5em 0.5em 0.5em;
+      border-bottom: solid 1px #aaaaaa;
+      border-left: solid 1px #aaaaaa;
+      border-right: solid 1px #aaaaaa;
+      border-top: none;
+      text-decoration: none; }
+      #nav_tabs #nav_tab_abs a:hover {
+        background: #7777aa;
+        color: white; }
 
 #flash_notice,
 #flash_error {
@@ -385,3 +394,9 @@ table {
 
 .nowrap {
   white-space: nowrap; }
+
+.sidetext {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); }

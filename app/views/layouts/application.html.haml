@@ -13,6 +13,10 @@
     = yield(:head)
 
   %body.nojs
+    #nav_tabs.sidetext
+      #nav_tab_abs
+        =yield(:navigation_links)
+
     #summary
       #usernav
         #user_identity
@@ -58,7 +62,7 @@
                   %li
                     = link_to 'dashboard', root_url
                   %li
-                    = link_to 'current', current_iteration_url
+                    = link_to 'active projects', current_iteration_url
                   %li
                     = link_to 'assignments', assignments_url
             - if current_user_can_see_defects(false)
@@ -95,9 +99,6 @@
 
       -if yield(:summary_info)
         = yield(:summary_info)
-
-      .nav_tabs
-        =yield(:navigation_links)
 
     #container
       #overview
