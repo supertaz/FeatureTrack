@@ -13,7 +13,7 @@
     - @statuses.each do |status|
       -total_items += status[1]['total_items'] - status[1]['total_others']
     %h2
-      Status Summary
+      Current Activity Summary
       %span ( #{total_items} total stories )
     #status_summary_items
       - @statuses.sort.each do |status|

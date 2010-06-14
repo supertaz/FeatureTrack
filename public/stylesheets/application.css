@@ -79,7 +79,7 @@ a {
   text-align: center; }
   .nav_tabs a {
     position: relative;
-    bottom: -11px;
+    bottom: 5px;
     background: white;
     color: black;
     padding: 0.3em 1.2em 5px 1.2em;
@@ -87,8 +87,7 @@ a {
     border-left: solid 1px black;
     border-right: solid 1px black;
     border-bottom: none;
-    text-decoration: none;
-    font-weight: bold; }
+    text-decoration: none; }
     .nav_tabs a:hover {
       background: #7777aa;
       color: white; }
@@ -279,7 +278,7 @@ a {
 #globalnav {
   position: relative;
   margin-right: 40px;
-  top: -11px;
+  top: -15px;
   background: white;
   display: block; }
   #globalnav ul, #globalnav li {
