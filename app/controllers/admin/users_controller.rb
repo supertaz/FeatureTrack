@@ -29,6 +29,9 @@ class Admin::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    if @user.source_api_keys.empty?
+      @user.source_api_keys.build
+    end
     @user.set_global_admin_override
   end
 
