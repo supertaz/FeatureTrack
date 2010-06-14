@@ -265,26 +265,75 @@ a
         :vertical-align text-bottom
         :top 0px
         :left 3px
+.nojs
+  #globalnav
+    ul
+      ul
+        :display none
 #globalnav
   :position relative
   :margin-right 40px
-  :top -5px
-  :background transparent
-  a
-    :position relative
-    :top -3px
+  :top -11px
+  :background #fff
+  :display block
+  ul, li
+    :list-style none
+    :margin 0
+    :padding 0
+  ul
     :background #fff
-    :color #000
-    :padding .2em .6em .2em .6em
-    :border-bottom solid 1px #000
-    :border-left solid 1px #000
-    :border-right solid 1px #000
-    :border-top none
-    :text-decoration none
-    :font-weight bold
-    &:hover
-      :background #77a
-      :color #fff
+    li
+      :display block
+      :float left
+      :position relative
+      :background #fff
+      a
+        :display block
+        :height 20px
+        :line-height 20px
+        :padding 5px 10px
+        :border 1px solid #aaa
+        :margin-left -1px
+        :color #333
+        :text-decoration none
+    li.hover
+      a
+        :background #99d
+        :color #fff
+        &:hover
+          :background #77a
+          :color #fff
+      ul
+        a
+          :background #fff
+          :color #555
+    ul
+      :position absolute
+      :top 32px
+      :z-index 20000
+      li
+        :float none
+        a
+          :margin -1px 0 0 -1px
+          :display block
+          :width 150px
+        &:hover
+          :background #f5f5f5
+//  a
+//    :position relative
+//    :top -3px
+//    :background #fff
+//    :color #000
+//    :padding .2em .6em .2em .6em
+//    :border-bottom solid 1px #000
+//    :border-left solid 1px #000
+//    :border-right solid 1px #000
+//    :border-top none
+//    :text-decoration none
+//    :font-weight bold
+//    &:hover
+//      :background #77a
+//      :color #fff
 
 #main_detail
   :padding .1em 0em 0em 0em

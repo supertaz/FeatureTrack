@@ -64,5 +64,7 @@ $(function() {
             acceptedVisible = true;
             $.cookies.set('acceptedVisible', true);
         }
-    })
+    });
+
+    $('#globalnav').sDrop();
 });

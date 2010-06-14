@@ -9,10 +9,10 @@
     - unless @refresh.nil? || @refresh < 1
       %meta{"http-equiv"=>'Refresh', :content=>@refresh.to_s}
     = stylesheet_link_tag 'application', 'overlay', 'formtastic', :cache => 'featuretrack'
-    = javascript_include_tag 'jquery-1.4.2.min', 'jquery.tools.min', 'jquery.cookies.2.2.0.min', 'application', :cache => 'featuretrack'
+    = javascript_include_tag 'jquery-1.4.2.min', 'jquery.tools.min', 'jquery.cookies.2.2.0.min', 'jquery.sdrop', 'application', :cache => 'featuretrack'
     = yield(:head)
 
-  %body
+  %body.nojs
     #summary
       #usernav
         #user_identity
@@ -50,20 +50,47 @@
 
       #globalnav
         - if current_user
-          = link_to 'dashboard', root_url
-          - if current_user_can_see_stories(false)
-            = link_to 'current', current_iteration_url
-            = link_to 'assignments', assignments_url
-          - if current_user_can_see_defects(false)
-            = link_to 'defects', defects_url
-          - if current_user_can_create_defects(false)
-            = link_to 'report a defect', new_defect_url
-          - if current_user_can_request_features(false)
-            = link_to 'feature requests', feature_requests_url
-          - if current_user.global_admin
-            = link_to 'administration', admin_url
+          %ul
+            - if current_user_can_see_stories(false)
+              %li
+                = link_to 'activity', root_url
+                %ul
+                  %li
+                    = link_to 'dashboard', root_url
+                  %li
+                    = link_to 'current', current_iteration_url
+                  %li
+                    = link_to 'assignments', assignments_url
+            - if current_user_can_see_defects(false)
+              %li
+                = link_to 'defects', defects_url
+                %ul
+                  %li
+                    = link_to 'view defects', defects_url
+                  - if current_user_can_create_defects(false)
+                    %li
+                      = link_to 'report a defect', new_defect_url
+            - if current_user_can_request_features(false)
+              %li
+                = link_to 'features', feature_requests_url
+                %ul
+                  %li
+                    = link_to 'show requests', feature_requests_url
+                  %li
+                    = link_to 'new request', new_feature_request_url
+            - if current_user.global_admin
+              %li
+                = link_to 'administration', admin_url
+                %ul
+                  %li
+                    = link_to 'projects', admin_projects_url
+                  %li
+                    = link_to 'environments', admin_environments_url
+                  %li
+                    = link_to 'users', admin_users_url
 
       - if show_title?
+        .clear
         %h1= h yield(:title)
 
       -if yield(:summary_info)
