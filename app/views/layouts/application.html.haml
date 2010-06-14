@@ -44,11 +44,14 @@
             Refresh interval:
             %br
             - if defined? @default_refresh
-              %a{:href => url_for(request.request_uri.gsub(/(.*)\?.*/,'\1'))} #{pluralize(@default_refresh / 60.00, 'min')}
+              %a{:href => url_for(request.request_uri.gsub(/(.*)\?.*/,'\1'))} #{@default_refresh}s
               - unless @default_refresh == 900
                 %span
                   |
-                %a{:href => url_for(request.request_uri.gsub(/(.*)\?.*/,'\1') + '?refresh=900')} 15 mins
+                %a{:href => url_for(request.request_uri.gsub(/(.*)\?.*/,'\1') + '?refresh=900')} 15m
+              %span
+                |
+              %a{:href => url_for(request.request_uri.gsub(/(.*)\?.*/,'\1') + '?refresh=0')} never
             - else
               %i Manual refresh only
 
