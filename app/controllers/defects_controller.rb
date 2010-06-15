@@ -96,14 +96,17 @@ class DefectsController < ApplicationController
                                              :description => defect.description,
                                              :story_type => defect.story_type.nil? ? 'bug' : defect.story_type)
         if new_defect.nil? || new_defect.id.nil?
-        defect.story_source = defect.project.source
-        defect.story_id = new_defect.id
-        defect.reviewer = current_user
-        defect.reviewed_at = Time.zone.now
-        defect.status = 'Reviewed'
-        defect.save
-        flash[:notice] = 'Defect successfully promoted to pivotal.'
-        redirect_to defect_url(defect)
+          flash[:error] = 'Unable to promote defect'
+        else
+          defect.story_source = defect.project.source
+          defect.story_id = new_defect.id
+          defect.reviewer = current_user
+          defect.reviewed_at = Time.zone.now
+          defect.status = 'Reviewed'
+          defect.save
+          flash[:notice] = 'Defect successfully promoted to pivotal.'
+          redirect_to defect_url(defect)
+        end
       else
         flash[:error] = 'Defect needs to be assigned to a project before it can be promoted.'
         redirect_to defect_url(defect)
