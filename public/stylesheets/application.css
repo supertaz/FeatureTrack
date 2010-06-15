@@ -1,65 +1,94 @@
+/* line 3, ../../app/views/stylesheets/application.sass */
 body {
   background: #fafaff;
   padding: 0px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 14px; }
+  font-size: 14px;
+}
 
+/* line 10, ../../app/views/stylesheets/application.sass */
 h1 {
   margin: 0em;
   padding: 0;
-  font-size: 20px; }
+  font-size: 20px;
+}
 
+/* line 14, ../../app/views/stylesheets/application.sass */
 h2 {
   margin: 0em;
   padding: 0;
-  font-size: 18px; }
-  h2 span {
-    font-size: 0.6em; }
+  font-size: 18px;
+}
+/* line 18, ../../app/views/stylesheets/application.sass */
+h2 span {
+  font-size: 0.6em;
+}
 
+/* line 20, ../../app/views/stylesheets/application.sass */
 h3 {
   margin: 0em;
   padding: 0;
-  font-size: 16px; }
+  font-size: 16px;
+}
 
+/* line 24, ../../app/views/stylesheets/application.sass */
 h4 {
   margin: 0em;
   padding: 0;
-  font-size: 14px; }
+  font-size: 14px;
+}
 
+/* line 28, ../../app/views/stylesheets/application.sass */
 h5 {
   margin: 0em;
   padding: 0;
-  font-size: 12px; }
+  font-size: 12px;
+}
 
+/* line 32, ../../app/views/stylesheets/application.sass */
 h6 {
   margin: 0em;
   padding: 0;
-  font-size: 10px; }
+  font-size: 10px;
+}
 
+/* line 36, ../../app/views/stylesheets/application.sass */
 a {
-  color: blue; }
-  a img {
-    border: none; }
+  color: blue;
+}
+/* line 38, ../../app/views/stylesheets/application.sass */
+a img {
+  border: none;
+}
 
+/* line 41, ../../app/views/stylesheets/application.sass */
 .clear {
   clear: both;
   height: 0;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
+/* line 46, ../../app/views/stylesheets/application.sass */
 #container {
   position: relative;
   width: 97%;
   margin: 0 auto;
   background: transparent;
   padding: 0px;
-  border: none; }
-  #container #overview {
-    padding: 0px 10px 0px 20px;
-    margin-top: 6.7em;
-    margin-bottom: 0px; }
-    #container #overview #messages {
-      padding-top: 15px; }
+  border: none;
+}
+/* line 53, ../../app/views/stylesheets/application.sass */
+#container #overview {
+  padding: 0px 10px 0px 20px;
+  margin-top: 6.7em;
+  margin-bottom: 0px;
+}
+/* line 57, ../../app/views/stylesheets/application.sass */
+#container #overview #messages {
+  padding-top: 15px;
+}
 
+/* line 59, ../../app/views/stylesheets/application.sass */
 #summary {
   display: block;
   position: fixed;
@@ -71,8 +100,10 @@ a {
   padding: 10px 20px 20px 20px;
   margin-bottom: 1em;
   border-bottom: solid 1px black;
-  background: #ffffdd; }
+  background: #ffffdd;
+}
 
+/* line 71, ../../app/views/stylesheets/application.sass */
 #nav_tabs {
   position: fixed;
   display: block;
@@ -81,159 +112,213 @@ a {
   padding: 0em;
   margin: 0em;
   text-align: center;
-  z-index: 10000; }
-  #nav_tabs #nav_tab_abs {
-    position: absolute;
-    width: 650px; }
-    #nav_tabs #nav_tab_abs a {
-      position: relative;
-      margin-left: -1px;
-      float: right;
-      background: white;
-      color: black;
-      padding: 0.3em 0.5em 0.5em 0.5em;
-      border-bottom: solid 1px #aaaaaa;
-      border-left: solid 1px #aaaaaa;
-      border-right: solid 1px #aaaaaa;
-      border-top: none;
-      text-decoration: none; }
-      #nav_tabs #nav_tab_abs a:hover {
-        background: #7777aa;
-        color: white; }
+  z-index: 10000;
+}
+/* line 80, ../../app/views/stylesheets/application.sass */
+#nav_tabs #nav_tab_abs {
+  position: absolute;
+  width: 650px;
+}
+/* line 83, ../../app/views/stylesheets/application.sass */
+#nav_tabs #nav_tab_abs a {
+  position: relative;
+  margin-left: -1px;
+  float: right;
+  background: white;
+  color: black;
+  padding: 0.3em 0.5em 0.5em 0.5em;
+  border-bottom: solid 1px #aaaaaa;
+  border-left: solid 1px #aaaaaa;
+  border-right: solid 1px #aaaaaa;
+  border-top: none;
+  text-decoration: none;
+}
+/* line 95, ../../app/views/stylesheets/application.sass */
+#nav_tabs #nav_tab_abs a:hover {
+  background: #7777aa;
+  color: white;
+}
 
+/* line 99, ../../app/views/stylesheets/application.sass */
 #flash_notice,
 #flash_error {
   padding: 5px 8px;
-  margin: 10px 0; }
+  margin: 10px 0;
+}
 
+/* line 104, ../../app/views/stylesheets/application.sass */
 #flash_notice {
   background-color: #ccffcc;
-  border: solid 1px #66cc66; }
+  border: solid 1px #66cc66;
+}
 
+/* line 108, ../../app/views/stylesheets/application.sass */
 #flash_error {
   background-color: #ffcccc;
-  border: solid 1px #cc6666; }
+  border: solid 1px #cc6666;
+}
 
+/* line 112, ../../app/views/stylesheets/application.sass */
 .fieldWithErrors {
-  display: inline; }
+  display: inline;
+}
 
+/* line 115, ../../app/views/stylesheets/application.sass */
 #errorExplanation {
   width: 400px;
   border: 2px solid #cf0000;
   padding: 0;
   padding-bottom: 12px;
   margin-bottom: 20px;
-  background-color: #f0f0f0; }
-  #errorExplanation h2 {
-    text-align: left;
-    padding: 5px 5px 5px 15px;
-    margin: 0;
-    font-weight: bold;
-    font-size: 12px;
-    background-color: #cc0000;
-    color: white; }
-  #errorExplanation p {
-    color: #333333;
-    margin-bottom: 0;
-    padding: 8px; }
-  #errorExplanation ul {
-    margin: 2px 24px; }
-    #errorExplanation ul li {
-      font-size: 12px;
-      list-style: disc; }
+  background-color: #f0f0f0;
+}
+/* line 122, ../../app/views/stylesheets/application.sass */
+#errorExplanation h2 {
+  text-align: left;
+  padding: 5px 5px 5px 15px;
+  margin: 0;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #cc0000;
+  color: white;
+}
+/* line 131, ../../app/views/stylesheets/application.sass */
+#errorExplanation p {
+  color: #333333;
+  margin-bottom: 0;
+  padding: 8px;
+}
+/* line 135, ../../app/views/stylesheets/application.sass */
+#errorExplanation ul {
+  margin: 2px 24px;
+}
+/* line 137, ../../app/views/stylesheets/application.sass */
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}
 
+/* line 141, ../../app/views/stylesheets/application.sass */
 #status_summary {
   margin-bottom: 20px;
   text-align: center;
   background-color: #eeeeff;
   padding: 5px;
-  border: solid 1px #999999; }
-  #status_summary #status_summary_items {
-    margin-top: 5px; }
-    #status_summary #status_summary_items img {
-      vertical-align: text-bottom; }
+  border: solid 1px #999999;
+}
+/* line 147, ../../app/views/stylesheets/application.sass */
+#status_summary #status_summary_items {
+  margin-top: 5px;
+}
+/* line 149, ../../app/views/stylesheets/application.sass */
+#status_summary #status_summary_items img {
+  vertical-align: text-bottom;
+}
 
+/* line 152, ../../app/views/stylesheets/application.sass */
 .status {
-  position: relative; }
-  .status img {
-    position: absolute;
-    vertical-align: text-bottom;
-    left: 0.3em;
-    padding-top: 0.1em;
-    padding-bottom: 0.1em; }
-  .status .accepted {
-    background-color: #00aa00;
-    color: white;
-    font-weight: bold;
-    padding: 0.2em 0.1em 0.2em 1em;
-    width: 8em;
-    text-align: center;
-    margin: 0;
-    border-right: 1px solid #999999;
-    border-left: 1px solid #999999; }
-  .status .rejected {
-    background-color: red;
-    color: white;
-    font-weight: bold;
-    padding: 0.2em 0.1em 0.2em 1em;
-    width: 8em;
-    text-align: center;
-    margin: 0;
-    border-right: 1px solid #999999;
-    border-left: 1px solid #999999; }
-  .status .delivered {
-    background-color: #dd7700;
-    color: white;
-    font-weight: bold;
-    padding: 0.2em 0.1em 0.2em 1em;
-    width: 8em;
-    text-align: center;
-    margin: 0;
-    border-right: 1px solid #999999;
-    border-left: 1px solid #999999; }
-  .status .finished {
-    background-color: #eeee00;
-    color: black;
-    font-weight: bold;
-    padding: 0.2em 0.1em 0.2em 1em;
-    width: 8em;
-    text-align: center;
-    margin: 0;
-    border-right: 1px solid #999999;
-    border-left: 1px solid #999999; }
-  .status .started {
-    background-color: #006699;
-    color: white;
-    font-weight: bold;
-    padding: 0.2em 0.1em 0.2em 1em;
-    width: 8em;
-    text-align: center;
-    margin: 0;
-    border-right: 1px solid #999999;
-    border-left: 1px solid #999999; }
-  .status .unstarted {
-    background-color: black;
-    color: white;
-    font-style: italic;
-    padding: 0.2em 0.1em 0.2em 1em;
-    width: 8em;
-    text-align: center;
-    margin: 0;
-    border-right: 1px solid #999999;
-    border-left: 1px solid #999999; }
+  position: relative;
+}
+/* line 154, ../../app/views/stylesheets/application.sass */
+.status img {
+  position: absolute;
+  vertical-align: text-bottom;
+  left: 0.3em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+/* line 160, ../../app/views/stylesheets/application.sass */
+.status .accepted {
+  background-color: #00aa00;
+  color: white;
+  font-weight: bold;
+  padding: 0.2em 0.1em 0.2em 1em;
+  width: 8em;
+  text-align: center;
+  margin: 0;
+  border-right: 1px solid #999999;
+  border-left: 1px solid #999999;
+}
+/* line 170, ../../app/views/stylesheets/application.sass */
+.status .rejected {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  padding: 0.2em 0.1em 0.2em 1em;
+  width: 8em;
+  text-align: center;
+  margin: 0;
+  border-right: 1px solid #999999;
+  border-left: 1px solid #999999;
+}
+/* line 180, ../../app/views/stylesheets/application.sass */
+.status .delivered {
+  background-color: #dd7700;
+  color: white;
+  font-weight: bold;
+  padding: 0.2em 0.1em 0.2em 1em;
+  width: 8em;
+  text-align: center;
+  margin: 0;
+  border-right: 1px solid #999999;
+  border-left: 1px solid #999999;
+}
+/* line 190, ../../app/views/stylesheets/application.sass */
+.status .finished {
+  background-color: #eeee00;
+  color: black;
+  font-weight: bold;
+  padding: 0.2em 0.1em 0.2em 1em;
+  width: 8em;
+  text-align: center;
+  margin: 0;
+  border-right: 1px solid #999999;
+  border-left: 1px solid #999999;
+}
+/* line 200, ../../app/views/stylesheets/application.sass */
+.status .started {
+  background-color: #006699;
+  color: white;
+  font-weight: bold;
+  padding: 0.2em 0.1em 0.2em 1em;
+  width: 8em;
+  text-align: center;
+  margin: 0;
+  border-right: 1px solid #999999;
+  border-left: 1px solid #999999;
+}
+/* line 210, ../../app/views/stylesheets/application.sass */
+.status .unstarted {
+  background-color: black;
+  color: white;
+  font-style: italic;
+  padding: 0.2em 0.1em 0.2em 1em;
+  width: 8em;
+  text-align: center;
+  margin: 0;
+  border-right: 1px solid #999999;
+  border-left: 1px solid #999999;
+}
 
+/* line 220, ../../app/views/stylesheets/application.sass */
 .task_type {
   position: relative;
-  width: 1.5em; }
-  .task_type img {
-    position: absolute;
-    vertical-align: text-bottom;
-    left: 0.3em;
-    top: 0.1em; }
+  width: 1.5em;
+}
+/* line 223, ../../app/views/stylesheets/application.sass */
+.task_type img {
+  position: absolute;
+  vertical-align: text-bottom;
+  left: 0.3em;
+  top: 0.1em;
+}
 
+/* line 228, ../../app/views/stylesheets/application.sass */
 .title {
-  width: 100%; }
+  width: 100%;
+}
 
+/* line 230, ../../app/views/stylesheets/application.sass */
 #usernav {
   position: absolute;
   top: -1px;
@@ -241,162 +326,247 @@ a {
   float: right;
   background-color: white;
   padding: 0.3em 0.5em 0.3em 0.3em;
-  border: black solid 1px; }
-  #usernav #user_identity {
-    float: left;
-    padding-left: 38px;
-    margin-right: 10px;
-    text-align: center; }
-    #usernav #user_identity a {
-      text-decoration: none;
-      color: #444444;
-      font-weight: bold; }
-      #usernav #user_identity a:hover {
-        color: #666666;
-        text-decoration: underline; }
-    #usernav #user_identity img {
-      position: absolute;
-      vertical-align: text-bottom;
-      top: 4px;
-      left: 3px; }
-  #usernav #refresh_options {
-    background: transparent;
-    float: right; }
-    #usernav #refresh_options #refresh_option_text {
-      position: relative;
-      text-align: center;
-      padding-left: 35px; }
-      #usernav #refresh_options #refresh_option_text a {
-        font-weight: bold;
-        color: #444444;
-        text-decoration: none; }
-        #usernav #refresh_options #refresh_option_text a:hover {
-          color: #666666;
-          text-decoration: underline; }
-      #usernav #refresh_options #refresh_option_text span {
-        color: #999999; }
-      #usernav #refresh_options #refresh_option_text img {
-        position: absolute;
-        vertical-align: text-bottom;
-        top: 0px;
-        left: 3px; }
+  border: black solid 1px;
+}
+/* line 238, ../../app/views/stylesheets/application.sass */
+#usernav #user_identity {
+  float: left;
+  padding-left: 38px;
+  margin-right: 10px;
+  text-align: center;
+}
+/* line 243, ../../app/views/stylesheets/application.sass */
+#usernav #user_identity a {
+  text-decoration: none;
+  color: #444444;
+  font-weight: bold;
+}
+/* line 247, ../../app/views/stylesheets/application.sass */
+#usernav #user_identity a:hover {
+  color: #666666;
+  text-decoration: underline;
+}
+/* line 250, ../../app/views/stylesheets/application.sass */
+#usernav #user_identity img {
+  position: absolute;
+  vertical-align: text-bottom;
+  top: 4px;
+  left: 3px;
+}
+/* line 255, ../../app/views/stylesheets/application.sass */
+#usernav #refresh_options {
+  background: transparent;
+  float: right;
+}
+/* line 258, ../../app/views/stylesheets/application.sass */
+#usernav #refresh_options #refresh_option_text {
+  position: relative;
+  text-align: center;
+  padding-left: 35px;
+}
+/* line 262, ../../app/views/stylesheets/application.sass */
+#usernav #refresh_options #refresh_option_text a {
+  font-weight: bold;
+  color: #444444;
+  text-decoration: none;
+}
+/* line 266, ../../app/views/stylesheets/application.sass */
+#usernav #refresh_options #refresh_option_text a:hover {
+  color: #666666;
+  text-decoration: underline;
+}
+/* line 269, ../../app/views/stylesheets/application.sass */
+#usernav #refresh_options #refresh_option_text span {
+  color: #999999;
+}
+/* line 271, ../../app/views/stylesheets/application.sass */
+#usernav #refresh_options #refresh_option_text img {
+  position: absolute;
+  vertical-align: text-bottom;
+  top: 0px;
+  left: 3px;
+}
 
+/* line 279, ../../app/views/stylesheets/application.sass */
 .nojs #globalnav ul ul {
-  display: none; }
+  display: none;
+}
 
+/* line 281, ../../app/views/stylesheets/application.sass */
 #globalnav {
   position: relative;
   margin-right: 40px;
   top: -15px;
   background: white;
-  display: block; }
-  #globalnav ul, #globalnav li {
-    list-style: none;
-    margin: 0;
-    padding: 0; }
-  #globalnav ul {
-    background: white; }
-    #globalnav ul li {
-      display: block;
-      float: left;
-      position: relative;
-      background: white; }
-      #globalnav ul li a {
-        display: block;
-        height: 20px;
-        line-height: 20px;
-        padding: 5px 10px;
-        border: 1px solid #aaaaaa;
-        margin-left: -1px;
-        color: #333333;
-        text-decoration: none; }
-    #globalnav ul li.hover a {
-      background: #9999dd;
-      color: white; }
-      #globalnav ul li.hover a:hover {
-        background: #7777aa;
-        color: white; }
-    #globalnav ul li.hover ul a {
-      background: white;
-      color: #555555; }
-    #globalnav ul ul {
-      position: absolute;
-      top: 32px;
-      z-index: 20000; }
-      #globalnav ul ul li {
-        float: none; }
-        #globalnav ul ul li a {
-          margin: -1px 0 0 -1px;
-          display: block;
-          width: 150px; }
-        #globalnav ul ul li:hover {
-          background: #f5f5f5; }
+  display: block;
+}
+/* line 287, ../../app/views/stylesheets/application.sass */
+#globalnav ul, #globalnav li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* line 291, ../../app/views/stylesheets/application.sass */
+#globalnav ul {
+  background: white;
+}
+/* line 293, ../../app/views/stylesheets/application.sass */
+#globalnav ul li {
+  display: block;
+  float: left;
+  position: relative;
+  background: white;
+}
+/* line 298, ../../app/views/stylesheets/application.sass */
+#globalnav ul li a {
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  padding: 5px 10px;
+  border: 1px solid #aaaaaa;
+  margin-left: -1px;
+  color: #333333;
+  text-decoration: none;
+}
+/* line 308, ../../app/views/stylesheets/application.sass */
+#globalnav ul li.hover a {
+  background: #9999dd;
+  color: white;
+}
+/* line 311, ../../app/views/stylesheets/application.sass */
+#globalnav ul li.hover a:hover {
+  background: #7777aa;
+  color: white;
+}
+/* line 315, ../../app/views/stylesheets/application.sass */
+#globalnav ul li.hover ul a {
+  background: white;
+  color: #555555;
+}
+/* line 318, ../../app/views/stylesheets/application.sass */
+#globalnav ul ul {
+  position: absolute;
+  top: 32px;
+  z-index: 20000;
+}
+/* line 322, ../../app/views/stylesheets/application.sass */
+#globalnav ul ul li {
+  float: none;
+}
+/* line 324, ../../app/views/stylesheets/application.sass */
+#globalnav ul ul li a {
+  margin: -1px 0 0 -1px;
+  display: block;
+  width: 150px;
+}
+/* line 328, ../../app/views/stylesheets/application.sass */
+#globalnav ul ul li:hover {
+  background: #f5f5f5;
+}
 
+/* line 331, ../../app/views/stylesheets/application.sass */
 #main_detail {
   padding: 0.1em 0em 0em 0em;
-  width: 800px; }
+  width: 800px;
+}
 
+/* line 334, ../../app/views/stylesheets/application.sass */
 #status_info {
   float: right;
   width: 21em;
   margin: 0px 0px 0px 2em;
   padding: 0px;
   font-size: 0.9em;
-  white-space: nowrap; }
-  #status_info strong {
-    font-size: 1.1em; }
+  white-space: nowrap;
+}
+/* line 341, ../../app/views/stylesheets/application.sass */
+#status_info strong {
+  font-size: 1.1em;
+}
 
+/* line 343, ../../app/views/stylesheets/application.sass */
 table {
   border-spacing: 0px;
-  margin-bottom: 20px; }
-  table a {
-    display: block;
-    text-decoration: none;
-    color: inherit; }
-  table a.action {
-    display: inline;
-    text-decoration: none;
-    color: inherit; }
-    table a.action:hover {
-      text-decoration: underline; }
-  table th {
-    font-family: Garamond, “Hoefler Text”, Palatino, “Palatino Linotype”, serif;
-    font-weight: bold;
-    font-variant: small-caps;
-    text-transform: capitalize;
-    padding: 0.2em 0.6em 0em 0.6em;
-    border-bottom: 1px solid #999999; }
-    table th:hover {
-      background: white;
-      color: black; }
-  table tr.head:hover {
-    background: white;
-    color: black; }
-  table tr:hover {
-    background: #7777aa;
-    color: white; }
-  table td {
-    font-size: 13px;
-    padding: 0em 0.2em 0em 0.2em;
-    border-bottom: 1px solid #999999; }
-  table td.left {
-    border-left: 1px solid #999999; }
-  table td.right {
-    border-right: 1px solid #999999;
-    text-align: center; }
-  table td.left_justify {
-    text-align: left; }
-  table tr.grey:hover td {
-    background: #7777aa;
-    color: white; }
-  table tr.grey td {
-    background: #eeeeee; }
+  margin-bottom: 20px;
+}
+/* line 346, ../../app/views/stylesheets/application.sass */
+table a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+/* line 350, ../../app/views/stylesheets/application.sass */
+table a.action {
+  display: inline;
+  text-decoration: none;
+  color: inherit;
+}
+/* line 354, ../../app/views/stylesheets/application.sass */
+table a.action:hover {
+  text-decoration: underline;
+}
+/* line 356, ../../app/views/stylesheets/application.sass */
+table th {
+  font-family: Garamond, “Hoefler Text”, Palatino, “Palatino Linotype”, serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  text-transform: capitalize;
+  padding: 0.2em 0.6em 0em 0.6em;
+  border-bottom: 1px solid #999999;
+}
+/* line 363, ../../app/views/stylesheets/application.sass */
+table th:hover {
+  background: white;
+  color: black;
+}
+/* line 367, ../../app/views/stylesheets/application.sass */
+table tr.head:hover {
+  background: white;
+  color: black;
+}
+/* line 370, ../../app/views/stylesheets/application.sass */
+table tr:hover {
+  background: #7777aa;
+  color: white;
+}
+/* line 373, ../../app/views/stylesheets/application.sass */
+table td {
+  font-size: 13px;
+  padding: 0em 0.2em 0em 0.2em;
+  border-bottom: 1px solid #999999;
+}
+/* line 377, ../../app/views/stylesheets/application.sass */
+table td.left {
+  border-left: 1px solid #999999;
+}
+/* line 379, ../../app/views/stylesheets/application.sass */
+table td.right {
+  border-right: 1px solid #999999;
+  text-align: center;
+}
+/* line 382, ../../app/views/stylesheets/application.sass */
+table td.left_justify {
+  text-align: left;
+}
+/* line 386, ../../app/views/stylesheets/application.sass */
+table tr.grey:hover td {
+  background: #7777aa;
+  color: white;
+}
+/* line 389, ../../app/views/stylesheets/application.sass */
+table tr.grey td {
+  background: #eeeeee;
+}
 
+/* line 391, ../../app/views/stylesheets/application.sass */
 .nowrap {
-  white-space: nowrap; }
+  white-space: nowrap;
+}
 
+/* line 393, ../../app/views/stylesheets/application.sass */
 .sidetext {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   -o-transform: rotate(-90deg);
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); }
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
