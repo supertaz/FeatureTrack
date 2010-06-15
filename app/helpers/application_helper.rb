@@ -101,6 +101,10 @@ module ApplicationHelper
     end
   end
 
+  def get_statuses
+    Defect.statuses
+  end
+
   def get_severities
     Defect.severities
   end

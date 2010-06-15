@@ -199,6 +199,25 @@ a img {
 }
 
 /* line 141, ../../app/views/stylesheets/application.sass */
+#context_search {
+  font-size: 0.7em;
+  border: 1px solid #aaaaaa;
+  padding: 1em;
+  margin-bottom: 2em;
+}
+/* line 146, ../../app/views/stylesheets/application.sass */
+#context_search input {
+  border: 1px solid #aaaaaa;
+}
+/* line 148, ../../app/views/stylesheets/application.sass */
+#context_search input.button {
+  border: 1px solid #aaaaaa;
+  background: #ffddcc;
+  text: #555555;
+  padding: 0.5em;
+}
+
+/* line 154, ../../app/views/stylesheets/application.sass */
 #status_summary {
   margin-bottom: 20px;
   text-align: center;
@@ -206,20 +225,20 @@ a img {
   padding: 5px;
   border: solid 1px #999999;
 }
-/* line 147, ../../app/views/stylesheets/application.sass */
+/* line 160, ../../app/views/stylesheets/application.sass */
 #status_summary #status_summary_items {
   margin-top: 5px;
 }
-/* line 149, ../../app/views/stylesheets/application.sass */
+/* line 162, ../../app/views/stylesheets/application.sass */
 #status_summary #status_summary_items img {
   vertical-align: text-bottom;
 }
 
-/* line 152, ../../app/views/stylesheets/application.sass */
+/* line 165, ../../app/views/stylesheets/application.sass */
 .status {
   position: relative;
 }
-/* line 154, ../../app/views/stylesheets/application.sass */
+/* line 167, ../../app/views/stylesheets/application.sass */
 .status img {
   position: absolute;
   vertical-align: text-bottom;
@@ -227,7 +246,7 @@ a img {
   padding-top: 0.1em;
   padding-bottom: 0.1em;
 }
-/* line 160, ../../app/views/stylesheets/application.sass */
+/* line 173, ../../app/views/stylesheets/application.sass */
 .status .accepted {
   background-color: #00aa00;
   color: white;
@@ -239,7 +258,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 170, ../../app/views/stylesheets/application.sass */
+/* line 183, ../../app/views/stylesheets/application.sass */
 .status .rejected {
   background-color: red;
   color: white;
@@ -251,7 +270,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 180, ../../app/views/stylesheets/application.sass */
+/* line 193, ../../app/views/stylesheets/application.sass */
 .status .delivered {
   background-color: #dd7700;
   color: white;
@@ -263,7 +282,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 190, ../../app/views/stylesheets/application.sass */
+/* line 203, ../../app/views/stylesheets/application.sass */
 .status .finished {
   background-color: #eeee00;
   color: black;
@@ -275,7 +294,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 200, ../../app/views/stylesheets/application.sass */
+/* line 213, ../../app/views/stylesheets/application.sass */
 .status .started {
   background-color: #006699;
   color: white;
@@ -287,7 +306,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 210, ../../app/views/stylesheets/application.sass */
+/* line 223, ../../app/views/stylesheets/application.sass */
 .status .unstarted {
   background-color: black;
   color: white;
@@ -300,12 +319,12 @@ a img {
   border-left: 1px solid #999999;
 }
 
-/* line 220, ../../app/views/stylesheets/application.sass */
+/* line 233, ../../app/views/stylesheets/application.sass */
 .task_type {
   position: relative;
   width: 1.5em;
 }
-/* line 223, ../../app/views/stylesheets/application.sass */
+/* line 236, ../../app/views/stylesheets/application.sass */
 .task_type img {
   position: absolute;
   vertical-align: text-bottom;
@@ -313,12 +332,12 @@ a img {
   top: 0.1em;
 }
 
-/* line 228, ../../app/views/stylesheets/application.sass */
+/* line 241, ../../app/views/stylesheets/application.sass */
 .title {
   width: 100%;
 }
 
-/* line 230, ../../app/views/stylesheets/application.sass */
+/* line 243, ../../app/views/stylesheets/application.sass */
 #usernav {
   position: absolute;
   top: -1px;
@@ -328,58 +347,58 @@ a img {
   padding: 0.3em 0.5em 0.3em 0.3em;
   border: black solid 1px;
 }
-/* line 238, ../../app/views/stylesheets/application.sass */
+/* line 251, ../../app/views/stylesheets/application.sass */
 #usernav #user_identity {
   float: left;
   padding-left: 38px;
   margin-right: 10px;
   text-align: center;
 }
-/* line 243, ../../app/views/stylesheets/application.sass */
+/* line 256, ../../app/views/stylesheets/application.sass */
 #usernav #user_identity a {
   text-decoration: none;
   color: #444444;
   font-weight: bold;
 }
-/* line 247, ../../app/views/stylesheets/application.sass */
+/* line 260, ../../app/views/stylesheets/application.sass */
 #usernav #user_identity a:hover {
   color: #666666;
   text-decoration: underline;
 }
-/* line 250, ../../app/views/stylesheets/application.sass */
+/* line 263, ../../app/views/stylesheets/application.sass */
 #usernav #user_identity img {
   position: absolute;
   vertical-align: text-bottom;
   top: 4px;
   left: 3px;
 }
-/* line 255, ../../app/views/stylesheets/application.sass */
+/* line 268, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options {
   background: transparent;
   float: right;
 }
-/* line 258, ../../app/views/stylesheets/application.sass */
+/* line 271, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text {
   position: relative;
   text-align: center;
   padding-left: 35px;
 }
-/* line 262, ../../app/views/stylesheets/application.sass */
+/* line 275, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text a {
   font-weight: bold;
   color: #444444;
   text-decoration: none;
 }
-/* line 266, ../../app/views/stylesheets/application.sass */
+/* line 279, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text a:hover {
   color: #666666;
   text-decoration: underline;
 }
-/* line 269, ../../app/views/stylesheets/application.sass */
+/* line 282, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text span {
   color: #999999;
 }
-/* line 271, ../../app/views/stylesheets/application.sass */
+/* line 284, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text img {
   position: absolute;
   vertical-align: text-bottom;
@@ -387,12 +406,12 @@ a img {
   left: 3px;
 }
 
-/* line 279, ../../app/views/stylesheets/application.sass */
+/* line 292, ../../app/views/stylesheets/application.sass */
 .nojs #globalnav ul ul {
   display: none;
 }
 
-/* line 281, ../../app/views/stylesheets/application.sass */
+/* line 294, ../../app/views/stylesheets/application.sass */
 #globalnav {
   position: relative;
   margin-right: 40px;
@@ -400,24 +419,24 @@ a img {
   background: white;
   display: block;
 }
-/* line 287, ../../app/views/stylesheets/application.sass */
+/* line 300, ../../app/views/stylesheets/application.sass */
 #globalnav ul, #globalnav li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 291, ../../app/views/stylesheets/application.sass */
+/* line 304, ../../app/views/stylesheets/application.sass */
 #globalnav ul {
   background: white;
 }
-/* line 293, ../../app/views/stylesheets/application.sass */
+/* line 306, ../../app/views/stylesheets/application.sass */
 #globalnav ul li {
   display: block;
   float: left;
   position: relative;
   background: white;
 }
-/* line 298, ../../app/views/stylesheets/application.sass */
+/* line 311, ../../app/views/stylesheets/application.sass */
 #globalnav ul li a {
   display: block;
   height: 20px;
@@ -428,49 +447,49 @@ a img {
   color: #333333;
   text-decoration: none;
 }
-/* line 308, ../../app/views/stylesheets/application.sass */
+/* line 321, ../../app/views/stylesheets/application.sass */
 #globalnav ul li.hover a {
   background: #9999dd;
   color: white;
 }
-/* line 311, ../../app/views/stylesheets/application.sass */
+/* line 324, ../../app/views/stylesheets/application.sass */
 #globalnav ul li.hover a:hover {
   background: #7777aa;
   color: white;
 }
-/* line 315, ../../app/views/stylesheets/application.sass */
+/* line 328, ../../app/views/stylesheets/application.sass */
 #globalnav ul li.hover ul a {
   background: white;
   color: #555555;
 }
-/* line 318, ../../app/views/stylesheets/application.sass */
+/* line 331, ../../app/views/stylesheets/application.sass */
 #globalnav ul ul {
   position: absolute;
   top: 32px;
   z-index: 20000;
 }
-/* line 322, ../../app/views/stylesheets/application.sass */
+/* line 335, ../../app/views/stylesheets/application.sass */
 #globalnav ul ul li {
   float: none;
 }
-/* line 324, ../../app/views/stylesheets/application.sass */
+/* line 337, ../../app/views/stylesheets/application.sass */
 #globalnav ul ul li a {
   margin: -1px 0 0 -1px;
   display: block;
   width: 150px;
 }
-/* line 328, ../../app/views/stylesheets/application.sass */
+/* line 341, ../../app/views/stylesheets/application.sass */
 #globalnav ul ul li:hover {
   background: #f5f5f5;
 }
 
-/* line 331, ../../app/views/stylesheets/application.sass */
+/* line 344, ../../app/views/stylesheets/application.sass */
 #main_detail {
   padding: 0.1em 0em 0em 0em;
   width: 800px;
 }
 
-/* line 334, ../../app/views/stylesheets/application.sass */
+/* line 347, ../../app/views/stylesheets/application.sass */
 #status_info {
   float: right;
   width: 21em;
@@ -479,33 +498,37 @@ a img {
   font-size: 0.9em;
   white-space: nowrap;
 }
-/* line 341, ../../app/views/stylesheets/application.sass */
+/* line 354, ../../app/views/stylesheets/application.sass */
 #status_info strong {
   font-size: 1.1em;
 }
 
-/* line 343, ../../app/views/stylesheets/application.sass */
+/* line 356, ../../app/views/stylesheets/application.sass */
 table {
   border-spacing: 0px;
   margin-bottom: 20px;
 }
-/* line 346, ../../app/views/stylesheets/application.sass */
+/* line 359, ../../app/views/stylesheets/application.sass */
 table a {
   display: block;
   text-decoration: none;
   color: inherit;
 }
-/* line 350, ../../app/views/stylesheets/application.sass */
+/* line 363, ../../app/views/stylesheets/application.sass */
+table a:hover {
+  text-decoration: underline;
+}
+/* line 365, ../../app/views/stylesheets/application.sass */
 table a.action {
   display: inline;
   text-decoration: none;
   color: inherit;
 }
-/* line 354, ../../app/views/stylesheets/application.sass */
+/* line 369, ../../app/views/stylesheets/application.sass */
 table a.action:hover {
   text-decoration: underline;
 }
-/* line 356, ../../app/views/stylesheets/application.sass */
+/* line 371, ../../app/views/stylesheets/application.sass */
 table th {
   font-family: Garamond, “Hoefler Text”, Palatino, “Palatino Linotype”, serif;
   font-weight: bold;
@@ -514,56 +537,56 @@ table th {
   padding: 0.2em 0.6em 0em 0.6em;
   border-bottom: 1px solid #999999;
 }
-/* line 363, ../../app/views/stylesheets/application.sass */
+/* line 378, ../../app/views/stylesheets/application.sass */
 table th:hover {
   background: white;
   color: black;
 }
-/* line 367, ../../app/views/stylesheets/application.sass */
+/* line 382, ../../app/views/stylesheets/application.sass */
 table tr.head:hover {
   background: white;
   color: black;
 }
-/* line 370, ../../app/views/stylesheets/application.sass */
+/* line 385, ../../app/views/stylesheets/application.sass */
 table tr:hover {
   background: #7777aa;
   color: white;
 }
-/* line 373, ../../app/views/stylesheets/application.sass */
+/* line 388, ../../app/views/stylesheets/application.sass */
 table td {
   font-size: 13px;
   padding: 0em 0.2em 0em 0.2em;
   border-bottom: 1px solid #999999;
 }
-/* line 377, ../../app/views/stylesheets/application.sass */
+/* line 392, ../../app/views/stylesheets/application.sass */
 table td.left {
   border-left: 1px solid #999999;
 }
-/* line 379, ../../app/views/stylesheets/application.sass */
+/* line 394, ../../app/views/stylesheets/application.sass */
 table td.right {
   border-right: 1px solid #999999;
   text-align: center;
 }
-/* line 382, ../../app/views/stylesheets/application.sass */
+/* line 397, ../../app/views/stylesheets/application.sass */
 table td.left_justify {
   text-align: left;
 }
-/* line 386, ../../app/views/stylesheets/application.sass */
+/* line 401, ../../app/views/stylesheets/application.sass */
 table tr.grey:hover td {
   background: #7777aa;
   color: white;
 }
-/* line 389, ../../app/views/stylesheets/application.sass */
+/* line 404, ../../app/views/stylesheets/application.sass */
 table tr.grey td {
   background: #eeeeee;
 }
 
-/* line 391, ../../app/views/stylesheets/application.sass */
+/* line 406, ../../app/views/stylesheets/application.sass */
 .nowrap {
   white-space: nowrap;
 }
 
-/* line 393, ../../app/views/stylesheets/application.sass */
+/* line 408, ../../app/views/stylesheets/application.sass */
 .sidetext {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);

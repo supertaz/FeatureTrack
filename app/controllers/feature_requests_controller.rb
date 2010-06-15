@@ -4,7 +4,8 @@ class FeatureRequestsController < ApplicationController
   before_filter :current_user_can_request_features, :only => [:new, :create]
 
   def index
-    @feature_requests = FeatureRequest.all
+    @search = FeatureRequest.search(params[:search])
+    @feature_requests = @search.all
   end
 
   def show

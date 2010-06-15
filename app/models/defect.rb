@@ -13,6 +13,8 @@ class Defect < ActiveRecord::Base
   belongs_to :environment
   belongs_to :project
 
+  before_save :set_execution_priority
+
   validates_presence_of :status
   validates_presence_of :reporter
   validates_presence_of :affected
@@ -78,6 +80,8 @@ class Defect < ActiveRecord::Base
         exec_pri += 50000
       when 'In QA'
         exec_pri += 60000
+      when 'In UAT'
+        exec_pri += 70000
       when 'Approved'
         exec_pri += 90000
       else
@@ -87,7 +91,7 @@ class Defect < ActiveRecord::Base
   end
 
   def display_priority
-    self.calculate_execution_priority.to_s[1,1]
+    self.calculate_execution_priority.to_s.rjust(5, '0')[1,1]
   end
 
   def get_risk_level_string
@@ -118,6 +122,19 @@ class Defect < ActiveRecord::Base
       end
     end
     s
+  end
+
+  def self.statuses
+    [
+          'New',
+          'Reviewed',
+          'Prioritized',
+          'In Dev',
+          'In QA',
+          'In UAT',
+          'Rejected',
+          'Approved'
+    ]
   end
 
   def self.affected_parties
@@ -188,4 +205,9 @@ class Defect < ActiveRecord::Base
     ]
   end
 
+  protected
+
+    def set_execution_priority
+      self.execution_priority = self.display_priority.to_i
+    end
 end
