@@ -2,7 +2,7 @@
 - content_for :summary_info do
   %h6
     %i
-      Defect ID #{@defect.id}: #{@defect.title}
+      = link_to "Defect ID #{@defect.id}: #{@defect.title}", defect_url(@defect)
 
 #status_info
   %p
