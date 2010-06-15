@@ -4,7 +4,9 @@ class DefectsController < ApplicationController
   before_filter :current_user_can_create_defects, :only => [:new, :create]
 
   def index
-    @defects = Defect.all.sort {|a,b| a.calculate_execution_priority <=> b.calculate_execution_priority}
+    @search = Defect.search(params[:search])
+#    @defects = Defect.all.sort {|a,b| a.calculate_execution_priority <=> b.calculate_execution_priority}
+    @defects = @search.all
   end
 
   def show
@@ -90,9 +92,10 @@ class DefectsController < ApplicationController
         project = defect.project.get_source_project
         new_defect = project.stories.create(:name => "P#{defect.display_priority} - " + defect.title,
                                              :labels => "p#{defect.display_priority}",
-                                             :requested_by => defect.reporter.firstname,
+                                             :requested_by => (defect.reporter.nickname.nil? || defect.reporter.nickname.empty?) ? defect.reporter.firstname : defect.reporter.nickname,
                                              :description => defect.description,
                                              :story_type => defect.story_type.nil? ? 'bug' : defect.story_type)
+        if new_defect.nil? || new_defect.id.nil?
         defect.story_source = defect.project.source
         defect.story_id = new_defect.id
         defect.reviewer = current_user
