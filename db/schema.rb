@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100512202130) do
+ActiveRecord::Schema.define(:version => 20100617211609) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(:version => 20100512202130) do
     t.integer  "execution_priority"
     t.string   "affected"
     t.string   "functional_area"
-    t.integer  "against_story_id"
     t.string   "against_story_source"
     t.integer  "developer_id"
     t.integer  "environment_id"
@@ -43,9 +42,10 @@ ActiveRecord::Schema.define(:version => 20100512202130) do
     t.string   "story_type"
     t.integer  "reviewer_id"
     t.datetime "reviewed_at"
+    t.boolean  "invalid",              :default => false
   end
 
-  add_index "defects", ["against_story_source", "against_story_id", "status", "id"], :name => "dfct_story_stat"
+  add_index "defects", ["against_story_source", "status", "id"], :name => "dfct_story_stat"
   add_index "defects", ["developer_id", "status", "id"], :name => "dfct_dev_stat"
   add_index "defects", ["environment_id", "status", "id"], :name => "dfct_env_stat"
   add_index "defects", ["execution_priority", "status", "id"], :name => "dfct_execpri_stat"
@@ -57,6 +57,14 @@ ActiveRecord::Schema.define(:version => 20100512202130) do
   add_index "defects", ["status", "severity", "execution_priority", "id"], :name => "dfct_stat_sev_execpri"
   add_index "defects", ["tester_id", "status", "id"], :name => "dfct_tester_stat"
   add_index "defects", ["title", "id"], :name => "index_defects_on_title_and_id"
+
+  create_table "defects_stories", :id => false, :force => true do |t|
+    t.integer "defect_id"
+    t.integer "story_id"
+  end
+
+  add_index "defects_stories", ["defect_id", "story_id"], :name => "index_defects_stories_on_defect_id_and_story_id"
+  add_index "defects_stories", ["story_id", "defect_id"], :name => "index_defects_stories_on_story_id_and_defect_id"
 
   create_table "environments", :force => true do |t|
     t.string   "name"
@@ -99,6 +107,25 @@ ActiveRecord::Schema.define(:version => 20100512202130) do
   add_index "feature_requests", ["status", "id"], :name => "index_feature_requests_on_status_and_id"
   add_index "feature_requests", ["story_source", "story_id", "id"], :name => "index_feature_requests_on_story_source_and_story_id_and_id"
   add_index "feature_requests", ["title", "id"], :name => "index_feature_requests_on_title_and_id"
+
+  create_table "feature_requests_stories", :id => false, :force => true do |t|
+    t.integer "feature_request_id"
+    t.integer "story_id"
+  end
+
+  create_table "notes", :force => true do |t|
+    t.integer  "story_id"
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "author_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "story_source"
+    t.integer  "source_id"
+  end
+
+  add_index "notes", ["author_id"], :name => "index_notes_on_author_id"
+  add_index "notes", ["story_id"], :name => "index_notes_on_story_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -155,6 +182,26 @@ ActiveRecord::Schema.define(:version => 20100512202130) do
 
   add_index "source_api_keys", ["source", "user_id", "id"], :name => "sak_src_usr"
   add_index "source_api_keys", ["user_id", "source", "id"], :name => "sak_usr_src"
+
+  create_table "stories", :force => true do |t|
+    t.integer  "source_id"
+    t.string   "story_source"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "project_id"
+    t.string   "story_type"
+    t.string   "status"
+    t.integer  "owner_id"
+    t.datetime "accepted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "source_url"
+    t.integer  "assignee_id"
+  end
+
+  add_index "stories", ["project_id", "status"], :name => "index_stories_on_project_id_and_status"
+  add_index "stories", ["status"], :name => "index_stories_on_status"
+  add_index "stories", ["story_source", "source_id"], :name => "index_stories_on_story_source_and_source_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email"

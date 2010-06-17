@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :current_user_session, :redirect_back_or_default, :store_location, :get_defect_level, :slugify,
                 :current_user_can_modify_feature_requests, :current_user_can_see_defects, :current_user_can_create_defects,
                 :current_user_can_request_features, :current_user_can_see_stories, :current_user_can_move_stories, :get_story_source
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  protect_from_forgery :except => 'receive_hook'
   include SslRequirement
 
   filter_parameter_logging :password
