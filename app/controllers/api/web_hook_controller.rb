@@ -111,65 +111,71 @@ class Api::WebHookController < ApplicationController
         end
 
         case event['type']
-          when 'story_create'
+          when 'story_create', 'story_update', 'note_create'
             unless event['project'].nil?
               event['stories'].each do |pivotal_story|
+                if event['type'] == 'note_create'
+                  notes = pivotal_story.delete 'notes'
+                end
                 story = get_or_create_story('pivotal', pivotal_story)
                 if story.new_record?
                   story.project = event['project']
-                  story.owner = event['actor'] if event.has_key? 'actor'
-                end
-                unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
-                  if story.updated_at.nil? || event['time'] > story.updated_at
-                    synchronize_attributes(pivotal_story, story)
-                    story.save
+                  if event['type'] == 'story_create'
+                    story.owner = event['actor'] if event.has_key? 'actor'
+                  else
+                    pivotal_story_id = pivotal_story['source_id']
+                    pivotal_project = event['project'].get_source_project
+                    pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
                   end
-                end
-              end
-            end
-          when 'story_update'
-            unless event['project'].nil?
-              event['stories'].each do |pivotal_story|
-                story = get_or_create_story('pivotal', pivotal_story)
-                if story.new_record?
-                  story.project = event['project']
-                  pivotal_story_id = pivotal_story['source_id']
-                  pivotal_project = event['project'].get_source_project
-                  pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
                 end
                 unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
                   if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
                     synchronize_attributes(pivotal_story, story)
                     story.save
+                  end
+                end
+                if event['type'] == 'note_create'
+                  notes.each do |note|
+                    story.notes.create(:body => note['body'], :story_source => note['story_source'], :source_id => note['source_id'], :author => event['actor'])
                   end
                 end
               end
             end
           when 'story_delete'
-          when 'note_create'
-            unless event['project'].nil?
+          when 'move_into_project', 'move_from_project'
+            unless !event['project'].instance_of?(Project) && !event['new_project'].instance_of?(Project)
+              new_project = nil
+              if event['type'] == 'move_into_project'
+                new_project = event['new_project'] if event['new_project'].instance_of?(Project)
+              else
+                new_project = event['project'] if !event['project'].instance_of?(Project)
+              end
               event['stories'].each do |pivotal_story|
-                notes = pivotal_story.delete 'notes'
                 story = get_or_create_story('pivotal', pivotal_story)
-                if story.new_record?
-                  story.project = event['project']
-                  pivotal_story_id = pivotal_story['source_id']
-                  pivotal_project = event['project'].get_source_project
-                  pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
-                end
-                unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
-                  if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
-                    synchronize_attributes(pivotal_story, story)
+                unless new_project.nil?
+                  if story.new_record?
+                    story.project = event['project']
+                    pivotal_story_id = pivotal_story['source_id']
+                    pivotal_project = event['project'].get_source_project
+                    pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
+                  end
+                  story.project = new_project
+                  unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
+                    if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
+                      synchronize_attributes(pivotal_story, story)
+                      story.save
+                    end
+                  end
+                else
+                  if story.new_record?
+                    story.destroy
+                  else
+                    story.project = nil
                     story.save
                   end
                 end
-                notes.each do |note|
-                  story.notes.create(:body => note['body'], :story_source => note['story_source'], :source_id => note['source_id'], :author => event['actor'])
-                end
               end
             end
-          when 'move_into_project'
-          when 'move_from_project'
         end
       end
     end
