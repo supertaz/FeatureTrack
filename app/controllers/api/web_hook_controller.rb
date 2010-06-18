@@ -8,7 +8,7 @@ class Api::WebHookController < ApplicationController
     render :nothing => true
   end
 
-  protected
+#  protected
 
     def process_pivotal_hook(hook_body_doc)
       case hook_body_doc.root.name
@@ -57,6 +57,8 @@ class Api::WebHookController < ApplicationController
                         local_story['title'] = story_element.content
                       when 'description'
                         local_story['description'] = story_element.content
+                      when 'story_type'
+                        local_story['story_type'] = story_element.content
                       when 'owned_by'
                         if !story_element.content.blank?
                           user = User.find_by_nickname(story_element.content.to_s)
@@ -73,10 +75,10 @@ class Api::WebHookController < ApplicationController
                         local_story['accepted_at'] = Time.zone.parse(story_element.content)
                       when 'notes'
                         local_story['notes'] = Array.new
-                        story_element.content.children.each do |note|
+                        story_element.children.each do |note|
                           if note.name == 'note'
+                            local_note = Hash.new
                             note.children.each do |note_element|
-                              local_note = Hash.new
                               case note_element.name
                                 when 'text'
                                   local_note['body'] = note_element.content unless note_element.empty?
@@ -84,8 +86,8 @@ class Api::WebHookController < ApplicationController
                                   local_note['story_source'] = 'pivotal'
                                   local_note['source_id'] = note_element.content.to_i
                               end
-                              local_story['notes'] << local_note
                             end
+                            local_story['notes'] << local_note
                           end
                         end
                     end
@@ -106,66 +108,68 @@ class Api::WebHookController < ApplicationController
                 end
               end
           end
+        end
 
-          case event['type']
-            when 'story_create'
-              unless event['project'].nil?
-                event['stories'].each do |pivotal_story|
-                  story = get_or_create_story('pivotal', pivotal_story)
-                  if story.new_record?
-                    story.project = event['project']
-                  end
-                  unless story.project.nil? || (event['project'].instance_of? Project && story.project != event['project'])
-                    if story.updated_at.nil? || event['time'] > story.updated_at
-                      synchronize_attributes(pivotal_story, story)
-                      story.save
-                    end
+        case event['type']
+          when 'story_create'
+            unless event['project'].nil?
+              event['stories'].each do |pivotal_story|
+                story = get_or_create_story('pivotal', pivotal_story)
+                if story.new_record?
+                  story.project = event['project']
+                  story.owner = event['actor'] if event.has_key? 'actor'
+                end
+                unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
+                  if story.updated_at.nil? || event['time'] > story.updated_at
+                    synchronize_attributes(pivotal_story, story)
+                    story.save
                   end
                 end
               end
-            when 'story_update'
-              unless event['project'].nil?
-                event['stories'].each do |pivotal_story|
-                  story = get_or_create_story('pivotal', pivotal_story)
-                  if story.new_record?
-                    story.project = event['project']
-                    pivotal_story_id = pivotal_story['source_id']
-                    pivotal_project = event['project'].get_source_project.stories.find(pivotal_story['source_id'])
-                    pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
-                  end
-                  unless story.project.nil? || (event['project'].instance_of? Project && story.project != event['project'])
-                    if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
-                      synchronize_attributes(pivotal_story, story)
-                      story.save
-                    end
+            end
+          when 'story_update'
+            unless event['project'].nil?
+              event['stories'].each do |pivotal_story|
+                story = get_or_create_story('pivotal', pivotal_story)
+                if story.new_record?
+                  story.project = event['project']
+                  pivotal_story_id = pivotal_story['source_id']
+                  pivotal_project = event['project'].get_source_project
+                  pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
+                end
+                unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
+                  if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
+                    synchronize_attributes(pivotal_story, story)
+                    story.save
                   end
                 end
               end
-            when 'story_delete'
-            when 'note_create'
-              unless event['project'].nil?
-                event['stories'].each do |pivotal_story|
-                  story = get_or_create_story('pivotal', pivotal_story)
-                  if story.new_record?
-                    story.project = event['project']
-                    pivotal_story_id = pivotal_story['source_id']
-                    pivotal_project = event['project'].get_source_project.stories.find(pivotal_story['source_id'])
-                    pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
-                  end
-                  unless story.project.nil? || (event['project'].instance_of? Project && story.project != event['project'])
-                    if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
-                      synchronize_attributes(pivotal_story, story)
-                      story.save
-                    end
-                  end
-                  pivotal_story['notes'].each do |note|
-                    story.notes.create(:body => note['body'], :story_source => note['story_source'], :source_id => note['source_id'], :author => event['actor'])
+            end
+          when 'story_delete'
+          when 'note_create'
+            unless event['project'].nil?
+              event['stories'].each do |pivotal_story|
+                notes = pivotal_story.delete 'notes'
+                story = get_or_create_story('pivotal', pivotal_story)
+                if story.new_record?
+                  story.project = event['project']
+                  pivotal_story_id = pivotal_story['source_id']
+                  pivotal_project = event['project'].get_source_project
+                  pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
+                end
+                unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
+                  if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
+                    synchronize_attributes(pivotal_story, story)
+                    story.save
                   end
                 end
+                notes.each do |note|
+                  story.notes.create(:body => note['body'], :story_source => note['story_source'], :source_id => note['source_id'], :author => event['actor'])
+                end
               end
-            when 'move_into_project'
-            when 'move_from_project'
-          end
+            end
+          when 'move_into_project'
+          when 'move_from_project'
         end
       end
     end
@@ -173,33 +177,41 @@ class Api::WebHookController < ApplicationController
     def get_or_create_story(story_source, story_hash)
       internal_id = nil
       source_id = nil
+      story = nil
       case story_source
         when 'pivotal'
-          if story_hash.has_key?('id') && !story_hash['id'].nil? && !story_hash['id'].empty? && story_hash['id'].to_i > 0
+          if story_hash.has_key?('id') && !story_hash['id'].nil? && !story_hash['id'].blank? && story_hash['id'] > 0
             internal_id = story_hash['id']
-            elsif story_hash.has_key? 'source_id'
-            source_id = pivotal_story['source_id']
+          end
+          if story_hash.has_key? 'source_id'
+            source_id = story_hash['source_id']
           end
       end
       unless internal_id.nil?
-        story = Story.find(internal_id)
+        begin
+          story = Story.find(internal_id)
+        rescue ActiveRecord::RecordNotFound
+        end
       end
-      unless (defined? story) || story_source.nil? || source_id.nil?
-        story = Story.find_by_source_id(source_id, :conditions => {:story_source => story_source})
+      if story.nil?
+        unless story_source.nil? || source_id.nil?
+          story = Story.find_by_source_id(source_id, :conditions => {:story_source => story_source})
+        end
       end
-      unless defined? story
+      if story.nil?
         story = Story.new(:story_source => story_source, :source_id => source_id)
       end
       return story
     end
 
     def populate_story_hash_from_pivotal_story(story_hash, pivotal_project, pivotal_story_id)
-      full_pivotal_story = pivotal_project.find(pivotal_story_id)
+      full_pivotal_story = pivotal_project.stories.find(pivotal_story_id)
       story_hash['title'] = full_pivotal_story.name
       story_hash['description'] = full_pivotal_story.description
       story_hash['owner'] = User.find_by_nickname(full_pivotal_story.requested_by)
       story_hash['assignee'] = User.find_by_nickname(full_pivotal_story.owned_by)
       story_hash['status'] = full_pivotal_story.current_state
+      story_hash['story_type'] = full_pivotal_story.story_type
       return story_hash
     end
 
