@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100617211609) do
+ActiveRecord::Schema.define(:version => 20100618205508) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20100617211609) do
     t.datetime "updated_at"
     t.text     "source_url"
     t.integer  "assignee_id"
+    t.text     "invalid_reason"
   end
 
   add_index "stories", ["project_id", "status"], :name => "index_stories_on_project_id_and_status"
