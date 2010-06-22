@@ -5,6 +5,5 @@
     %a{:href=>'#', :rel => 'toggle_accepted_stories'}Toggle accepted stories
 
 - @lanes.sort.each do |lane|
-  =render :partial => 'show_stories_table', :locals =>{:lane =>lane}
-#overlay.overlay
-  .contentWrap
+  =render :partial => 'show_stories_table', :locals =>{:lane => lane}
+

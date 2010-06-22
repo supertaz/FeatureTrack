@@ -1,7 +1,7 @@
-- unless lane[1]['total_items'] == 0 || (controller_name == 'iterations' && action_name == 'current' && lane[1]['open_others'] == 0)
+- unless lane[1]['total_items'] == 0
   - if lane[1]['total_items'] == lane[1]['total_items'] - lane[1]['open_items']
     - lane_accepted = true
-  -else
+  - else
     - lane_accepted = false
   - slug = slugify(lane[1]['name'])
   - content_for :navigation_links do
