@@ -24,7 +24,7 @@ class Api::WebHookController < ApplicationController
           when 'event_type'
             event['type'] = value
           when 'occurred_at'
-            event['time'] = Time.zone.parse(value)
+            event['time'] = value
           when 'author'
             by_nick = User.active.find_by_nickname(value)
             if by_nick.instance_of? User
@@ -67,7 +67,7 @@ class Api::WebHookController < ApplicationController
                     when 'current_state'
                       local_story['status'] = story_element
                     when 'accepted_at'
-                      local_story['accepted_at'] = Time.zone.parse(story_element)
+                      local_story['accepted_at'] = story_element
                     when 'notes'
                       local_story['notes'] = Array.new
                       story_element.each do |note_key, note|
