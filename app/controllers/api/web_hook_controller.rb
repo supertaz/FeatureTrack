@@ -2,23 +2,20 @@ class Api::WebHookController < ApplicationController
   def receive_hook
     case params[:integration_type]
       when 'pivotal'
-        process_pivotal_hook(params['activity'])
+        if params.has_key? 'activity'
+          process_pivotal_activity(params['activity'])
+        elsif params.has_key? 'activities'
+          params['activities'].each do |key, value|
+            if key == 'activity'
+              process_pivotal_activity(value)
+            end
+          end
+        end
     end
     render :nothing => true
   end
 
 #  protected
-
-    def process_pivotal_hook(hook_body_doc)
-      case hook_body_doc.root.name
-        when 'activity'
-          process_pivotal_activity(hook_body_doc.root)
-        when 'activities'
-          hook_body_doc.root.children.each do |activity|
-            process_pivotal_activity(activity)
-          end
-      end
-    end
 
     def process_pivotal_activity(activity)
       event = Hash.new
