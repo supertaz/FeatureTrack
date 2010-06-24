@@ -31,7 +31,7 @@ class Api::WebHookController < ApplicationController
               event['actor'] = by_nick
             end
           when 'project_id'
-            project = Project.find_by_source_id(value.to_i)
+            project = Project.find_by_source_id(value)
             if project.instance_of? Project
               event['project'] = project
             end
@@ -115,13 +115,9 @@ class Api::WebHookController < ApplicationController
               story = get_or_create_story('pivotal', pivotal_story)
               if story.new_record?
                 story.project = event['project']
-                if event['type'] == 'story_create'
-                  story.owner = event['actor'] if event.has_key? 'actor'
-                else
-                  pivotal_story_id = pivotal_story['source_id']
-                  pivotal_project = event['project'].get_source_project
-                  pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
-                end
+                pivotal_story_id = pivotal_story['source_id']
+                pivotal_project = event['project'].get_source_project
+                pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
               end
               unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
                 if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
