@@ -37,8 +37,8 @@ class Api::WebHookController < ApplicationController
             end
           when 'stories'
             event['stories'] = Array.new
-            value.each do |story|
-              if story.name == 'story'
+            value.each do |story_key, story|
+              if story_key == 'story'
                 local_story = Hash.new
                 story.each do |story_element_key, story_element|
                   case story_element_key
