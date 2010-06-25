@@ -1,4 +1,4 @@
-- semantic_form_for @feature_request do |f|
+- semantic_form_for @feature_request, @feature_request.new_record? ? {:url => feature_requests_url} : {:url => feature_request_url(@feature_request)} do |f|
   - f.inputs do
     = f.input :title, :label => 'Title'
     = f.input :description, :label => 'Description'

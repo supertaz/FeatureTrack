@@ -5,7 +5,7 @@
     - f.inputs do
       = f.input :status_is, :as => :select, :collection => get_statuses, :required => false, :label => 'Status is'
       = f.input :title_like, :required => false, :label => 'Title like', :hint => 'Use a % as a wildcard to represent any number of any character'
-      = f.input :story_id, :required => false, :label => 'Story ID'
+      = f.input :source_id, :required => false, :label => 'Story ID'
     - f.buttons do
       = f.submit 'Search / Filter', :class => 'button'
 
@@ -31,13 +31,13 @@
   - for feature_request in @feature_requests
     %tr
       %td.left.right= h feature_request.status
-      %td.right.left_justify= link_to feature_request.title, feature_request
+      %td.right.left_justify= link_to feature_request.title, feature_request_url(feature_request)
       %td.right= feature_request.priority.nil? ? '<i>Not yet assessed</i>' : feature_request.get_priority_string
       %td.right= feature_request.risk.nil? ? '<i>Not yet assessed</i>' : feature_request.get_risk_level_string
       %td.right= h feature_request.affected
       %td.right= h feature_request.functional_area
       %td.right= h feature_request.story_source
-      %td.right= h feature_request.story_id
+      %td.right= h feature_request.source_id
       %td.right= h feature_request.requestor.fullname
       %td.right
         -unless feature_request.approver.nil?
@@ -53,7 +53,7 @@
           #{feature_request.approved_at > feature_request.rejected_at ? "Approved: #{feature_request.approved_at}" : "Rejected: #{feature_request.rejected_at}"}
       %td.right
         - if current_user == feature_request.requestor || current_user.scrum_master || current_user.global_admin
-          = link_to 'Edit', edit_feature_request_path(feature_request), :class => 'action'
-          = link_to 'Delete', feature_request, :confirm => 'Are you sure you want to delete this feature request?', :method => :delete, :class => 'action'
+          = link_to 'Edit', edit_feature_request_url(feature_request), :class => 'action'
+          = link_to 'Delete', feature_request_url(feature_request), :confirm => 'Are you sure you want to delete this feature request?', :method => :delete, :class => 'action'
 
 %p= link_to "New Feature Request", new_feature_request_path

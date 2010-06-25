@@ -1,7 +1,7 @@
 %p
   %h3 Defect Description
   %br
-  - semantic_form_for @defect do |f|
+  - semantic_form_for @defect, @defect.new_record? ? {:url => defects_url} : {:url => defect_url(@defect)} do |f|
     - f.inputs do
       - unless @defect.id.nil?
         = f.input :status, :label => 'Status', :as => :select, :collection => get_allowable_statuses(@defect, current_user), :include_blank => false

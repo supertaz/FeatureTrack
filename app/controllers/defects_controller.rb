@@ -4,102 +4,85 @@ class DefectsController < ApplicationController
   before_filter :current_user_can_create_defects, :only => [:new, :create]
 
   def index
-    @search = Defect.search(params[:search])
-#    @defects = Defect.all.sort {|a,b| a.calculate_execution_priority <=> b.calculate_execution_priority}
+    @search = Story.bugs.search(params[:search])
     @defects = @search.all
   end
 
   def show
-    key_object = current_user.get_api_key('pivotal')
-    PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
-    @defect = Defect.find(params[:id])
+    @defect = Story.bugs.find(params[:id])
     markdown = RDiscount.new(@defect.description)
     @defect_description = Sanitize.clean(markdown.to_html, Sanitize::Config::BASIC)
   end
 
   def new
-    @defect = Defect.new
+    @defect = Story.new
+    @defect.story_type = 'bug'
   end
 
   def create
-    @defect = Defect.new(params[:defect])
+    @defect = Story.new(params[:story])
     @defect.status = 'New'
-    @defect.reporter = current_user
-    @defect.environment = Environment.find(params[:defect].delete('environment_id'))
-    unless @defect.project.nil? || @defect.project.blank?
-      unless @defect.against_story_id.nil? || @defect.against_story_id.blank?
-        @defect.against_story_source = @defect.project.source
-      end
-    end
+    @defect.requestor = current_user
+    @defect.environment = Environment.find(params[:story].delete('environment_id'))
     if @defect.save
       flash[:notice] = "Successfully created defect."
-      redirect_to @defect
+      redirect_to defect_url(@defect)
     else
       render :action => 'new'
     end
   end
 
   def edit
-    @defect = Defect.find(params[:id])
+    @defect = Story.bugs.find(params[:id])
   end
 
   def update
-    @defect = Defect.find(params[:id])
-    @defect.environment = Environment.find(params[:defect].delete('environment_id'))
-    unless @defect.project.nil? || @defect.project.blank?
-      unless @defect.against_story_id.nil? || @defect.against_story_id.blank?
-        @defect.against_story_source = @defect.project.source
-      end
-    end
-    if @defect.description != params[:defect]['description']
+    @defect = Story.bugs.find(params[:id])
+    @defect.environment = Environment.find(params[:story].delete('environment_id'))
+    if @defect.description != params[:story]['description']
       description_changed = true
     else
       description_changed = false
     end
-    if @defect.update_attributes(params[:defect])
-      unless @defect.project.nil? || @defect.story_id.nil?
+    if @defect.update_attributes(params[:story])
+      unless @defect.project.nil? || @defect.source_id.nil?
         if description_changed
-          key_object = current_user.get_api_key('pivotal')
-          PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
           project = @defect.project.get_source_project
-          story = project.stories.find(@defect.story_id)
+          story = project.stories.find(@defect.source_id)
           story.update({'description' => @defect.description})
         end
       end
       flash[:notice] = "Successfully updated defect."
-      redirect_to @defect
+      redirect_to defect_url(@defect)
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @defect = Defect.find(params[:id])
+    @defect = Story.bugs.find(params[:id])
     @defect.destroy
     flash[:notice] = "Successfully destroyed defect."
     redirect_to defects_url
   end
 
   def promote
-    defect = Defect.find(params[:id])
+    defect = Story.bugs.find(params[:id])
     if (current_user.developer && defect.display_priority.to_i <= 3) || current_user.development_manager || current_user.scrum_master || current_user.global_admin
       unless defect.project.nil?
-        unless defect.against_story_id.nil? || defect.against_story_id.blank?
-          defect.against_story_source = defect.project.source
-        end
-        key_object = current_user.get_api_key('pivotal')
-        PivotalTracker::Client.token = key_object.api_key unless key_object.nil?
         project = defect.project.get_source_project
         new_defect = project.stories.create(:name => "P#{defect.display_priority} - " + defect.title,
                                              :labels => "p#{defect.display_priority}",
-                                             :requested_by => (defect.reporter.nickname.nil? || defect.reporter.nickname.empty?) ? defect.reporter.firstname : defect.reporter.nickname,
+                                             :requested_by => (defect.requestor.nickname.nil? || defect.requestor.nickname.empty?) ? defect.requestor.firstname : defect.requestor.nickname,
                                              :description => defect.description,
-                                             :story_type => defect.story_type.nil? ? 'bug' : defect.story_type)
+                                             :story_type => defect.story_type.nil? ? 'bug' : defect.story_type,
+                                             :other_id => defect.id)
         if new_defect.nil? || new_defect.id.nil?
           flash[:error] = 'Unable to promote defect'
         else
           defect.story_source = defect.project.source
-          defect.story_id = new_defect.id
+          defect.source_url = new_defect.url
+          defect.source_id = new_defect.id
           defect.reviewer = current_user
           defect.reviewed_at = Time.zone.now
           defect.status = 'Reviewed'

@@ -5,8 +5,8 @@
     - f.inputs do
       = f.input :status_is, :as => :select, :collection => get_statuses, :required => false, :label => 'Status is'
       = f.input :title_like, :required => false, :label => 'Title like', :hint => 'Use a % as a wildcard to represent any number of any character'
-      = f.input :story_id, :required => false, :label => 'Story ID'
-      = f.input :against_story_id, :required => false, :label => 'Reported against story ID'
+      = f.input :source_id, :required => false, :label => 'Integration story ID'
+      = f.input :against_story_id, :required => false, :label => 'Reported against story'
     - f.buttons do
       = f.submit 'Search / Filter', :class => 'button'
 
@@ -21,7 +21,7 @@
     %th.nowrap Defect story
     %th.nowrap Reported against
     %th.nowrap
-      = order @search, :by => :reporter_id, :as => 'Reported by'
+      = order @search, :by => :requestor_id, :as => 'Reported by'
     %th.nowrap Current owner
     %th.nowrap Developer
     %th.nowrap Tester
@@ -34,16 +34,16 @@
       %td.right P#{defect.display_priority}
       %td.right.left_justify= link_to "#{h defect.title}", defect_url(defect), :class => 'action'
       %td.right
-        - unless defect.story_id.nil?
+        - unless defect.source_id.nil?
           #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}
-          #{defect.story_id}
-          =# link_to "#{defect.story_id}", defect.get_story_url, :target => '_new', :class => 'action'
+          -unless defect.source_url.nil? || defect.source_url.empty?
+            =link_to "#{defect.source_id}", defect.source_url, :target => '_new', :class => 'action'
         - else
           Not promoted
       %td.right
-        #{defect.against_story_source.nil? ? nil : "#{h defect.against_story_source}: "}
+        =##{defect.against_story_source.nil? ? nil : "#{h defect.against_story_source}: "}
         #{defect.against_story_id.nil? ? '<i>No story specified</i>' : "#{h defect.against_story_id}"}
-      %td.right.nowrap= h defect.reporter.fullname
+      %td.right.nowrap= h defect.requestor.fullname
       %td.right.nowrap
         - unless defect.owner.nil?
           = h defect.owner
@@ -70,8 +70,8 @@
         - else
           %i Not assigned
       %td.right.nowrap
-        = link_to 'Edit', edit_defect_path(defect), :class => 'action'
+        = link_to 'Edit', edit_defect_url(defect), :class => 'action'
         - if current_user.is_global_admin? || current_user.is_scrum_master? || (defect.created_at > Time.zone.now - 15.minutes && defect.reporter == current_user)
-          = link_to 'Delete', defect, :confirm => 'Are you sure you want to remove this defect? (This action can\'t be undone!)', :method => :delete, :class => 'action'
+          = link_to 'Delete', defect_url(defect), :confirm => 'Are you sure you want to remove this defect? (This action can\'t be undone!)', :method => :delete, :class => 'action'
 
 %p= link_to "Report a new defect", new_defect_path
