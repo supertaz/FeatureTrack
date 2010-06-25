@@ -11,7 +11,10 @@ namespace :featuretrack do
           end
           new_story.story_source = 'pivotal'
           new_story.source_id = defect.story_id
-          new_story.source_url ||= defect.get_story_url
+          begin
+            new_story.source_url ||= defect.get_story_url
+          rescue
+          end
         end
       end
       new_story.story_type = 'bug'
