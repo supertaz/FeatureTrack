@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.root :controller => 'dashboards', :action => 'index'
 
   map.namespace(:admin) do |admin|
@@ -9,6 +10,10 @@ ActionController::Routing::Routes.draw do |map|
   map.admin '/admin', :controller => 'admin/dashboard', :action => 'index'
 
   map.resource :user, :controller => 'users', :as => 'account'
+
+  map.resources :release_notes
+
+  map.resources :releases
 
   map.resources :defects, :member => {:promote => :get}
 

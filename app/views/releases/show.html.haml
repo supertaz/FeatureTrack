@@ -1,0 +1,24 @@
+- title "Release"
+
+%p
+  %strong Name:
+  =h @release.name
+%p
+  %strong Code Freeze On:
+  =h @release.code_freeze_on
+%p
+  %strong Merge On:
+  =h @release.merge_on
+%p
+  %strong Push On:
+  =h @release.push_on
+%p
+  %strong Description:
+  =h @release.description
+
+%p
+  = link_to "Edit", edit_release_path(@release)
+  |
+  = link_to "Destroy", @release, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", releases_path

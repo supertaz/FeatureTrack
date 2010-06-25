@@ -1,0 +1,15 @@
+- title "Release Note"
+
+%p
+  %strong Title:
+  =h @release_note.title
+%p
+  %strong Description:
+  =h @release_note.description
+
+%p
+  = link_to "Edit", edit_release_note_path(@release_note)
+  |
+  = link_to "Destroy", @release_note, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", release_notes_path

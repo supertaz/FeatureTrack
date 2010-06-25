@@ -1,0 +1,24 @@
+- form_for @release do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :code_freeze_on
+    %br
+    = f.datetime_select :code_freeze_on
+  %p
+    = f.label :merge_on
+    %br
+    = f.datetime_select :merge_on
+  %p
+    = f.label :push_on
+    %br
+    = f.datetime_select :push_on
+  %p
+    = f.label :description
+    %br
+    = f.text_area :description
+  %p
+    = f.submit

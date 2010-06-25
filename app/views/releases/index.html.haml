@@ -1,0 +1,21 @@
+- title "Releases"
+
+%table
+  %tr
+    %th Name
+    %th Code freeze on
+    %th Merge on
+    %th Push on
+    %th Description
+  - for release in @releases
+    %tr
+      %td= h release.name
+      %td= h release.code_freeze_on
+      %td= h release.merge_on
+      %td= h release.push_on
+      %td= h release.description
+      %td= link_to 'Show', release
+      %td= link_to 'Edit', edit_release_path(release)
+      %td= link_to 'Destroy', release, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Release", new_release_path

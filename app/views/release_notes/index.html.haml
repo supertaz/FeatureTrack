@@ -1,0 +1,15 @@
+- title "Release Notes"
+
+%table
+  %tr
+    %th Title
+    %th Description
+  - for release_note in @release_notes
+    %tr
+      %td= h release_note.title
+      %td= h release_note.description
+      %td= link_to 'Show', release_note
+      %td= link_to 'Edit', edit_release_note_path(release_note)
+      %td= link_to 'Destroy', release_note, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Release Note", new_release_note_path

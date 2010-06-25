@@ -1,0 +1,13 @@
+one:
+  name: MyString
+  code_freeze_on: 2010-06-25 09:34:50
+  merge_on: 2010-06-25 09:34:50
+  push_on: 2010-06-25 09:34:50
+  description: MyText
+
+two:
+  name: MyString
+  code_freeze_on: 2010-06-25 09:34:50
+  merge_on: 2010-06-25 09:34:50
+  push_on: 2010-06-25 09:34:50
+  description: MyText
