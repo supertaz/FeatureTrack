@@ -35,7 +35,11 @@ class Story < ActiveRecord::Base
   validates_length_of :description, :minimum => 50
 
   def calculate_execution_priority
-    exec_pri = self.severity * 1000
+    unless self.severity.nil?
+      exec_pri = self.severity * 1000
+    else
+      exec_pri = 1000
+    end
     unless self.priority.nil?
       if self.priority.between?(1, 4)
         if exec_pri > 1999
