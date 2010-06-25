@@ -1,21 +1,21 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   def show_story_state(state, image_tag = nil)
-    case state
+    case state.downcase
       when 'accepted'
-        "<div class = 'accepted'>#{image_tag.nil? ? '' : image_tag}ACCEPTED</div>"
+        "<div class = 'accepted'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
       when 'rejected'
-        "<div class = 'rejected'>#{image_tag.nil? ? '' : image_tag}REJECTED</div>"
+        "<div class = 'rejected'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
       when 'delivered'
-        "<div class = 'delivered'>#{image_tag.nil? ? '' : image_tag}In UAT</div>"
+        "<div class = 'delivered'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
       when 'finished'
-        "<div class = 'finished'>#{image_tag.nil? ? '' : image_tag}In QA</div>"
+        "<div class = 'finished'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
       when 'started'
-        "<div class = 'started'>#{image_tag.nil? ? '' : image_tag}In Dev</div>"
+        "<div class = 'started'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
       when 'unstarted'
-        "<div class = 'unstarted'>#{image_tag.nil? ? '' : image_tag}Not Started</div>"
+        "<div class = 'unstarted'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
       else
-        "<div class = 'rejected'>??? Unknown ???</div>"
+        "<div class = 'unstarted'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
     end
   end
 
@@ -31,7 +31,7 @@ module ApplicationHelper
         15
       when 'started'
         10
-      when 'unstarted'
+      else
         0
     end
   end
@@ -55,7 +55,7 @@ module ApplicationHelper
   end
 
   def get_state_icon(state)
-    case state
+    case state.downcase
       when 'accepted'
         '/images/icons/accepted.png'
       when 'rejected'
@@ -66,13 +66,13 @@ module ApplicationHelper
         '/images/icons/QA.png'
       when 'started'
         '/images/icons/dev.png'
-      when 'unstarted'
+      else
         '/images/icons/unstarted.png'
     end
   end
 
   def get_state_name(state)
-    case state
+    case state.downcase
       when 'accepted'
         'Accepted'
       when 'rejected'
@@ -85,11 +85,17 @@ module ApplicationHelper
         'In Dev'
       when 'unstarted'
         'Not Started'
+      when 'reviewed'
+        'Reviewed'
+      when 'prioritized'
+        'Prioritized'
+      when 'unscheduled', 'approved'
+        'To Be Scheduled'
     end
   end
 
   def get_task_type_icon(task_type)
-    case task_type
+    case task_type.downcase
       when 'chore'
         '/images/icons/chore.png'
       when 'bug'
@@ -102,27 +108,27 @@ module ApplicationHelper
   end
 
   def get_statuses
-    Defect.statuses
+    Story.statuses
   end
 
   def get_severities
-    Defect.severities
+    Story.severities
   end
 
   def get_risk_levels
-    Defect.risk_levels
+    Story.risk_levels
   end
 
   def get_priorities
-    Defect.priorities
+    Story.priorities
   end
 
   def get_affected_parties
-    Defect.affected_parties
+    Story.affected_parties
   end
 
   def get_functional_areas
-    Defect.functional_areas
+    Story.functional_areas
   end
 
   def get_active_projects

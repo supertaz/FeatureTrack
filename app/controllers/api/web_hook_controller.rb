@@ -204,7 +204,7 @@ class Api::WebHookController < ApplicationController
       full_pivotal_story = pivotal_project.stories.find(pivotal_story_id)
       story_hash['title'] = full_pivotal_story.name
       story_hash['description'] = full_pivotal_story.description
-      story_hash['owner'] = User.find_by_nickname(full_pivotal_story.requested_by)
+      story_hash['requestor'] = User.find_by_nickname(full_pivotal_story.requested_by)
       story_hash['assignee'] = User.find_by_nickname(full_pivotal_story.owned_by)
       story_hash['status'] = full_pivotal_story.current_state
       story_hash['story_type'] = full_pivotal_story.story_type
