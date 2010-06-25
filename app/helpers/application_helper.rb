@@ -87,10 +87,14 @@ module ApplicationHelper
         'Not Started'
       when 'reviewed'
         'Reviewed'
+      when 'approved'
+        'Approved'
       when 'prioritized'
         'Prioritized'
-      when 'unscheduled', 'approved'
+      when 'unscheduled'
         'To Be Scheduled'
+      when 'new'
+        'New'
     end
   end
 

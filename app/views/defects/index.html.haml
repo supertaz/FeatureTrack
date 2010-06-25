@@ -30,7 +30,7 @@
     %th.nowrap Actions
   - for defect in @defects
     %tr{:class => cycle('grey', nil)}
-      %td.left.right= h defect.status
+      %td.left.right= get_state_name(defect.status)
       %td.right P#{defect.display_priority}
       %td.right.left_justify= link_to "#{h defect.title}", defect_url(defect), :class => 'action'
       %td.right

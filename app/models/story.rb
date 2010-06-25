@@ -119,14 +119,16 @@ class Story < ActiveRecord::Base
 
   def self.statuses
     [
-          'New',
-          'Reviewed',
-          'Prioritized',
-          'In Dev',
-          'In QA',
-          'In UAT',
-          'Rejected',
-          'Approved'
+          ['New'],
+          ['Reviewed'],
+          ['Approved'],
+          ['To Be Scheduled', 'unscheduled'],
+          ['Prioritized'],
+          ['In Dev', 'started'],
+          ['In QA', 'finished'],
+          ['In UAT', 'delivered'],
+          ['Rejected'],
+          ['Accepted']
     ]
   end
 
