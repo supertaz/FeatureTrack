@@ -46,17 +46,17 @@
       %td.right.nowrap= h defect.requestor.fullname
       %td.right.nowrap
         - unless defect.owner.nil?
-          = h defect.owner
+          = h defect.owner.fullname
         - else
           %i Not assigned
       %td.right.nowrap
         - unless defect.developer.nil?
-          = h developer.owner
+          = h developer.fullname
         - else
           %i Not assigned
       %td.right.nowrap
         - unless defect.tester.nil?
-          = h tester.owner
+          = h tester.fullname
         - else
           %i Not assigned
       %td.right
