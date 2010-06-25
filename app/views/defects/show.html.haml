@@ -85,7 +85,7 @@
 %p
   = link_to "Edit", edit_defect_path(@defect)
   |
-  - if current_user.global_admin || current_user.scrum_master || (@defect.created_at > Time.zone.now - 15.minutes && @defect.reporter == current_user)
+  - if current_user.global_admin || current_user.scrum_master || (@defect.created_at > Time.zone.now - 15.minutes && @defect.requestor == current_user)
     = link_to 'Delete', defect_url(@defect), :confirm => 'Are you sure you want to remove this defect? (This action can\'t be undone!)', :method => :delete
     |
   - if @defect.source_id.nil? && ((current_user.developer && @defect.display_priority.to_i <= 3) || current_user.development_manager || current_user.scrum_master || current_user.global_admin)

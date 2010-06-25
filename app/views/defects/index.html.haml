@@ -71,7 +71,7 @@
           %i Not assigned
       %td.right.nowrap
         = link_to 'Edit', edit_defect_url(defect), :class => 'action'
-        - if current_user.is_global_admin? || current_user.is_scrum_master? || (defect.created_at > Time.zone.now - 15.minutes && defect.reporter == current_user)
+        - if current_user.is_global_admin? || current_user.is_scrum_master? || (defect.created_at > Time.zone.now - 15.minutes && defect.requestor == current_user)
           = link_to 'Delete', defect_url(defect), :confirm => 'Are you sure you want to remove this defect? (This action can\'t be undone!)', :method => :delete, :class => 'action'
 
 %p= link_to "Report a new defect", new_defect_path
