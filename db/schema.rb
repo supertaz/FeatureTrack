@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100618205508) do
+ActiveRecord::Schema.define(:version => 20100625152810) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -151,6 +151,35 @@ ActiveRecord::Schema.define(:version => 20100618205508) do
   add_index "projects", ["test_project", "active", "id"], :name => "prj_test_act"
   add_index "projects", ["test_project", "active", "name", "id"], :name => "prj_tst_act_nm"
 
+  create_table "release_notes", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "release_notes_stories", :id => false, :force => true do |t|
+    t.integer "release_note_id", :default => 0, :null => false
+    t.integer "story_id",        :default => 0, :null => false
+  end
+
+  add_index "release_notes_stories", ["release_note_id", "story_id"], :name => "rn_story_rn_story_idx"
+  add_index "release_notes_stories", ["story_id", "release_note_id"], :name => "rn_story_story_rn_idx"
+
+  create_table "releases", :force => true do |t|
+    t.string   "name"
+    t.datetime "code_freeze_on"
+    t.datetime "merge_on"
+    t.datetime "push_on"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "releases", ["code_freeze_on"], :name => "index_releases_on_code_freeze_on"
+  add_index "releases", ["merge_on"], :name => "index_releases_on_merge_on"
+  add_index "releases", ["push_on"], :name => "index_releases_on_push_on"
+
   create_table "roles", :force => true do |t|
     t.string   "name",              :limit => 40
     t.string   "authorizable_type", :limit => 40
@@ -200,11 +229,34 @@ ActiveRecord::Schema.define(:version => 20100618205508) do
     t.text     "source_url"
     t.integer  "assignee_id"
     t.text     "invalid_reason"
+    t.integer  "release_id"
+    t.integer  "approver_id"
+    t.integer  "requestor_id"
+    t.integer  "priority"
+    t.string   "affected"
+    t.string   "functional_area"
+    t.integer  "risk"
+    t.integer  "reviewer_id"
+    t.integer  "developer_id"
+    t.integer  "tester_id"
+    t.integer  "environment_id"
+    t.datetime "reviewed_at"
+    t.boolean  "invalid"
+    t.datetime "last_assigned_at"
+    t.integer  "execution_priority"
+    t.integer  "against_story_id"
+    t.datetime "delivered_at"
+    t.integer  "severity"
+    t.datetime "started_at"
+    t.datetime "finished_at"
   end
 
   add_index "stories", ["project_id", "status"], :name => "index_stories_on_project_id_and_status"
+  add_index "stories", ["project_id", "story_type"], :name => "index_stories_on_project_id_and_story_type"
+  add_index "stories", ["requestor_id"], :name => "index_stories_on_requestor_id"
   add_index "stories", ["status"], :name => "index_stories_on_status"
   add_index "stories", ["story_source", "source_id"], :name => "index_stories_on_story_source_and_source_id", :unique => true
+  add_index "stories", ["story_type"], :name => "index_stories_on_story_type"
 
   create_table "users", :force => true do |t|
     t.string   "email"

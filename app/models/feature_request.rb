@@ -6,8 +6,6 @@ class FeatureRequest < ActiveRecord::Base
   belongs_to :approver, :class_name => 'User'
   belongs_to :project
 
-  has_and_belongs_to_many :stories
-
   validates_presence_of :status
   validates_presence_of :title
   validates_length_of :title, :within => 10..250

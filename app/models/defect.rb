@@ -13,8 +13,6 @@ class Defect < ActiveRecord::Base
   belongs_to :environment
   belongs_to :project
 
-  has_and_belongs_to_many :stories
-
   before_save :set_execution_priority
 
   validates_presence_of :status
