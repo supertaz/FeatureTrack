@@ -19,6 +19,7 @@ class FeatureRequestsController < ApplicationController
 
   def create
     @feature_request = Story.new(params[:story])
+    @feature_request.story_type = 'feature'
     @feature_request.status = 'New'
     @feature_request.requestor = current_user
     if @feature_request.save

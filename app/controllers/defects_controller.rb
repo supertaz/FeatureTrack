@@ -21,6 +21,7 @@ class DefectsController < ApplicationController
 
   def create
     @defect = Story.new(params[:story])
+    @defect.story_type = 'bug'
     @defect.status = 'New'
     @defect.requestor = current_user
     @defect.environment = Environment.find(params[:story].delete('environment_id'))
