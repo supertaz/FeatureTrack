@@ -488,8 +488,13 @@ a img {
   padding: 0.1em 0em 0em 0em;
   width: 800px;
 }
-
 /* line 347, ../../app/views/stylesheets/application.sass */
+#main_detail p {
+  margin: 0.6em 0em 0em 0em;
+  padding: 0em;
+}
+
+/* line 350, ../../app/views/stylesheets/application.sass */
 #status_info {
   float: right;
   width: 21em;
@@ -498,37 +503,37 @@ a img {
   font-size: 0.9em;
   white-space: nowrap;
 }
-/* line 354, ../../app/views/stylesheets/application.sass */
+/* line 357, ../../app/views/stylesheets/application.sass */
 #status_info strong {
   font-size: 1.1em;
 }
 
-/* line 356, ../../app/views/stylesheets/application.sass */
+/* line 359, ../../app/views/stylesheets/application.sass */
 table {
   border-spacing: 0px;
   margin-bottom: 20px;
 }
-/* line 359, ../../app/views/stylesheets/application.sass */
+/* line 362, ../../app/views/stylesheets/application.sass */
 table a {
   display: block;
   text-decoration: none;
   color: inherit;
 }
-/* line 363, ../../app/views/stylesheets/application.sass */
+/* line 366, ../../app/views/stylesheets/application.sass */
 table a:hover {
   text-decoration: underline;
 }
-/* line 365, ../../app/views/stylesheets/application.sass */
+/* line 368, ../../app/views/stylesheets/application.sass */
 table a.action {
   display: inline;
   text-decoration: none;
   color: inherit;
 }
-/* line 369, ../../app/views/stylesheets/application.sass */
+/* line 372, ../../app/views/stylesheets/application.sass */
 table a.action:hover {
   text-decoration: underline;
 }
-/* line 371, ../../app/views/stylesheets/application.sass */
+/* line 374, ../../app/views/stylesheets/application.sass */
 table th {
   font-family: Garamond, “Hoefler Text”, Palatino, “Palatino Linotype”, serif;
   font-weight: bold;
@@ -537,56 +542,56 @@ table th {
   padding: 0.2em 0.6em 0em 0.6em;
   border-bottom: 1px solid #999999;
 }
-/* line 378, ../../app/views/stylesheets/application.sass */
+/* line 381, ../../app/views/stylesheets/application.sass */
 table th:hover {
   background: white;
   color: black;
 }
-/* line 382, ../../app/views/stylesheets/application.sass */
+/* line 385, ../../app/views/stylesheets/application.sass */
 table tr.head:hover {
   background: white;
   color: black;
 }
-/* line 385, ../../app/views/stylesheets/application.sass */
+/* line 388, ../../app/views/stylesheets/application.sass */
 table tr:hover {
   background: #7777aa;
   color: white;
 }
-/* line 388, ../../app/views/stylesheets/application.sass */
+/* line 391, ../../app/views/stylesheets/application.sass */
 table td {
   font-size: 13px;
   padding: 0em 0.2em 0em 0.2em;
   border-bottom: 1px solid #999999;
 }
-/* line 392, ../../app/views/stylesheets/application.sass */
+/* line 395, ../../app/views/stylesheets/application.sass */
 table td.left {
   border-left: 1px solid #999999;
 }
-/* line 394, ../../app/views/stylesheets/application.sass */
+/* line 397, ../../app/views/stylesheets/application.sass */
 table td.right {
   border-right: 1px solid #999999;
   text-align: center;
 }
-/* line 397, ../../app/views/stylesheets/application.sass */
+/* line 400, ../../app/views/stylesheets/application.sass */
 table td.left_justify {
   text-align: left;
 }
-/* line 401, ../../app/views/stylesheets/application.sass */
+/* line 404, ../../app/views/stylesheets/application.sass */
 table tr.grey:hover td {
   background: #7777aa;
   color: white;
 }
-/* line 404, ../../app/views/stylesheets/application.sass */
+/* line 407, ../../app/views/stylesheets/application.sass */
 table tr.grey td {
   background: #eeeeee;
 }
 
-/* line 406, ../../app/views/stylesheets/application.sass */
+/* line 409, ../../app/views/stylesheets/application.sass */
 .nowrap {
   white-space: nowrap;
 }
 
-/* line 408, ../../app/views/stylesheets/application.sass */
+/* line 411, ../../app/views/stylesheets/application.sass */
 .sidetext {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
@@ -594,34 +599,34 @@ table tr.grey td {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
-/* line 413, ../../app/views/stylesheets/application.sass */
+/* line 416, ../../app/views/stylesheets/application.sass */
 p.notes {
   margin-bottom: 0.4em;
 }
 
-/* line 415, ../../app/views/stylesheets/application.sass */
+/* line 418, ../../app/views/stylesheets/application.sass */
 .note {
   margin: 0em;
   padding: 0em 0.5em 0.5em 0.5em;
   font-size: 0.8em;
 }
-/* line 419, ../../app/views/stylesheets/application.sass */
+/* line 422, ../../app/views/stylesheets/application.sass */
 .note li {
   padding-top: 0.2em;
   list-style-type: none;
 }
-/* line 422, ../../app/views/stylesheets/application.sass */
+/* line 425, ../../app/views/stylesheets/application.sass */
 .note li label {
   font-style: italic;
   padding-left: 1em;
   margin-right: 1em;
 }
-/* line 427, ../../app/views/stylesheets/application.sass */
+/* line 430, ../../app/views/stylesheets/application.sass */
 .note li.text label {
   vertical-align: top;
   padding-right: 1.5em;
 }
-/* line 431, ../../app/views/stylesheets/application.sass */
+/* line 434, ../../app/views/stylesheets/application.sass */
 .note fieldset.buttons input {
   margin-top: 1em;
 }
