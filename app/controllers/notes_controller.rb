@@ -16,7 +16,11 @@ class NotesController < ApplicationController
         pivotal_story.notes.create(:text => note_header + note.body)
       rescue => e
         error_message = 'Unable to create note, please try again. If this continues, please contact your administrator.<br>'
-        logger.error e.backtrace
+        backtrace = String.new
+        e.backtrace.each do |msg|
+          backtrace += "#{msg}\n"
+        end
+        logger.error backtrace
         if e.respond_to? 'response'
           if e.response.nil?
             error_message += "#{e.class} exception#{e.respond_to?('message') ? ':' + e.message : '.'}"
