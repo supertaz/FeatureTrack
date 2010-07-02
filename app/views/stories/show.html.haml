@@ -98,7 +98,7 @@
         %strong
           %i
             On #{note.created_at},
-            = note.author.fullname
+            #{note.author.nil? ? 'someone' : note.author.fullname}
             - unless note.subject.nil? || note.subject.blank?
               talked about "#{note.subject}":
             -else
