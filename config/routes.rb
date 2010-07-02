@@ -23,7 +23,9 @@ ActionController::Routing::Routes.draw do |map|
   map.assignments '/assignments', :controller => 'iterations', :action => 'assignments'
   map.resources :iterations
 
-  map.resources :stories, :except => [:index, :destroy]
+  map.resources :stories, :except => [:index, :destroy] do |story|
+    story.resources :notes, :only => [:create, :edit, :update]
+  end
   map.move_story '/stories/:source/:project_id/:story_id/move', :controller => 'stories', :action => 'move'
 
   map.resources :release_notes

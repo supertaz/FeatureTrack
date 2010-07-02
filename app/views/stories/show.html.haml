@@ -108,6 +108,17 @@
   - else
     %p
       %strong No notes on this story.
+  %p.note
+    %br
+    %strong New note
+    %br
+    - semantic_form_for [@story, @note] do |f|
+      = f.input :subject, :label => 'Subject', :input_html => {:size => 90}
+      %br
+      = f.input :body, :label => 'Note', :input_html => {:rows => 8, :cols => 100}
+      - f.buttons do
+        = f.submit 'Add new note'
+
 
 %p
   - case @story.story_type

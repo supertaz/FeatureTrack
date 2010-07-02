@@ -8,6 +8,7 @@ class StoriesController < ApplicationController
 
   def show
     @story = Story.find(params[:id])
+    @note = Note.new(:story => @story)
   end
 
   def move
