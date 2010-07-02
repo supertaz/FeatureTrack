@@ -621,3 +621,7 @@ p.notes {
   vertical-align: top;
   padding-right: 1.5em;
 }
+/* line 431, ../../app/views/stylesheets/application.sass */
+.note fieldset.buttons input {
+  margin-top: 1em;
+}
