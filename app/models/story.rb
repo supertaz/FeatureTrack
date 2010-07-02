@@ -137,6 +137,7 @@ class Story < ActiveRecord::Base
           'Sitters',
           'Parents',
           'Corporate parents',
+          'Free trial parents',
           'Customer support',
           'Administrators',
           'External',
