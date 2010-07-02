@@ -32,7 +32,7 @@
     %tr{:class => cycle('grey', nil)}
       %td.left.right= get_state_name(defect.status)
       %td.right P#{defect.display_priority}
-      %td.right.left_justify= link_to "#{h defect.title}", defect_url(defect), :class => 'action'
+      %td.right.left_justify= link_to "#{h defect.title}", story_url(defect), :class => 'action'
       %td.right
         - unless defect.source_id.nil?
           #{h defect.story_source}#{defect.story_source.nil? ? nil : ': '}

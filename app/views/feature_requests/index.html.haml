@@ -31,7 +31,7 @@
   - for feature_request in @feature_requests
     %tr
       %td.left.right= get_state_name(feature_request.status)
-      %td.right.left_justify= link_to feature_request.title, feature_request_url(feature_request)
+      %td.right.left_justify= link_to feature_request.title, story_url(feature_request)
       %td.right= feature_request.priority.nil? ? '<i>Not yet assessed</i>' : feature_request.get_priority_string
       %td.right= feature_request.risk.nil? ? '<i>Not yet assessed</i>' : feature_request.get_risk_level_string
       %td.right= h feature_request.affected

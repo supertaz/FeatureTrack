@@ -9,9 +9,10 @@ class DefectsController < ApplicationController
   end
 
   def show
-    @defect = Story.bugs.find(params[:id])
-    markdown = RDiscount.new(@defect.description)
-    @defect_description = Sanitize.clean(markdown.to_html, Sanitize::Config::BASIC)
+    defect = Story.bugs.find(params[:id])
+    redirect_to story_url(defect)
+#    markdown = RDiscount.new(@defect.description)
+#    @defect_description = Sanitize.clean(markdown.to_html, Sanitize::Config::BASIC)
   end
 
   def new
@@ -27,7 +28,7 @@ class DefectsController < ApplicationController
     @defect.environment = Environment.find(params[:story].delete('environment_id'))
     if @defect.save
       flash[:notice] = "Successfully created defect."
-      redirect_to defect_url(@defect)
+      redirect_to story_url(@defect)
     else
       render :action => 'new'
     end
@@ -54,7 +55,7 @@ class DefectsController < ApplicationController
         end
       end
       flash[:notice] = "Successfully updated defect."
-      redirect_to defect_url(@defect)
+      redirect_to story_url(@defect)
     else
       render :action => 'edit'
     end
@@ -84,16 +85,18 @@ class DefectsController < ApplicationController
           defect.story_source = defect.project.source
           defect.source_url = new_defect.url
           defect.source_id = new_defect.id
+          defect.approver = current_user
+          defect.approved_at = Time.zone.now
           defect.reviewer = current_user
           defect.reviewed_at = Time.zone.now
           defect.status = 'Reviewed'
           defect.save
           flash[:notice] = 'Defect successfully promoted to pivotal.'
-          redirect_to defect_url(defect)
+          redirect_to story_url(defect)
         end
       else
         flash[:error] = 'Defect needs to be assigned to a project before it can be promoted.'
-        redirect_to defect_url(defect)
+        redirect_to story_url(defect)
       end
     end
   end

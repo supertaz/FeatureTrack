@@ -9,7 +9,8 @@ class FeatureRequestsController < ApplicationController
   end
 
   def show
-    @feature_request = Story.features.find(params[:id])
+    feature_request = Story.features.find(params[:id])
+    redirect_to story_url(feature_request)
   end
 
   def new
@@ -24,7 +25,7 @@ class FeatureRequestsController < ApplicationController
     @feature_request.requestor = current_user
     if @feature_request.save
       flash[:notice] = "Successfully created feature request."
-      redirect_to feature_request_url(@feature_request)
+      redirect_to story_url(@feature_request)
     else
       render :action => 'new'
     end
@@ -38,7 +39,7 @@ class FeatureRequestsController < ApplicationController
     @feature_request = Story.features.find(params[:id])
     if @feature_request.update_attributes(params[:story])
       flash[:notice] = "Successfully updated feature request."
-      redirect_to feature_request_url(@feature_request)
+      redirect_to story_url(@feature_request)
     else
       render :action => 'edit'
     end
@@ -70,10 +71,10 @@ class FeatureRequestsController < ApplicationController
         feature.status = 'Approved'
         feature.save
         flash[:notice] = 'Feature successfully promoted to story.'
-        redirect_to feature_request_url(feature)
+        redirect_to story_url(feature)
       else
         flash[:error] = 'Feature request needs to be assigned to a project before it can be approved.'
-        redirect_to feature_request_url(feature)
+        redirect_to story_url(feature)
       end
     else
       flash[:error] = 'You don\'t have access to that functionality.'
@@ -89,7 +90,7 @@ class FeatureRequestsController < ApplicationController
       feature.status = 'Rejected'
       feature.save
       flash[:notice] = 'Feature rejected.'
-      redirect_to feature_request_url(feature)
+      redirect_to story_url(feature)
     else
       flash[:error] = 'You don\'t have access to that functionality.'
       redirect_to feature_requests_url

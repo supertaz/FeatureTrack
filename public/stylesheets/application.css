@@ -593,3 +593,15 @@ table tr.grey td {
   -o-transform: rotate(-90deg);
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
+
+/* line 413, ../../app/views/stylesheets/application.sass */
+p.notes {
+  margin-bottom: 0.4em;
+}
+
+/* line 415, ../../app/views/stylesheets/application.sass */
+.note {
+  margin: 0em;
+  padding: 0em 0.5em 0.2em 0.5em;
+  font-size: 0.8em;
+}

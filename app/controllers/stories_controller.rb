@@ -3,7 +3,11 @@ class StoriesController < ApplicationController
   before_filter :current_user_can_move_stories, :only => [:move]
 
   def index
-    @stories = Project.stories.all
+    @stories = Project.find(params[:project]).stories.all
+  end
+
+  def show
+    @story = Story.find(params[:id])
   end
 
   def move
