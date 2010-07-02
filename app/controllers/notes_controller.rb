@@ -18,7 +18,7 @@ class NotesController < ApplicationController
         error_message = 'Unable to create note, please try again. If this continues, please contact your administrator.<br>'
         if e.respond_to? 'response'
           if e.response.nil?
-            error_message += "#{e.class} exception."
+            error_message += "#{e.class} exception#{e.respond_to?('message') ? ':' + e.message : '.'}"
           else
             error_message += "Remote source exception: #{e.response}"
           end
