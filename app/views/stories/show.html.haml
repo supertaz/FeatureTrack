@@ -111,7 +111,9 @@
       %strong No notes on this story.
   %p.note
     %br
-    %strong New note
+    %strong
+      %u New note
+    %br
     %br
     - semantic_form_for [@story, @note] do |f|
       = f.input :subject, :label => 'Subject', :input_html => {:size => 90}

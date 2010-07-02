@@ -602,6 +602,22 @@ p.notes {
 /* line 415, ../../app/views/stylesheets/application.sass */
 .note {
   margin: 0em;
-  padding: 0em 0.5em 0.2em 0.5em;
+  padding: 0em 0.5em 0.5em 0.5em;
   font-size: 0.8em;
+}
+/* line 419, ../../app/views/stylesheets/application.sass */
+.note li {
+  padding-top: 0.2em;
+  list-style-type: none;
+}
+/* line 422, ../../app/views/stylesheets/application.sass */
+.note li label {
+  font-style: italic;
+  padding-left: 1em;
+  margin-right: 1em;
+}
+/* line 427, ../../app/views/stylesheets/application.sass */
+.note li.text label {
+  vertical-align: top;
+  padding-right: 1.5em;
 }
