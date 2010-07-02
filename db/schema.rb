@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100625174234) do
+ActiveRecord::Schema.define(:version => 20100702141529) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -174,6 +174,7 @@ ActiveRecord::Schema.define(:version => 20100625174234) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "project_id"
   end
 
   add_index "releases", ["code_freeze_on"], :name => "index_releases_on_code_freeze_on"

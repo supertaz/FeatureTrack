@@ -2,6 +2,9 @@ class Project < ActiveRecord::Base
   attr_accessible :name, :source, :source_id, :allow_bugs, :allow_features, :allow_chores, :allow_releases, :active,
                   :archived, :test_project, :start_at, :end_at
 
+  has_many :releases
+  has_many :stories
+
   named_scope :active, :conditions => {:active => true, :test_project => false}
   named_scope :unarchived, :conditions => {:archived => false, :test_project => false}
 
