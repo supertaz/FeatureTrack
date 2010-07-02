@@ -98,11 +98,12 @@
         %strong
           %i
             On #{note.created_at},
-            #{note.author.nil? ? 'someone' : note.author.fullname}
-            - unless note.subject.nil? || note.subject.blank?
-              talked about "#{note.subject}":
-            -else
-              said:
+            -unless note.author.nil?
+              #{note.author.fullname}
+              - unless note.subject.nil? || note.subject.blank?
+                talked about "#{note.subject}":
+              -else
+                said:
         %br
           = h note.body
   - else
