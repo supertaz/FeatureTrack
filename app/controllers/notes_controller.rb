@@ -9,9 +9,9 @@ class NotesController < ApplicationController
         pivotal_project = story.project.get_source_project
         pivotal_story = pivotal_project.stories.find(story.source_id)
         if note.subject.empty?
-          note_header = "*#{current_user.fullname} said:*\n"
+          note_header = "*#{current_user.fullname} said:*\n\n"
         else
-          note_header = "*#{current_user.fullname} talked about \"#{note.subject}\":*\n"
+          note_header = "**#{current_user.fullname} talked about \"#{note.subject}\":**\n\n"
         end
         pivotal_story.notes.create(:text => note_header + note.body)
         flash[:success] = 'Note posted sucessfully; please wait a few moments before refreshing if you don\'t see it.'
