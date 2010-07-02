@@ -14,8 +14,14 @@ class NotesController < ApplicationController
           note_header = "*#{current_user.fullname} talked about \"#{note.subject}\":*\n"
         end
         pivotal_story.notes.create(:text => note_header + note.body)
-      rescue
-        flash.now[:error] = 'Unable to create note, please try again. If this continues, please contact your administrator.'
+      rescue => e
+        error_message = 'Unable to create note, please try again. If this continues, please contact your administrator.<br>'
+        if e.response.nil?
+          error_message += "#{e.class} exception."
+        else
+          error_message += "Remote source exception: #{e.response}"
+        end
+        flash.now[:error] = error_message
         @story = story
         @note = note
         render 'stories/show' and return
