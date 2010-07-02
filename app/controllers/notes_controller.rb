@@ -18,7 +18,7 @@ class NotesController < ApplicationController
         flash.now[:error] = 'Unable to create note, please try again. If this continues, please contact your administrator.'
         @story = story
         @note = note
-        render 'stories/show'
+        render 'stories/show' and return
       end
     else
       note.save
