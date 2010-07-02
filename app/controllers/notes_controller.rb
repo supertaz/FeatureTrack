@@ -14,7 +14,7 @@ class NotesController < ApplicationController
           note_header = "**#{current_user.fullname} talked about \"#{note.subject}\":**\n\n"
         end
         pivotal_story.notes.create(:text => note_header + note.body)
-        flash[:success] = 'Note posted sucessfully; please wait a few moments before refreshing if you don\'t see it.'
+        flash[:notice] = 'Note posted sucessfully; please wait a few moments before refreshing if you don\'t see it.'
       rescue => e
         error_message = 'Unable to create note, please try again. If this continues, please contact your administrator.<br>'
         backtrace = String.new
