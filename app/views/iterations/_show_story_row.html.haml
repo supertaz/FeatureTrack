@@ -10,11 +10,14 @@
       &nbsp;
   %td
     -#%a{:href=>story.url, :rel => '#overlay'}= h story.name
-    %a{:href=>story.url, :target => '_new'} #{h story.name}
+    =link_to "#{h story.title}", story_url(story)
   %td.status
-    .status=show_story_state(story.current_state, image_tag(get_state_icon story.current_state))
-  %td.right.nowrap= h story.requested_by
-  %td.right.nowrap= h story.owned_by
+    .status=show_story_state(story.status, image_tag(get_state_icon story.status))
+  %td.right.nowrap= story.requestor.nil? ? '' : "#{h story.requestor.fullname}"
+  %td.right.nowrap
+    - owner = story.assignee unless story.assignee.nil?
+    - owner ||= story.owner unless story.owner.nil?
+    = owner.fullname unless owner.nil?
   %td.right.nowrap
 -#    - if current_user_can_move_stories(false)
 -#      = link_to 'move', move_story_url(:source => get_story_source(story), :project_id => story.project_id, :story_id => story.id)

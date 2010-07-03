@@ -47,11 +47,11 @@
             - i += 1
             =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
         - unless category['chores'].nil?
-          - category['chores'].sort{|a,b| get_state_step(b.current_state) <=> get_state_step(a.current_state)}.each do |story|
+          - category['chores'].sort{|a,b| get_state_step(b.status) <=> get_state_step(a.status)}.each do |story|
             - i += 1
             =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
         - unless category['features'].nil?
-          - category['features'].sort{|a,b| get_state_step(b.current_state) <=> get_state_step(a.current_state)}.each do |story|
+          - category['features'].sort{|a,b| get_state_step(b.status) <=> get_state_step(a.status)}.each do |story|
             - i += 1
             =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
         - unless category['defects'].nil?
@@ -59,6 +59,6 @@
             - i += 1
             =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}
         - unless category['other'].nil?
-          - category['other'].sort{|a,b| get_state_step(b.current_state) <=> get_state_step(a.current_state)}.each do |story|
+          - category['other'].sort{|a,b| get_state_step(b.status) <=> get_state_step(a.status)}.each do |story|
             - i += 1
             =render :partial => 'iterations/show_story_row', :locals => {:story => story, :i => i, :accepted => accepted}

@@ -1,0 +1,8 @@
+- title "Stories Not Attached To Projects"
+
+- content_for :summary_info do
+  %h6
+    %a{:href=>'#', :rel => 'toggle_accepted_stories'}Toggle accepted stories
+
+- @lanes.sort.each do |lane|
+  =render :partial => 'show_stories_table', :locals =>{:lane => lane}

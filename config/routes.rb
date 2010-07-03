@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.current_iteration '/current', :controller => 'iterations', :action => 'current'
   map.assignments '/assignments', :controller => 'iterations', :action => 'assignments'
+  map.orphans '/orphans', :controller => 'iterations', :action => 'orphans'
   map.resources :iterations
 
   map.resources :stories, :except => [:index, :destroy] do |story|

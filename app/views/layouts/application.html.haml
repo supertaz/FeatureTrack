@@ -66,11 +66,13 @@
                 = link_to 'activity', root_url
                 %ul
                   %li
-                    = link_to 'dashboard', root_url
+                    = link_to 'status dashboard', root_url
                   %li
                     = link_to 'active projects', current_iteration_url
                   %li
-                    = link_to 'assignments', assignments_url
+                    = link_to 'story assignments', assignments_url
+                  %li
+                    = link_to 'orphaned stories', orphans_url
             - if current_user_can_see_defects(false)
               %li
                 = link_to 'defects', defects_url

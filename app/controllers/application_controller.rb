@@ -181,16 +181,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def get_defect_level(defect)
-      pri = 10
-      defect.labels.split(',').each do |label|
-        if label.match(/^p[0-9]$/)
-          unless label.gsub(/^p([0-9])$/, '\1').nil?
-            pri = label.gsub(/p([0-9])/, '\1').to_i
-          end
-        end
-      end
-      pri
+    def get_defect_level(story)
+      story.execution_priority || 9
     end
 
     def get_story_source(story)
@@ -209,7 +201,7 @@ class ApplicationController < ActionController::Base
     def add_to_lane_hash(lanes, label, story, accepted_bubble_up = true)
       unless lanes.has_key?(label)
         lanes[label] = Hash.new
-        lanes[label]['name'] = label.capitalize
+        lanes[label]['name'] = label
         lanes[label]['total_items'] = 0
         lanes[label]['total_features'] = 0
         lanes[label]['total_defects'] = 0
@@ -244,18 +236,18 @@ class ApplicationController < ActionController::Base
         }
       end
 
-      if accepted_bubble_up && story.current_state == 'accepted'
+      if accepted_bubble_up && story.status == 'accepted'
         target = lanes[label]['accepted']
       else
         target = lanes[label]['todo']
       end
       lanes[label]['total_items'] += 1
-      lanes[label]['open_items'] += 1 unless story.current_state == 'accepted'
+      lanes[label]['open_items'] += 1 unless story.status == 'accepted'
       case story.story_type
         when 'feature'
           target['features'] << story
           lanes[label]['total_features'] += 1
-          lanes[label]['open_features'] += 1 unless story.current_state == 'accepted'
+          lanes[label]['open_features'] += 1 unless story.status == 'accepted'
         when 'bug'
           if get_defect_level(story) > 2
             target['defects'] << story
@@ -263,15 +255,15 @@ class ApplicationController < ActionController::Base
             target['priority'] << story
           end
           lanes[label]['total_defects'] += 1
-          lanes[label]['open_defects'] += 1 unless story.current_state == 'accepted'
+          lanes[label]['open_defects'] += 1 unless story.status == 'accepted'
         when 'chore'
           target['chores'] << story
           lanes[label]['total_chores'] += 1
-          lanes[label]['open_chores'] += 1 unless story.current_state == 'accepted'
+          lanes[label]['open_chores'] += 1 unless story.status == 'accepted'
         else
           target['other'] << story
           lanes[label]['total_others'] += 1
-          lanes[label]['open_others'] += 1 unless story.current_state == 'accepted'
+          lanes[label]['open_others'] += 1 unless story.status == 'accepted'
       end
     end
 

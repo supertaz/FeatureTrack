@@ -36,22 +36,12 @@ module ApplicationHelper
     end
   end
 
-  def sort_defect_score(defect_a, defect_b)
-    get_defect_priority(defect_b) <=> get_defect_priority(defect_a)
+  def sort_defect_score(story_a, story_b)
+    get_defect_priority(story_b) <=> get_defect_priority(story_a)
   end
 
-  def get_defect_priority(defect)
-    pri = 1000
-    unless defect.labels.nil?
-      defect.labels.split(',').each do |label|
-        if label.match(/^p[0-9]$/)
-          unless label.gsub(/^p([0-9])$/, '\1').nil? || get_state_step(defect.current_state).nil?
-            pri = (6000 - (label.gsub(/p([0-9])/, '\1').to_i * 1000)) + get_state_step(defect.current_state)
-          end
-        end
-      end
-    end
-    pri
+  def get_defect_priority(story)
+    story.execution_priority || 9
   end
 
   def get_state_icon(state)

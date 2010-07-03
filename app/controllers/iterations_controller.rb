@@ -26,19 +26,8 @@ class IterationsController < ApplicationController
     @refresh = @refresh = params[:refresh].nil? ? @default_refresh : params[:refresh].to_i
     @lanes = Hash.new
     Project.active.each do |project|
-      begin
-        iteration = PivotalTracker::Iteration.current(project.get_source_project)
-        iteration.stories.each do |story|
-          add_to_lane_hash(@lanes, project.name, story)
-        end
-      rescue => e
-        if !(defined? e.response) || e.response.nil?
-          flash.now[:error] = "#{e.class} exception, trying again in 15 seconds."
-          @refresh = 15
-        else
-          flash.now[:error] = "Remote source returned an exception: #{e.response}&nbsp;&nbsp;Will try again in 15 seconds."
-          @refresh = 15
-        end
+      project.stories.each do |story|
+        add_to_lane_hash(@lanes, project.name, story)
       end
     end
   end
@@ -48,22 +37,21 @@ class IterationsController < ApplicationController
     @refresh = params[:refresh].nil? ? @default_refresh : params[:refresh].to_i
     @workers = Hash.new
     Project.active.each do |project|
-      begin
-        iteration = PivotalTracker::Iteration.current(project.get_source_project)
-        iteration.stories.each do |story|
-          owner = (story.owned_by.nil? || story.owned_by.empty?) ? 'Unassigned' : story.owned_by
-          add_to_lane_hash(@workers, owner, story)
-        end
-      rescue => e
-        if !(defined? e.response) || e.response.nil?
-          flash.now[:error] = "#{e.class} exception, trying again in 15 seconds."
-          @refresh = 15
-        else
-          flash.now[:error] = "Remote source returned an exception: #{e.response}&nbsp;&nbsp;Will try again in 15 seconds."
-          @refresh = 15
-        end
+      project.stories.each do |story|
+        owner = story.assignee.fullname unless story.assignee.nil?
+        owner ||= story.owner.fullname unless story.owner.nil?
+        owner ||= 'Unassigned'
+        add_to_lane_hash(@workers, owner, story)
       end
     end
   end
 
+  def orphans
+    @default_refresh = 300
+    @refresh = params[:refresh].nil? ? @default_refresh : params[:refresh].to_i
+    @lanes = Hash.new
+    Story.all(:conditions => {:project_id => nil}).each do |orphan|
+      add_to_lane_hash(@lanes, 'No Project', orphan)
+    end
+  end
 end
