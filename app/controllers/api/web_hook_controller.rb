@@ -107,6 +107,7 @@ class Api::WebHookController < ApplicationController
 
       case event['type']
         when 'story_create', 'story_update', 'note_create'
+          skip_note = false
           unless event['project'].nil?
             event['stories'].each do |pivotal_story|
               if event['type'] == 'note_create'
@@ -122,7 +123,11 @@ class Api::WebHookController < ApplicationController
               unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
                 if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
                   synchronize_attributes(pivotal_story, story)
-                  new_record = true if story.new_record?
+                  if story.new_record?
+                    new_record = true
+                  else
+                    new_record = false
+                  end
                   story.save
                   if new_record
                     pivotal_project = event['project'].get_source_project
@@ -133,13 +138,16 @@ class Api::WebHookController < ApplicationController
                         new_note_author = User.find_by_nickname(note.author)
                         story.notes.create(:body => note.text, :author => new_note_author, :created_at => note.noted_at)
                       end
+                      skip_note = true
                     end
                   end
                 end
               end
-              if event['type'] == 'note_create'
-                notes.each do |note|
-                  story.notes.create(:body => note['body'], :story_source => note['story_source'], :source_id => note['source_id'], :author => event['actor'])
+              unless skip_note
+                if event['type'] == 'note_create'
+                  notes.each do |note|
+                    story.notes.create(:body => note['body'], :story_source => note['story_source'], :source_id => note['source_id'], :author => event['actor'])
+                  end
                 end
               end
             end
@@ -161,6 +169,14 @@ class Api::WebHookController < ApplicationController
                   pivotal_story_id = pivotal_story['source_id']
                   pivotal_project = event['project'].get_source_project
                   pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
+                  pivotal_api_story = pivotal_project.stories.find(pivotal_story_id)
+                  pivotal_notes = pivotal_api_story.notes.all
+                  if pivotal_notes.count > 0
+                    pivotal_notes.each do |note|
+                      new_note_author = User.find_by_nickname(note.author)
+                      story.notes.create(:body => note.text, :author => new_note_author, :created_at => note.noted_at)
+                    end
+                  end
                 end
                 story.project = new_project
                 unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
