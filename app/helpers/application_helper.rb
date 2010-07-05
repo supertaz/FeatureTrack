@@ -20,17 +20,25 @@ module ApplicationHelper
   end
 
   def get_state_step(state)
-    case state
+    case state.downcase
       when 'accepted'
         25
       when 'rejected'
-        5
+        12
       when 'delivered'
         20
       when 'finished'
         15
       when 'started'
         10
+      when 'unstarted'
+        8
+      when 'unscheduled'
+        6
+      when 'approved'
+        4
+      when 'reviewed'
+        2
       else
         0
     end
