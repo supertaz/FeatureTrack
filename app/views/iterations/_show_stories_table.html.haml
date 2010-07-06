@@ -1,18 +1,14 @@
 - unless lane[1]['total_items'] == 0
+  - special_classes = Array.new
   - if lane[1]['total_items'] == lane[1]['total_items'] - lane[1]['open_items']
-    - lane_accepted = true
-  - else
-    - lane_accepted = false
+    - special_classes << 'accepted'
+  - case lane[1]['name'].downcase
+    - when 'unscheduled', 'new', 'reviewed', 'approved'
+      - special_classes << 'unscheduled'
   - slug = slugify(lane[1]['name'])
   - content_for :navigation_links do
-    %a{:href => "##{slug}", :rel => 'scrollTo', :class => lane_accepted ? 'accepted' : nil}= h lane[1]['name']
-  - special_class = lane_accepted ? 'accepted' : nil
-  - special_class ||= case lane[1]['name'].downcase
-    - when 'unscheduled', 'new', 'reviewed', 'approved'
-      - 'unscheduled'
-    - else
-      - nil
-  .story_table{:class => special_class}
+    %a{:href => "##{slug}", :rel => 'scrollTo', :class => special_classes}= h lane[1]['name']
+  .story_table{:class => special_classes}
     %h2{:id => slug}
       #{h lane[1]['name']}:
       - if defined?(show_lane_progress) && show_lane_progress

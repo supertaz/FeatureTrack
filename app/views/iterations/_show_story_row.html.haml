@@ -1,8 +1,10 @@
--row_classes = ((i + 1) % 2) > 0 ? nil : 'grey'
--if row_classes.nil? && accepted
-  -row_classes = 'accepted'
--elsif accepted
-  -row_classes = 'grey accepted'
+- row_classes = Array.new
+- ((i + 1) % 2) > 0 ? nil : row_classes << 'grey'
+- if accepted
+  - row_classes << 'accepted'
+- case story.status.downcase
+  - when 'unscheduled', 'new', 'reviewed', 'approved'
+    - row_classes << 'unscheduled'
 %tr{:class => row_classes}
   %td.left
     .task_type

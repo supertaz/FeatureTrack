@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(:version => 20100702141529) do
     t.integer  "execution_priority"
     t.string   "affected"
     t.string   "functional_area"
-    t.integer  "against_story_id"
     t.string   "against_story_source"
     t.integer  "developer_id"
     t.integer  "environment_id"
@@ -46,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20100702141529) do
     t.boolean  "invalid",              :default => false
   end
 
-  add_index "defects", ["against_story_source", "against_story_id", "status", "id"], :name => "dfct_story_stat"
+  add_index "defects", ["against_story_source", "status", "id"], :name => "dfct_story_stat"
   add_index "defects", ["developer_id", "status", "id"], :name => "dfct_dev_stat"
   add_index "defects", ["environment_id", "status", "id"], :name => "dfct_env_stat"
   add_index "defects", ["execution_priority", "status", "id"], :name => "dfct_execpri_stat"
@@ -127,7 +126,6 @@ ActiveRecord::Schema.define(:version => 20100702141529) do
 
   add_index "notes", ["author_id"], :name => "index_notes_on_author_id"
   add_index "notes", ["story_id"], :name => "index_notes_on_story_id"
-  add_index "notes", ["story_source", "source_id"], :name => "index_notes_on_story_source_and_source_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"

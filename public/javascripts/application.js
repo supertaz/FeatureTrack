@@ -81,7 +81,7 @@ $(function() {
     {
         $(".unscheduled").hide();
     }
-    $("a[rel='toggle_accepted_stories']").click(function(event){
+    $("a[rel='toggle_unscheduled_stories']").click(function(event){
         event.preventDefault();
         if (unscheduledVisible)
         {
