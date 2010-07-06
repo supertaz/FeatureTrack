@@ -66,5 +66,36 @@ $(function() {
         }
     });
 
+    unscheduledVisible = $.cookies.get('unscheduledVisible');
+
+    if (unscheduledVisible == null)
+    {
+        unscheduledVisible = true;
+        $.cookies.set('unscheduledVisible', true);
+    }
+    if (unscheduledVisible)
+    {
+        $(".accepted").show();
+    }
+    else
+    {
+        $(".accepted").hide();
+    }
+    $("a[rel='toggle_accepted_stories']").click(function(event){
+        event.preventDefault();
+        if (unscheduledVisible)
+        {
+            $(".accepted").hide();
+            unscheduledVisible = false;
+            $.cookies.set('unscheduledVisible', false);
+        }
+        else
+        {
+            $(".accepted").show();
+            unscheduledVisible = true;
+            $.cookies.set('unscheduledVisible', true);
+        }
+    });
+
     $('#globalnav').sDrop();
 });
