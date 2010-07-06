@@ -6,13 +6,13 @@ module ApplicationHelper
         "<div class = 'accepted'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
       when 'rejected'
         "<div class = 'rejected'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
-      when 'delivered'
+      when 'delivered', 'in uat'
         "<div class = 'delivered'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
-      when 'finished'
+      when 'finished', 'in qa'
         "<div class = 'finished'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
-      when 'started'
+      when 'started', 'in dev'
         "<div class = 'started'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
-      when 'unstarted'
+      when 'unstarted', 'not started'
         "<div class = 'unstarted'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
       else
         "<div class = 'unstarted'>#{image_tag.nil? ? '' : image_tag}#{get_state_name(state)}</div>"
@@ -25,13 +25,13 @@ module ApplicationHelper
         25
       when 'rejected'
         12
-      when 'delivered'
+      when 'delivered', 'in uat'
         20
-      when 'finished'
+      when 'finished', 'in qa'
         15
-      when 'started'
+      when 'started', 'in dev'
         10
-      when 'unstarted'
+      when 'unstarted', 'not started'
         8
       when 'unscheduled'
         6
