@@ -3,7 +3,7 @@
   - if lane[1]['total_items'] == lane[1]['total_items'] - lane[1]['open_items']
     - special_classes << 'accepted'
   - case lane[1]['name'].downcase
-    - when 'unscheduled', 'new', 'reviewed', 'approved'
+    - when 'unscheduled', 'new', 'reviewed', 'approved', 'to be scheduled'
       - special_classes << 'unscheduled'
   - slug = slugify(lane[1]['name'])
   - content_for :navigation_links do
