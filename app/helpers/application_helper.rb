@@ -33,7 +33,7 @@ module ApplicationHelper
         10
       when 'unstarted', 'not started'
         8
-      when 'unscheduled'
+      when 'unscheduled', 'to be scheduled'
         6
       when 'approved'
         4
@@ -58,11 +58,11 @@ module ApplicationHelper
         '/images/icons/accepted.png'
       when 'rejected'
         '/images/icons/rejected.png'
-      when 'delivered'
+      when 'delivered', 'in uat'
         '/images/icons/UAT.png'
-      when 'finished'
+      when 'finished', 'in qa'
         '/images/icons/QA.png'
-      when 'started'
+      when 'started', 'in dev'
         '/images/icons/dev.png'
       else
         '/images/icons/unstarted.png'
