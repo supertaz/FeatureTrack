@@ -7,7 +7,7 @@ class DashboardsController < ApplicationController
     @statuses = Hash.new
     Project.active.each do |project|
       project.stories.each do |story|
-        add_to_lane_hash(@statuses, story.status.capitalize, story)
+        add_to_lane_hash(@statuses, @template.get_state_name(story.status), story)
       end
     end
   end

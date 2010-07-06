@@ -93,6 +93,8 @@ module ApplicationHelper
         'To Be Scheduled'
       when 'new'
         'New'
+      else
+        state
     end
   end
 

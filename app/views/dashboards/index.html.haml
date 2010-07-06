@@ -17,11 +17,11 @@
       Current Activity Summary
       %span ( #{total_items} total stories )
     #status_summary_items
-      - @statuses.sort {|a,b| get_state_step(b[1]['name'].downcase) <=> get_state_step(a[1]['name'].downcase)}.each do |status|
-        %img{:src => get_state_icon(status[1]['name'].downcase)}
-        %strong #{get_state_name(status[1]['name'].downcase)}:
+      - @statuses.sort {|a,b| get_state_step(b[1]['name']) <=> get_state_step(a[1]['name'])}.each do |status|
+        %img{:src => get_state_icon(status[1]['name'])}
+        %strong #{get_state_name(status[1]['name'])}:
         #{status[1]['total_items'] - status[1]['total_others']}
         &nbsp;
 
-- @statuses.sort {|a,b| get_state_step(b[1]['name'].downcase) <=> get_state_step(a[1]['name'].downcase)}.each do |status|
-  =render :partial => 'iterations/show_stories_table', :locals =>{:lane =>status, :show_lane_progress => false}
+- @statuses.sort {|a,b| get_state_step(b[1]['name']) <=> get_state_step(a[1]['name'])}.each do |status|
+  =render :partial => 'iterations/show_stories_table', :locals =>{:lane => status, :show_lane_progress => false}
