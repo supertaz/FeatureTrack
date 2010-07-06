@@ -75,23 +75,23 @@ $(function() {
     }
     if (unscheduledVisible)
     {
-        $(".accepted").show();
+        $(".unscheduled").show();
     }
     else
     {
-        $(".accepted").hide();
+        $(".unscheduled").hide();
     }
     $("a[rel='toggle_accepted_stories']").click(function(event){
         event.preventDefault();
         if (unscheduledVisible)
         {
-            $(".accepted").hide();
+            $(".unscheduled").hide();
             unscheduledVisible = false;
             $.cookies.set('unscheduledVisible', false);
         }
         else
         {
-            $(".accepted").show();
+            $(".unscheduled").show();
             unscheduledVisible = true;
             $.cookies.set('unscheduledVisible', true);
         }

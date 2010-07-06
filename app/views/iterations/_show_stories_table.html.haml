@@ -6,7 +6,13 @@
   - slug = slugify(lane[1]['name'])
   - content_for :navigation_links do
     %a{:href => "##{slug}", :rel => 'scrollTo', :class => lane_accepted ? 'accepted' : nil}= h lane[1]['name']
-  .story_table{:class => lane_accepted ? 'accepted' : nil}
+  - special_class = lane_accepted ? 'accepted' : nil
+  - special_class ||= case lane[1]['name'].downcase
+    - when 'unscheduled', 'new', 'reviewed', 'approved'
+      - 'unscheduled'
+    - else
+      - nil
+  .story_table{:class => special_class}
     %h2{:id => slug}
       #{h lane[1]['name']}:
       - if defined?(show_lane_progress) && show_lane_progress

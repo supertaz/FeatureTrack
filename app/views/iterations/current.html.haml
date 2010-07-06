@@ -3,7 +3,7 @@
 - content_for :summary_info do
   %h6
     %a{:href=>'#', :rel => 'toggle_accepted_stories'}Toggle accepted stories
-    %a{:href=>'#', :rel => 'toggle_unscheduled_stories'}Toggle unschedule stories
+    %a{:href=>'#', :rel => 'toggle_unscheduled_stories'}Toggle unscheduled stories
 
 - @lanes.sort.each do |lane|
   =render :partial => 'show_stories_table', :locals =>{:lane => lane}
