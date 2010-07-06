@@ -140,10 +140,11 @@ class Api::WebHookController < ApplicationController
                       end
                       skip_note = true
                     end
+                    pivotal_api_story.update(:other_id => story.id)
                   end
                 end
               end
-              unless skip_note 
+              unless skip_note
                 if event['type'] == 'note_create'
                   notes.each do |note|
                     story.notes.create(:body => note['body'], :story_source => note['story_source'], :source_id => note['source_id'], :author => event['actor'])
