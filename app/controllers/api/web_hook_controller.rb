@@ -46,8 +46,6 @@ class Api::WebHookController < ApplicationController
                       local_story['source_id'] = story_element
                     when 'other_id'
                       local_story['id'] = story_element.to_i
-                    when 'url'
-                      local_story['source_url'] = story_element
                     when 'name'
                       local_story['title'] = story_element
                     when 'description'
@@ -132,6 +130,9 @@ class Api::WebHookController < ApplicationController
                   if new_record
                     pivotal_project = event['project'].get_source_project
                     pivotal_api_story = pivotal_project.stories.find(pivotal_story['source_id'])
+                    story_url = pivotal_project.use_https? ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
+                    story.url = story_url + pivotal_story['source_id']
+                    story.save
                     pivotal_notes = pivotal_api_story.notes.all
                     if pivotal_notes.count > 0
                       pivotal_notes.each do |note|
