@@ -181,7 +181,7 @@ class Api::WebHookController < ApplicationController
                 end
                 story.project = new_project
                 unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
-                  if story.new_record? || story.updated_at.nil? || event['time'] > story.updated_at
+                  if story.new_record? || story.updated_at.nil? || event['time'] > (story.updated_at - 2.minutes)
                     synchronize_attributes(pivotal_story, story)
                     story.save
                   end
