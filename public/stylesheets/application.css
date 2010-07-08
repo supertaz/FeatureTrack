@@ -69,6 +69,12 @@ a img {
 }
 
 /* line 46, ../../app/views/stylesheets/application.sass */
+.small_right {
+  font-size: 0.8em;
+  float: right;
+}
+
+/* line 49, ../../app/views/stylesheets/application.sass */
 #container {
   position: relative;
   width: 97%;
@@ -77,18 +83,18 @@ a img {
   padding: 0px;
   border: none;
 }
-/* line 53, ../../app/views/stylesheets/application.sass */
+/* line 56, ../../app/views/stylesheets/application.sass */
 #container #overview {
   padding: 0px 10px 0px 20px;
   margin-top: 6.7em;
   margin-bottom: 0px;
 }
-/* line 57, ../../app/views/stylesheets/application.sass */
+/* line 60, ../../app/views/stylesheets/application.sass */
 #container #overview #messages {
   padding-top: 15px;
 }
 
-/* line 59, ../../app/views/stylesheets/application.sass */
+/* line 62, ../../app/views/stylesheets/application.sass */
 #summary {
   display: block;
   position: fixed;
@@ -103,7 +109,7 @@ a img {
   background: #ffffdd;
 }
 
-/* line 71, ../../app/views/stylesheets/application.sass */
+/* line 74, ../../app/views/stylesheets/application.sass */
 #nav_tabs {
   position: fixed;
   display: block;
@@ -114,12 +120,12 @@ a img {
   text-align: center;
   z-index: 10000;
 }
-/* line 80, ../../app/views/stylesheets/application.sass */
+/* line 83, ../../app/views/stylesheets/application.sass */
 #nav_tabs #nav_tab_abs {
   position: absolute;
   width: 650px;
 }
-/* line 83, ../../app/views/stylesheets/application.sass */
+/* line 86, ../../app/views/stylesheets/application.sass */
 #nav_tabs #nav_tab_abs a {
   position: relative;
   margin-left: -1px;
@@ -133,37 +139,37 @@ a img {
   border-top: none;
   text-decoration: none;
 }
-/* line 95, ../../app/views/stylesheets/application.sass */
+/* line 98, ../../app/views/stylesheets/application.sass */
 #nav_tabs #nav_tab_abs a:hover {
   background: #7777aa;
   color: white;
 }
 
-/* line 99, ../../app/views/stylesheets/application.sass */
+/* line 102, ../../app/views/stylesheets/application.sass */
 #flash_notice,
 #flash_error {
   padding: 5px 8px;
   margin: 10px 0;
 }
 
-/* line 104, ../../app/views/stylesheets/application.sass */
+/* line 107, ../../app/views/stylesheets/application.sass */
 #flash_notice {
   background-color: #ccffcc;
   border: solid 1px #66cc66;
 }
 
-/* line 108, ../../app/views/stylesheets/application.sass */
+/* line 111, ../../app/views/stylesheets/application.sass */
 #flash_error {
   background-color: #ffcccc;
   border: solid 1px #cc6666;
 }
 
-/* line 112, ../../app/views/stylesheets/application.sass */
+/* line 115, ../../app/views/stylesheets/application.sass */
 .fieldWithErrors {
   display: inline;
 }
 
-/* line 115, ../../app/views/stylesheets/application.sass */
+/* line 118, ../../app/views/stylesheets/application.sass */
 #errorExplanation {
   width: 400px;
   border: 2px solid #cf0000;
@@ -172,7 +178,7 @@ a img {
   margin-bottom: 20px;
   background-color: #f0f0f0;
 }
-/* line 122, ../../app/views/stylesheets/application.sass */
+/* line 125, ../../app/views/stylesheets/application.sass */
 #errorExplanation h2 {
   text-align: left;
   padding: 5px 5px 5px 15px;
@@ -182,34 +188,34 @@ a img {
   background-color: #cc0000;
   color: white;
 }
-/* line 131, ../../app/views/stylesheets/application.sass */
+/* line 134, ../../app/views/stylesheets/application.sass */
 #errorExplanation p {
   color: #333333;
   margin-bottom: 0;
   padding: 8px;
 }
-/* line 135, ../../app/views/stylesheets/application.sass */
+/* line 138, ../../app/views/stylesheets/application.sass */
 #errorExplanation ul {
   margin: 2px 24px;
 }
-/* line 137, ../../app/views/stylesheets/application.sass */
+/* line 140, ../../app/views/stylesheets/application.sass */
 #errorExplanation ul li {
   font-size: 12px;
   list-style: disc;
 }
 
-/* line 141, ../../app/views/stylesheets/application.sass */
+/* line 144, ../../app/views/stylesheets/application.sass */
 #context_search {
   font-size: 0.7em;
   border: 1px solid #aaaaaa;
   padding: 1em;
   margin-bottom: 2em;
 }
-/* line 146, ../../app/views/stylesheets/application.sass */
+/* line 149, ../../app/views/stylesheets/application.sass */
 #context_search input {
   border: 1px solid #aaaaaa;
 }
-/* line 148, ../../app/views/stylesheets/application.sass */
+/* line 151, ../../app/views/stylesheets/application.sass */
 #context_search input.button {
   border: 1px solid #aaaaaa;
   background: #ffddcc;
@@ -217,7 +223,7 @@ a img {
   padding: 0.5em;
 }
 
-/* line 154, ../../app/views/stylesheets/application.sass */
+/* line 157, ../../app/views/stylesheets/application.sass */
 #status_summary {
   margin-bottom: 20px;
   text-align: center;
@@ -225,20 +231,20 @@ a img {
   padding: 5px;
   border: solid 1px #999999;
 }
-/* line 160, ../../app/views/stylesheets/application.sass */
+/* line 163, ../../app/views/stylesheets/application.sass */
 #status_summary #status_summary_items {
   margin-top: 5px;
 }
-/* line 162, ../../app/views/stylesheets/application.sass */
+/* line 165, ../../app/views/stylesheets/application.sass */
 #status_summary #status_summary_items img {
   vertical-align: text-bottom;
 }
 
-/* line 165, ../../app/views/stylesheets/application.sass */
+/* line 168, ../../app/views/stylesheets/application.sass */
 .status {
   position: relative;
 }
-/* line 167, ../../app/views/stylesheets/application.sass */
+/* line 170, ../../app/views/stylesheets/application.sass */
 .status img {
   position: absolute;
   vertical-align: text-bottom;
@@ -246,7 +252,7 @@ a img {
   padding-top: 0.1em;
   padding-bottom: 0.1em;
 }
-/* line 173, ../../app/views/stylesheets/application.sass */
+/* line 176, ../../app/views/stylesheets/application.sass */
 .status .accepted {
   background-color: #00aa00;
   color: white;
@@ -258,7 +264,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 183, ../../app/views/stylesheets/application.sass */
+/* line 186, ../../app/views/stylesheets/application.sass */
 .status .rejected {
   background-color: red;
   color: white;
@@ -270,7 +276,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 193, ../../app/views/stylesheets/application.sass */
+/* line 196, ../../app/views/stylesheets/application.sass */
 .status .delivered {
   background-color: #dd7700;
   color: white;
@@ -282,7 +288,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 203, ../../app/views/stylesheets/application.sass */
+/* line 206, ../../app/views/stylesheets/application.sass */
 .status .finished {
   background-color: #eeee00;
   color: black;
@@ -294,7 +300,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 213, ../../app/views/stylesheets/application.sass */
+/* line 216, ../../app/views/stylesheets/application.sass */
 .status .started {
   background-color: #006699;
   color: white;
@@ -306,7 +312,7 @@ a img {
   border-right: 1px solid #999999;
   border-left: 1px solid #999999;
 }
-/* line 223, ../../app/views/stylesheets/application.sass */
+/* line 226, ../../app/views/stylesheets/application.sass */
 .status .unstarted {
   background-color: black;
   color: white;
@@ -319,12 +325,12 @@ a img {
   border-left: 1px solid #999999;
 }
 
-/* line 233, ../../app/views/stylesheets/application.sass */
+/* line 236, ../../app/views/stylesheets/application.sass */
 .task_type {
   position: relative;
   width: 1.5em;
 }
-/* line 236, ../../app/views/stylesheets/application.sass */
+/* line 239, ../../app/views/stylesheets/application.sass */
 .task_type img {
   position: absolute;
   vertical-align: text-bottom;
@@ -332,12 +338,12 @@ a img {
   top: 0.1em;
 }
 
-/* line 241, ../../app/views/stylesheets/application.sass */
+/* line 244, ../../app/views/stylesheets/application.sass */
 .title {
   width: 100%;
 }
 
-/* line 243, ../../app/views/stylesheets/application.sass */
+/* line 246, ../../app/views/stylesheets/application.sass */
 #usernav {
   position: absolute;
   top: -1px;
@@ -347,58 +353,58 @@ a img {
   padding: 0.3em 0.5em 0.3em 0.3em;
   border: black solid 1px;
 }
-/* line 251, ../../app/views/stylesheets/application.sass */
+/* line 254, ../../app/views/stylesheets/application.sass */
 #usernav #user_identity {
   float: left;
   padding-left: 38px;
   margin-right: 10px;
   text-align: center;
 }
-/* line 256, ../../app/views/stylesheets/application.sass */
+/* line 259, ../../app/views/stylesheets/application.sass */
 #usernav #user_identity a {
   text-decoration: none;
   color: #444444;
   font-weight: bold;
 }
-/* line 260, ../../app/views/stylesheets/application.sass */
+/* line 263, ../../app/views/stylesheets/application.sass */
 #usernav #user_identity a:hover {
   color: #666666;
   text-decoration: underline;
 }
-/* line 263, ../../app/views/stylesheets/application.sass */
+/* line 266, ../../app/views/stylesheets/application.sass */
 #usernav #user_identity img {
   position: absolute;
   vertical-align: text-bottom;
   top: 4px;
   left: 3px;
 }
-/* line 268, ../../app/views/stylesheets/application.sass */
+/* line 271, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options {
   background: transparent;
   float: right;
 }
-/* line 271, ../../app/views/stylesheets/application.sass */
+/* line 274, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text {
   position: relative;
   text-align: center;
   padding-left: 35px;
 }
-/* line 275, ../../app/views/stylesheets/application.sass */
+/* line 278, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text a {
   font-weight: bold;
   color: #444444;
   text-decoration: none;
 }
-/* line 279, ../../app/views/stylesheets/application.sass */
+/* line 282, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text a:hover {
   color: #666666;
   text-decoration: underline;
 }
-/* line 282, ../../app/views/stylesheets/application.sass */
+/* line 285, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text span {
   color: #999999;
 }
-/* line 284, ../../app/views/stylesheets/application.sass */
+/* line 287, ../../app/views/stylesheets/application.sass */
 #usernav #refresh_options #refresh_option_text img {
   position: absolute;
   vertical-align: text-bottom;
@@ -406,12 +412,12 @@ a img {
   left: 3px;
 }
 
-/* line 292, ../../app/views/stylesheets/application.sass */
+/* line 295, ../../app/views/stylesheets/application.sass */
 .nojs #globalnav ul ul {
   display: none;
 }
 
-/* line 294, ../../app/views/stylesheets/application.sass */
+/* line 297, ../../app/views/stylesheets/application.sass */
 #globalnav {
   position: relative;
   margin-right: 40px;
@@ -419,24 +425,24 @@ a img {
   background: white;
   display: block;
 }
-/* line 300, ../../app/views/stylesheets/application.sass */
+/* line 303, ../../app/views/stylesheets/application.sass */
 #globalnav ul, #globalnav li {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-/* line 304, ../../app/views/stylesheets/application.sass */
+/* line 307, ../../app/views/stylesheets/application.sass */
 #globalnav ul {
   background: white;
 }
-/* line 306, ../../app/views/stylesheets/application.sass */
+/* line 309, ../../app/views/stylesheets/application.sass */
 #globalnav ul li {
   display: block;
   float: left;
   position: relative;
   background: white;
 }
-/* line 311, ../../app/views/stylesheets/application.sass */
+/* line 314, ../../app/views/stylesheets/application.sass */
 #globalnav ul li a {
   display: block;
   height: 20px;
@@ -447,54 +453,54 @@ a img {
   color: #333333;
   text-decoration: none;
 }
-/* line 321, ../../app/views/stylesheets/application.sass */
+/* line 324, ../../app/views/stylesheets/application.sass */
 #globalnav ul li.hover a {
   background: #9999dd;
   color: white;
 }
-/* line 324, ../../app/views/stylesheets/application.sass */
+/* line 327, ../../app/views/stylesheets/application.sass */
 #globalnav ul li.hover a:hover {
   background: #7777aa;
   color: white;
 }
-/* line 328, ../../app/views/stylesheets/application.sass */
+/* line 331, ../../app/views/stylesheets/application.sass */
 #globalnav ul li.hover ul a {
   background: white;
   color: #555555;
 }
-/* line 331, ../../app/views/stylesheets/application.sass */
+/* line 334, ../../app/views/stylesheets/application.sass */
 #globalnav ul ul {
   position: absolute;
   top: 32px;
   z-index: 20000;
 }
-/* line 335, ../../app/views/stylesheets/application.sass */
+/* line 338, ../../app/views/stylesheets/application.sass */
 #globalnav ul ul li {
   float: none;
 }
-/* line 337, ../../app/views/stylesheets/application.sass */
+/* line 340, ../../app/views/stylesheets/application.sass */
 #globalnav ul ul li a {
   margin: -1px 0 0 -1px;
   display: block;
   width: 150px;
 }
-/* line 341, ../../app/views/stylesheets/application.sass */
+/* line 344, ../../app/views/stylesheets/application.sass */
 #globalnav ul ul li:hover {
   background: #f5f5f5;
 }
 
-/* line 344, ../../app/views/stylesheets/application.sass */
+/* line 347, ../../app/views/stylesheets/application.sass */
 #main_detail {
   padding: 0.1em 0em 0em 0em;
   width: 800px;
 }
-/* line 347, ../../app/views/stylesheets/application.sass */
+/* line 350, ../../app/views/stylesheets/application.sass */
 #main_detail p {
   margin: 0.6em 0em 0em 0em;
   padding: 0em;
 }
 
-/* line 350, ../../app/views/stylesheets/application.sass */
+/* line 353, ../../app/views/stylesheets/application.sass */
 #status_info {
   float: right;
   width: 21em;
@@ -503,37 +509,37 @@ a img {
   font-size: 0.9em;
   white-space: nowrap;
 }
-/* line 357, ../../app/views/stylesheets/application.sass */
+/* line 360, ../../app/views/stylesheets/application.sass */
 #status_info strong {
   font-size: 1.1em;
 }
 
-/* line 359, ../../app/views/stylesheets/application.sass */
+/* line 362, ../../app/views/stylesheets/application.sass */
 table {
   border-spacing: 0px;
   margin-bottom: 20px;
 }
-/* line 362, ../../app/views/stylesheets/application.sass */
+/* line 365, ../../app/views/stylesheets/application.sass */
 table a {
   display: block;
   text-decoration: none;
   color: inherit;
 }
-/* line 366, ../../app/views/stylesheets/application.sass */
+/* line 369, ../../app/views/stylesheets/application.sass */
 table a:hover {
   text-decoration: underline;
 }
-/* line 368, ../../app/views/stylesheets/application.sass */
+/* line 371, ../../app/views/stylesheets/application.sass */
 table a.action {
   display: inline;
   text-decoration: none;
   color: inherit;
 }
-/* line 372, ../../app/views/stylesheets/application.sass */
+/* line 375, ../../app/views/stylesheets/application.sass */
 table a.action:hover {
   text-decoration: underline;
 }
-/* line 374, ../../app/views/stylesheets/application.sass */
+/* line 377, ../../app/views/stylesheets/application.sass */
 table th {
   font-family: Garamond, “Hoefler Text”, Palatino, “Palatino Linotype”, serif;
   font-weight: bold;
@@ -542,56 +548,56 @@ table th {
   padding: 0.2em 0.6em 0em 0.6em;
   border-bottom: 1px solid #999999;
 }
-/* line 381, ../../app/views/stylesheets/application.sass */
+/* line 384, ../../app/views/stylesheets/application.sass */
 table th:hover {
   background: white;
   color: black;
 }
-/* line 385, ../../app/views/stylesheets/application.sass */
+/* line 388, ../../app/views/stylesheets/application.sass */
 table tr.head:hover {
   background: white;
   color: black;
 }
-/* line 388, ../../app/views/stylesheets/application.sass */
+/* line 391, ../../app/views/stylesheets/application.sass */
 table tr:hover {
   background: #7777aa;
   color: white;
 }
-/* line 391, ../../app/views/stylesheets/application.sass */
+/* line 394, ../../app/views/stylesheets/application.sass */
 table td {
   font-size: 13px;
   padding: 0em 0.2em 0em 0.2em;
   border-bottom: 1px solid #999999;
 }
-/* line 395, ../../app/views/stylesheets/application.sass */
+/* line 398, ../../app/views/stylesheets/application.sass */
 table td.left {
   border-left: 1px solid #999999;
 }
-/* line 397, ../../app/views/stylesheets/application.sass */
+/* line 400, ../../app/views/stylesheets/application.sass */
 table td.right {
   border-right: 1px solid #999999;
   text-align: center;
 }
-/* line 400, ../../app/views/stylesheets/application.sass */
+/* line 403, ../../app/views/stylesheets/application.sass */
 table td.left_justify {
   text-align: left;
 }
-/* line 404, ../../app/views/stylesheets/application.sass */
+/* line 407, ../../app/views/stylesheets/application.sass */
 table tr.grey:hover td {
   background: #7777aa;
   color: white;
 }
-/* line 407, ../../app/views/stylesheets/application.sass */
+/* line 410, ../../app/views/stylesheets/application.sass */
 table tr.grey td {
   background: #eeeeee;
 }
 
-/* line 409, ../../app/views/stylesheets/application.sass */
+/* line 412, ../../app/views/stylesheets/application.sass */
 .nowrap {
   white-space: nowrap;
 }
 
-/* line 411, ../../app/views/stylesheets/application.sass */
+/* line 414, ../../app/views/stylesheets/application.sass */
 .sidetext {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
@@ -599,34 +605,34 @@ table tr.grey td {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
-/* line 416, ../../app/views/stylesheets/application.sass */
+/* line 419, ../../app/views/stylesheets/application.sass */
 p.notes {
   margin-bottom: 0.4em;
 }
 
-/* line 418, ../../app/views/stylesheets/application.sass */
+/* line 421, ../../app/views/stylesheets/application.sass */
 .note {
   margin: 0em;
   padding: 0em 0.5em 0.5em 0.5em;
   font-size: 0.8em;
 }
-/* line 422, ../../app/views/stylesheets/application.sass */
+/* line 425, ../../app/views/stylesheets/application.sass */
 .note li {
   padding-top: 0.2em;
   list-style-type: none;
 }
-/* line 425, ../../app/views/stylesheets/application.sass */
+/* line 428, ../../app/views/stylesheets/application.sass */
 .note li label {
   font-style: italic;
   padding-left: 1em;
   margin-right: 1em;
 }
-/* line 430, ../../app/views/stylesheets/application.sass */
+/* line 433, ../../app/views/stylesheets/application.sass */
 .note li.text label {
   vertical-align: top;
   padding-right: 1.5em;
 }
-/* line 434, ../../app/views/stylesheets/application.sass */
+/* line 437, ../../app/views/stylesheets/application.sass */
 .note fieldset.buttons input {
   margin-top: 1em;
 }

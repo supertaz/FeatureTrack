@@ -11,7 +11,8 @@
       =image_tag(get_task_type_icon story.story_type)
       &nbsp;
   %td
-    -#%a{:href=>story.url, :rel => '#overlay'}= h story.name
+    - unless story.story_source.nil? || story.story_source.empty?
+      %span.small_right #{link_to story.story_source, story.source_url}
     =link_to "#{h story.title}", story_url(story)
   %td.status
     .status=show_story_state(story.status, image_tag(get_state_icon story.status))
