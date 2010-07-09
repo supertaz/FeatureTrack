@@ -14,6 +14,8 @@ class Story < ActiveRecord::Base
 
   has_and_belongs_to_many :release_notes
 
+  before_save :manage_points
+
   named_scope :bugs, :conditions => {:story_type => 'bug'}
   named_scope :features, :conditions => {:story_type => 'feature'}
   named_scope :project, lambda { |project|
@@ -205,5 +207,11 @@ class Story < ActiveRecord::Base
 
     def set_execution_priority
       self.execution_priority = self.display_priority.to_i
+    end
+
+    def manage_points
+      unless self.estimated_points.nil?
+        self.original_points = self.estimated_points if self.original_points.nil?
+      end
     end
 end

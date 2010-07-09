@@ -66,6 +66,8 @@ class Api::WebHookController < ApplicationController
                       local_story['status'] = story_element
                     when 'accepted_at'
                       local_story['accepted_at'] = story_element
+                    when 'estimate'
+                      local_story['estimated_points'] = story_element
                     when 'notes'
                       local_story['notes'] = Array.new
                       story_element.each do |note_key, note|

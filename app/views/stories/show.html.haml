@@ -143,15 +143,14 @@
         |
         = link_to "Delete", feature_request_url(@story), :confirm => 'Are you sure you want to delete this request?', :method => :delete
         |
-      - if @story.source_id.nil? && @story.status != 'New' && (current_user.developer || current_user.development_manager || current_user.scrum_master || current_user.global_admin)
+      - if @story.source_id.nil? && (current_user.developer || current_user.development_manager || current_user.scrum_master || current_user.global_admin)
         = link_to 'Promote', promote_story_url(@story)
         |
       - if @story.status == 'New' && (current_user.scrum_master || current_user.global_admin)
-        = link_to "Approve", approve_feature_request_url(@story)
-        |
         = link_to "Reject", reject_feature_request_url(@story)
         |
       = link_to "All Feature Requests", feature_requests_url
   - unless @story.project.nil?
-    |
+    - if @story.story_type.match(/(feature|bug)/)
+      |
     = link_to "All stories for this project", stories_url(:project_id => @story.project)

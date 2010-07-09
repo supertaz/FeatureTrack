@@ -24,7 +24,15 @@ ActionController::Routing::Routes.draw do |map|
   map.orphans '/orphans', :controller => 'iterations', :action => 'orphans'
   map.resources :iterations
 
-  map.resources :stories, :except => [:destroy], :member => {:update_remote_status => :get, :promote => :get} do |story|
+  map.resources :stories, :except => [:destroy], :member =>
+          {       :update_remote_status => :get,
+                  :promote => :get,
+                  :start => :get,
+                  :qa => :get,
+                  :uat => :get,
+                  :accept => :get,
+                  :reject => :get
+          } do |story|
     story.resources :notes, :only => [:create, :edit, :update]
   end
   map.move_story '/stories/:source/:project_id/:story_id/move', :controller => 'stories', :action => 'move'
