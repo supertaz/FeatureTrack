@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
   attr_accessible :name, :source, :source_id, :allow_bugs, :allow_features, :allow_chores, :allow_releases, :active,
-                  :archived, :test_project, :start_at, :end_at
+                  :archived, :test_project, :start_at, :end_at, :external_integration_id
 
   has_many :releases
   has_many :stories
