@@ -4,7 +4,12 @@ class DefectsController < ApplicationController
   before_filter :current_user_can_create_defects, :only => [:new, :create]
 
   def index
-    @search = Story.bugs.search(params[:search])
+    if params.has_key?(:search)
+      @search = Story.bugs.search(params[:search])
+    else
+      @search = Story.bugs.search(:status_in => ['new','unscheduled'])
+      @search_title = 'Showing unscheduled stories by default'
+    end
     @defects = @search.all
   end
 

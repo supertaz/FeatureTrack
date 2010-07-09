@@ -4,7 +4,12 @@ class FeatureRequestsController < ApplicationController
   before_filter :current_user_can_request_features, :only => [:new, :create]
 
   def index
-    @search = Story.features.search(params[:search])
+    if params.has_key?(:search)
+      @search = Story.features.search(params[:search])
+    else
+      @search = Story.features.search(:status_in => ['new','approved','unscheduled'])
+      @search_title = 'Showing unscheduled stories by default'
+    end
     @feature_requests = @search.all
   end
 

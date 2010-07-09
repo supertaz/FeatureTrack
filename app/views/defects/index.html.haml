@@ -1,4 +1,7 @@
 - title "Defects"
+- content_for :summary_info do
+  %h6
+    #{@search_title}
 
 #context_search
   - semantic_form_for @search do |f|
