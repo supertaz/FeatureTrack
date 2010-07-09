@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   helper_method :current_user, :current_user_session, :redirect_back_or_default, :store_location, :get_defect_level, :slugify,
                 :current_user_can_modify_feature_requests, :current_user_can_see_defects, :current_user_can_create_defects,
-                :current_user_can_request_features, :current_user_can_see_stories, :current_user_can_move_stories, :get_story_source
+                :current_user_can_request_features, :current_user_can_see_stories, :current_user_can_move_stories, :get_story_source,
+                :current_user_can_promote_stories, :current_user_can_send_stories_to_qa, :current_user_can_send_stories_to_uat,
+                :current_user_can_perform_story_uat
   protect_from_forgery :except => 'receive_hook'
   include SslRequirement
 
@@ -180,6 +182,73 @@ class ApplicationController < ActionController::Base
         return true
       end
     end
+
+  def current_user_can_promote_stories(redirect = true)
+    unless current_user && (
+                    current_user.developer ||
+                    current_user.development_manager ||
+                    current_user.scrum_master ||
+                    current_user.global_admin)
+      if redirect
+        flash[:error] = "You don't have access to that page."
+        redirect_to root_url
+      end
+      return false
+    else
+      return true
+    end
+  end
+
+  def current_user_can_send_stories_to_qa(redirect = true)
+    unless current_user && (
+                    current_user.developer ||
+                    current_user.development_manager ||
+                    current_user.qa_manager ||
+                    current_user.scrum_master ||
+                    current_user.global_admin)
+      if redirect
+        flash[:error] = "You don't have access to that page."
+        redirect_to root_url
+      end
+      return false
+    else
+      return true
+    end
+  end
+
+  def current_user_can_send_stories_to_uat(redirect = true)
+    unless current_user && (
+                    current_user.qa ||
+                    current_user.qa_manager ||
+                    current_user.scrum_master ||
+                    current_user.global_admin)
+      if redirect
+        flash[:error] = "You don't have access to that page."
+        redirect_to root_url
+      end
+      return false
+    else
+      return true
+    end
+  end
+
+  def current_user_can_perform_story_uat(redirect = true)
+    unless current_user && (
+                    current_user.business_user ||
+                    current_user.development_manager ||
+                    current_user.qa ||
+                    current_user.qa_manager ||
+                    current_user.scrum_master ||
+                    current_user.global_admin)
+      if redirect
+        flash[:error] = "You don't have access to that page."
+        redirect_to root_url
+      end
+      return false
+    else
+      return true
+    end
+  end
 
     def get_defect_level(story)
       story.execution_priority || 9
