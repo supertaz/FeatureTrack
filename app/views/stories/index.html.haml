@@ -23,19 +23,5 @@
         #{status[1]['total_items'] - status[1]['total_others']}
         &nbsp;
 
-- @statuses.sort {|a,b| get_state_step(b[1]['name']) <=> get_state_step(a[1]['name'])}.each do |status|
-  =render :partial => 'iterations/show_stories_table', :locals =>{:lane => status, :show_lane_progress => false}
-
-- title "Stories"
-
-%table
-  %tr
-    %th Story name
-    %th Story type
-    %th Current state
-  - for story in @stories
-    %tr
-      %td= h story.name
-      %td= h story.story_type
-      %td= h story.current_state
-
+- @stories.sort {|a,b| get_state_step(b[1]['name']) <=> get_state_step(a[1]['name'])}.each do |story|
+  =render :partial => 'iterations/show_stories_table', :locals =>{:lane => story, :show_lane_progress => false}

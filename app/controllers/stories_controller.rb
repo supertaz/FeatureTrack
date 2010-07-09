@@ -6,8 +6,10 @@ class StoriesController < ApplicationController
     @project = Project.find(params[:project_id])
     stories = @project.stories.all
     @stories = Hash.new
+    @statuses = Hash.new
     stories.each do |story|
       add_to_lane_hash(@stories, @project.name, story)
+      add_to_lane_hash(@statuses, @template.get_state_name(story.status), story)
     end
   end
 
