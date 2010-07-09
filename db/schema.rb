@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100702141529) do
+ActiveRecord::Schema.define(:version => 20100709165943) do
 
   create_table "defects", :force => true do |t|
     t.string   "status"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20100702141529) do
     t.integer  "execution_priority"
     t.string   "affected"
     t.string   "functional_area"
+    t.integer  "against_story_id"
     t.string   "against_story_source"
     t.integer  "developer_id"
     t.integer  "environment_id"
@@ -45,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20100702141529) do
     t.boolean  "invalid",              :default => false
   end
 
-  add_index "defects", ["against_story_source", "status", "id"], :name => "dfct_story_stat"
+  add_index "defects", ["against_story_source", "against_story_id", "status", "id"], :name => "dfct_story_stat"
   add_index "defects", ["developer_id", "status", "id"], :name => "dfct_dev_stat"
   add_index "defects", ["environment_id", "status", "id"], :name => "dfct_env_stat"
   add_index "defects", ["execution_priority", "status", "id"], :name => "dfct_execpri_stat"
@@ -126,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20100702141529) do
 
   add_index "notes", ["author_id"], :name => "index_notes_on_author_id"
   add_index "notes", ["story_id"], :name => "index_notes_on_story_id"
+  add_index "notes", ["story_source", "source_id"], :name => "index_notes_on_story_source_and_source_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -142,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20100702141529) do
     t.boolean  "allow_releases"
     t.date     "start_at"
     t.date     "end_at"
+    t.integer  "external_integration_id"
   end
 
   add_index "projects", ["active", "id"], :name => "index_projects_on_active_and_id"
