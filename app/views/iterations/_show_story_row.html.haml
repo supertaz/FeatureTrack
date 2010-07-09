@@ -29,9 +29,9 @@
     - if current_user_can_send_stories_to_qa(false) && story.source_id.nil? && (['approved','reviewed'].map! {|status| story.status.downcase.include? status}.include? true)
       = link_to 'start', start_story_url(story), :class => 'action'
     - if current_user_can_send_stories_to_qa(false) && story.status.downcase == 'started'
-      = link_to 'QA', qa_story_url(story), :class => 'action'
+      = link_to 'done', qa_story_url(story), :class => 'action'
     - if current_user_can_send_stories_to_uat(false) && story.status.downcase == 'finished'
-      = link_to 'UAT', uat_story_url(story), :class => 'action'
+      = link_to 'accept', uat_story_url(story), :class => 'action'
       = link_to 'reject', reject_story_url(story), :class => 'action'
     - if current_user_can_perform_story_uat(false) && story.status.downcase == 'delivered'
       = link_to 'accept', accept_story_url(story), :class => 'action'
