@@ -7,7 +7,7 @@ class FeatureRequestsController < ApplicationController
     if params.has_key?(:search)
       @search = Story.features.search(params[:search])
     else
-      @search = Story.features.search(:status_in => ['new','approved','unscheduled'])
+      @search = Story.features.search(:status_in => ['new','approved','unscheduled'], :order => :ascend_by_status)
       @search_title = 'Showing unscheduled stories by default'
     end
     @feature_requests = @search.all

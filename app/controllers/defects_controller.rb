@@ -7,7 +7,7 @@ class DefectsController < ApplicationController
     if params.has_key?(:search)
       @search = Story.bugs.search(params[:search])
     else
-      @search = Story.bugs.search(:status_in => ['new','unscheduled'])
+      @search = Story.bugs.search(:status_in => ['new','unscheduled'], :order => :ascend_by_status)
       @search_title = 'Showing unscheduled stories by default'
     end
     @defects = @search.all
