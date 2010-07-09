@@ -11,6 +11,8 @@
     %br
     %strong Current status:
     =get_state_name @story.status
+    - unless @story.story_source.nil?
+      (#{link_to 'verify', update_remote_status_story_url(@story)})
     - unless @story.source_id.nil?
       %br
       %strong Story ID:
@@ -131,8 +133,8 @@
       - if current_user.global_admin || current_user.scrum_master || (@story.created_at > Time.zone.now - 15.minutes && @story.requestor == current_user)
         = link_to 'Delete', defect_url(@story), :confirm => 'Are you sure you want to remove this defect? (This action can\'t be undone!)', :method => :delete
         |
-      - if @story.source_id.nil? && ((current_user.developer && @story.display_priority.to_i <= 3) || current_user.development_manager || current_user.scrum_master || current_user.global_admin)
-        = link_to 'Promote', promote_defect_url(@story)
+      - if @story.source_id.nil? && (current_user.developer || current_user.development_manager || current_user.scrum_master || current_user.global_admin)
+        = link_to 'Promote', promote_story_url(@story)
         |
       = link_to "All Defects", defects_path
     -when 'feature'
@@ -140,6 +142,9 @@
         = link_to "Edit", edit_feature_request_url(@story)
         |
         = link_to "Delete", feature_request_url(@story), :confirm => 'Are you sure you want to delete this request?', :method => :delete
+        |
+      - if @story.source_id.nil? && @story.status != 'New' && (current_user.developer || current_user.development_manager || current_user.scrum_master || current_user.global_admin)
+        = link_to 'Promote', promote_story_url(@story)
         |
       - if @story.status == 'New' && (current_user.scrum_master || current_user.global_admin)
         = link_to "Approve", approve_feature_request_url(@story)

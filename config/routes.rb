@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :user, :controller => 'users', :as => 'account'
 
-  map.resources :defects, :member => {:promote => :get}
+  map.resources :defects
 
   map.resources :feature_requests, :member => {:approve => :get, :reject => :get}
 
@@ -24,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.orphans '/orphans', :controller => 'iterations', :action => 'orphans'
   map.resources :iterations
 
-  map.resources :stories, :except => [:index, :destroy] do |story|
+  map.resources :stories, :except => [:destroy], :member => {:update_remote_status => :get, :promote => :get} do |story|
     story.resources :notes, :only => [:create, :edit, :update]
   end
   map.move_story '/stories/:source/:project_id/:story_id/move', :controller => 'stories', :action => 'move'

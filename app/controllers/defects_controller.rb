@@ -68,36 +68,4 @@ class DefectsController < ApplicationController
     redirect_to defects_url
   end
 
-  def promote
-    defect = Story.bugs.find(params[:id])
-    if (current_user.developer && defect.display_priority.to_i <= 3) || current_user.development_manager || current_user.scrum_master || current_user.global_admin
-      unless defect.project.nil?
-        project = defect.project.get_source_project
-        new_defect = project.stories.create(:name => "P#{defect.display_priority} - " + defect.title,
-                                             :labels => "p#{defect.display_priority}",
-                                             :requested_by => (defect.requestor.nickname.nil? || defect.requestor.nickname.empty?) ? defect.requestor.firstname : defect.requestor.nickname,
-                                             :description => defect.description,
-                                             :story_type => defect.story_type.nil? ? 'bug' : defect.story_type,
-                                             :other_id => defect.id)
-        if new_defect.nil? || new_defect.id.nil?
-          flash[:error] = 'Unable to promote defect'
-        else
-          defect.story_source = defect.project.source
-          defect.source_url = new_defect.url
-          defect.source_id = new_defect.id
-          defect.approver = current_user
-          defect.approved_at = Time.zone.now
-          defect.reviewer = current_user
-          defect.reviewed_at = Time.zone.now
-          defect.status = 'Reviewed'
-          defect.save
-          flash[:notice] = 'Defect successfully promoted to pivotal.'
-          redirect_to story_url(defect)
-        end
-      else
-        flash[:error] = 'Defect needs to be assigned to a project before it can be promoted.'
-        redirect_to story_url(defect)
-      end
-    end
-  end
 end

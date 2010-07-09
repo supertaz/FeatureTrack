@@ -1,3 +1,31 @@
+- title "Stories for #{@project.name}"
+
+- content_for :summary_info do
+  %h6
+    %a{:href=>'#', :rel => 'toggle_accepted_stories'}Toggle accepted stories
+    %a{:href=>'#', :rel => 'toggle_unscheduled_stories'}Toggle unscheduled stories
+
+- content_for :navigation_links do
+  %a{:href => "#status_summary", :rel => 'scrollTo', :class => 'status_summary'} Summary
+
+- content_for :status_summary do
+  #status_summary.status_summary.nowrap
+    - total_items = 0
+    - @statuses.each do |status|
+      -total_items += status[1]['total_items'] - status[1]['total_others']
+    %h2
+      Current Activity Summary
+      %span ( #{total_items} total stories )
+    #status_summary_items
+      - @statuses.sort {|a,b| get_state_step(b[1]['name']) <=> get_state_step(a[1]['name'])}.each do |status|
+        %img{:src => get_state_icon(status[1]['name'])}
+        %strong #{get_state_name(status[1]['name'])}:
+        #{status[1]['total_items'] - status[1]['total_others']}
+        &nbsp;
+
+- @statuses.sort {|a,b| get_state_step(b[1]['name']) <=> get_state_step(a[1]['name'])}.each do |status|
+  =render :partial => 'iterations/show_stories_table', :locals =>{:lane => status, :show_lane_progress => false}
+
 - title "Stories"
 
 %table
