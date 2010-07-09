@@ -7,6 +7,7 @@
     %th.nowrap Project Name
     %th Source
     %th.nowrap Source ID
+    %th.nowrap Ext. Int. ID
     %th Active
     %th.nowrap Allows New...
     %th.nowrap Start Date
@@ -19,6 +20,7 @@
       %td.left.right= h project.name
       %td.right= h project.source
       %td.right= h project.source_id
+      %td.right= h project.external_integration_id
       %td.right= project.active?
       %td.right
         - if project.allow_features? || project.allow_bugs? || project.allow_chores? || project.allow_releases?
