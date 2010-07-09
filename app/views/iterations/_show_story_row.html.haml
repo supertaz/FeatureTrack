@@ -23,18 +23,19 @@
     = owner.fullname unless owner.nil?
   %td.right.nowrap
     - if current_user_can_promote_stories(false) && story.source_id.nil? && (['new','approved','reviewed'].map! {|status| story.status.downcase.include? status}.include? true)
-      = link_to 'promote', promote_story_url(story)
+      = link_to 'promote', promote_story_url(story), :class => 'action'
     - if current_user_can_send_stories_to_qa(false) && !story.source_id.nil? && (['rejected','unstarted'].map! {|status| story.status.downcase.include? status}.include? true)
-      = link_to 'start', start_story_url(story)
+      = link_to 'start', start_story_url(story), :class => 'action'
     - if current_user_can_send_stories_to_qa(false) && story.source_id.nil? && (['approved','reviewed'].map! {|status| story.status.downcase.include? status}.include? true)
-      = link_to 'start', start_story_url(story)
+      = link_to 'start', start_story_url(story), :class => 'action'
     - if current_user_can_send_stories_to_qa(false) && story.status.downcase == 'started'
-      = link_to 'send to QA', qa_story_url(story)
+      = link_to 'QA', qa_story_url(story), :class => 'action'
     - if current_user_can_send_stories_to_uat(false) && story.status.downcase == 'finished'
-      = link_to 'send to UAT', uat_story_url(story)
+      = link_to 'UAT', uat_story_url(story), :class => 'action'
+      = link_to 'reject', reject_story_url(story), :class => 'action'
     - if current_user_can_perform_story_uat(false) && story.status.downcase == 'delivered'
-      = link_to 'accept', accept_story_url(story)
+      = link_to 'accept', accept_story_url(story), :class => 'action'
     - if current_user_can_perform_story_uat(false) && (story.status.downcase == 'delivered' || story.status.downcase == 'accepted')
-      = link_to 'reject', reject_story_url(story)
+      = link_to 'reject', reject_story_url(story), :class => 'action'
 -#    - if current_user_can_move_stories(false)
 -#      = link_to 'move', move_story_url(:source => get_story_source(story), :project_id => story.project_id, :story_id => story.id)
