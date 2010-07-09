@@ -29,7 +29,7 @@ Rails::Initializer.run do |config|
   config.gem 'haml', :version => '>=3.0.12'
   config.gem 'formtastic', :version => '>=0.9.8'
   config.gem 'validation_reflection'
-  config.gem 'pivotal-tracker', :version => '>= 0.1.3.1'
+  config.gem 'pivotal-tracker', :version => '>= 0.2.0.2'
   config.gem 'authlogic'
   config.gem 'compass', :version => '>=0.10.2'
   config.gem 'searchlogic'
