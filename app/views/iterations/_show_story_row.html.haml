@@ -24,9 +24,9 @@
   %td.right.nowrap
     - if current_user_can_promote_stories(false) && story.source_id.nil? && (['new','approved','reviewed'].map! {|status| story.status.downcase.include? status}.include? true)
       = link_to 'promote', promote_story_url(story), :class => 'action'
-    - if current_user_can_send_stories_to_qa(false) && !story.source_id.nil? && (['rejected','unstarted'].map! {|status| story.status.downcase.include? status}.include? true)
+    - if current_user_can_send_stories_to_qa(false) && !story.source_id.nil? && (['rejected','unstarted'].map! {|status| story.status.downcase.include? status}.include? true) && (story.story_type == 'feature' && !story.estimated_points.nil?)
       = link_to 'start', start_story_url(story), :class => 'action'
-    - if current_user_can_send_stories_to_qa(false) && story.source_id.nil? && (['approved','reviewed'].map! {|status| story.status.downcase.include? status}.include? true)
+    - if current_user_can_send_stories_to_qa(false) && story.source_id.nil? && (['approved','reviewed'].map! {|status| story.status.downcase.include? status}.include? true) && (story.story_type == 'feature' && !story.estimated_points.nil?)
       = link_to 'start', start_story_url(story), :class => 'action'
     - if current_user_can_send_stories_to_qa(false) && story.status.downcase == 'started'
       = link_to 'done', qa_story_url(story), :class => 'action'
