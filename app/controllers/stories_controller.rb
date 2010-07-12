@@ -53,6 +53,36 @@ class StoriesController < ApplicationController
           flash[:error] = 'Unable to promote story'
           redirect_to story_url(story)
         else
+          unless story.story_source.nil? || story.story_source != 'pivotal'
+            begin
+              pivotal_project = story.project.get_source_project
+              pivotal_story = pivotal_project.stories.find(story.source_id)
+              story.notes.each do |note|
+                if note.subject.empty?
+                  note_header = "*#{note.author.fullname} said:*\n\n"
+                else
+                  note_header = "**#{note.author.fullname} talked about \"#{note.subject}\":**\n\n"
+                end
+                pivotal_story.notes.create(:text => note_header + note.body)
+              end
+            rescue => e
+              backtrace = String.new
+              e.backtrace.each do |msg|
+                backtrace += "#{msg}\n"
+              end
+              logger.error backtrace
+              if e.respond_to? 'response'
+                if e.response.nil?
+                  error_message += "#{e.class} exception#{e.respond_to?('message') ? ':' + e.message : '.'}"
+                else
+                  error_message += "Remote source exception: #{e.response}"
+                end
+              else
+                error_message += "#{e.class} exception#{e.respond_to?('message') ? ':' + e.message : '.'}"
+              end
+              flash[:error] = "Unable to copy notes to pivotal: #{error_message}"
+            end
+          end
           story.story_source = story.project.source
           story.source_url = (project.use_https ? 'https' : 'http') + '://www.pivotaltracker.com/story/show/' + new_story.id.to_s
           story.source_id = new_story.id
