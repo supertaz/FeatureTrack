@@ -133,7 +133,7 @@ class Api::WebHookController < ApplicationController
                     pivotal_project = event['project'].get_source_project
                     pivotal_api_story = pivotal_project.stories.find(pivotal_story['source_id'])
                     story_url = pivotal_project.use_https? ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
-                    story.url = story_url + pivotal_story['source_id']
+                    story.source_url = story_url + pivotal_story['source_id']
                     story.save
                     pivotal_notes = pivotal_api_story.notes.all
                     if pivotal_notes.count > 0
