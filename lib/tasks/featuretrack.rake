@@ -78,18 +78,21 @@ namespace :featuretrack do
           defect.against_story_id = story.id
           defect.save
         else
-          story = Story.try(:find, defect.against_story_id)
-          unless story.nil?
-            defect.against_story_source = 'internal'
-            defect.save
-          else
-            if !defect.story_source.nil?
-              defect.against_story_source = defect.story_source
-              defect.save
-            else
+          begin
+            story = Story.try(:find, defect.against_story_id)
+            unless story.nil?
               defect.against_story_source = 'internal'
               defect.save
+            else
+              if !defect.story_source.nil?
+                defect.against_story_source = defect.story_source
+                defect.save
+              else
+                defect.against_story_source = 'internal'
+                defect.save
+              end
             end
+          rescue
           end
         end
       end
