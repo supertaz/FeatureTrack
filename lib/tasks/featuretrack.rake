@@ -68,7 +68,8 @@ namespace :featuretrack do
   desc 'Make everything a story'
   task :migrate_all_to_stories => [:migrate_defects_to_stories, :migrate_feature_requests_to_stories]
 
-  desc 'Migrate defect story linkages' => :environment do
+  desc 'Migrate defect story linkages for initial move to internal linkages'
+  task :migrate_defect_story_linkages => :environment do
     Story.bugs.each do |defect|
       if defect.against_story_source.nil? && !defect.against_story_id.nil?
         story = Story.try(:find_by_source_id, defect.against_story_id)
