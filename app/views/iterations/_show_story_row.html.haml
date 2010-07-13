@@ -13,6 +13,7 @@
   %td
     - unless story.story_source.nil? || story.story_source.empty? || story.source_id.nil? || story.source_url.nil? || story.source_url.empty?
       %span.small_right #{link_to story.story_source, story.source_url, :target => '_new'}
+    %span.small_right #{pluralize story.defects.count, 'defect'}, #{story.defects.open.count} open&nbsp;&nbsp;&nbsp;
     =link_to "#{h story.title}", story_url(story)
   %td.status
     .status=show_story_state(story.status, image_tag(get_state_icon story.status))

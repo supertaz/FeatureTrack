@@ -495,12 +495,25 @@ a img {
   width: 800px;
 }
 /* line 350, ../../app/views/stylesheets/application.sass */
+#main_detail a {
+  text-decoration: none;
+}
+/* line 352, ../../app/views/stylesheets/application.sass */
 #main_detail p {
   margin: 0.6em 0em 0em 0em;
   padding: 0em;
 }
+/* line 355, ../../app/views/stylesheets/application.sass */
+#main_detail ul.defect_list {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+/* line 358, ../../app/views/stylesheets/application.sass */
+#main_detail ul.defect_list li {
+  list-style-type: none;
+}
 
-/* line 353, ../../app/views/stylesheets/application.sass */
+/* line 360, ../../app/views/stylesheets/application.sass */
 #status_info {
   float: right;
   width: 21em;
@@ -509,37 +522,37 @@ a img {
   font-size: 0.9em;
   white-space: nowrap;
 }
-/* line 360, ../../app/views/stylesheets/application.sass */
+/* line 367, ../../app/views/stylesheets/application.sass */
 #status_info strong {
   font-size: 1.1em;
 }
 
-/* line 362, ../../app/views/stylesheets/application.sass */
+/* line 369, ../../app/views/stylesheets/application.sass */
 table {
   border-spacing: 0px;
   margin-bottom: 20px;
 }
-/* line 365, ../../app/views/stylesheets/application.sass */
+/* line 372, ../../app/views/stylesheets/application.sass */
 table a {
   display: block;
   text-decoration: none;
   color: inherit;
 }
-/* line 369, ../../app/views/stylesheets/application.sass */
+/* line 376, ../../app/views/stylesheets/application.sass */
 table a:hover {
   text-decoration: underline;
 }
-/* line 371, ../../app/views/stylesheets/application.sass */
+/* line 378, ../../app/views/stylesheets/application.sass */
 table a.action {
   display: inline;
   text-decoration: none;
   color: inherit;
 }
-/* line 375, ../../app/views/stylesheets/application.sass */
+/* line 382, ../../app/views/stylesheets/application.sass */
 table a.action:hover {
   text-decoration: underline;
 }
-/* line 377, ../../app/views/stylesheets/application.sass */
+/* line 384, ../../app/views/stylesheets/application.sass */
 table th {
   font-family: Garamond, “Hoefler Text”, Palatino, “Palatino Linotype”, serif;
   font-weight: bold;
@@ -548,56 +561,56 @@ table th {
   padding: 0.2em 0.6em 0em 0.6em;
   border-bottom: 1px solid #999999;
 }
-/* line 384, ../../app/views/stylesheets/application.sass */
+/* line 391, ../../app/views/stylesheets/application.sass */
 table th:hover {
   background: white;
   color: black;
 }
-/* line 388, ../../app/views/stylesheets/application.sass */
+/* line 395, ../../app/views/stylesheets/application.sass */
 table tr.head:hover {
   background: white;
   color: black;
 }
-/* line 391, ../../app/views/stylesheets/application.sass */
+/* line 398, ../../app/views/stylesheets/application.sass */
 table tr:hover {
   background: #7777aa;
   color: white;
 }
-/* line 394, ../../app/views/stylesheets/application.sass */
+/* line 401, ../../app/views/stylesheets/application.sass */
 table td {
   font-size: 13px;
   padding: 0em 0.2em 0em 0.2em;
   border-bottom: 1px solid #999999;
 }
-/* line 398, ../../app/views/stylesheets/application.sass */
+/* line 405, ../../app/views/stylesheets/application.sass */
 table td.left {
   border-left: 1px solid #999999;
 }
-/* line 400, ../../app/views/stylesheets/application.sass */
+/* line 407, ../../app/views/stylesheets/application.sass */
 table td.right {
   border-right: 1px solid #999999;
   text-align: center;
 }
-/* line 403, ../../app/views/stylesheets/application.sass */
+/* line 410, ../../app/views/stylesheets/application.sass */
 table td.left_justify {
   text-align: left;
 }
-/* line 407, ../../app/views/stylesheets/application.sass */
+/* line 414, ../../app/views/stylesheets/application.sass */
 table tr.grey:hover td {
   background: #7777aa;
   color: white;
 }
-/* line 410, ../../app/views/stylesheets/application.sass */
+/* line 417, ../../app/views/stylesheets/application.sass */
 table tr.grey td {
   background: #eeeeee;
 }
 
-/* line 412, ../../app/views/stylesheets/application.sass */
+/* line 419, ../../app/views/stylesheets/application.sass */
 .nowrap {
   white-space: nowrap;
 }
 
-/* line 414, ../../app/views/stylesheets/application.sass */
+/* line 421, ../../app/views/stylesheets/application.sass */
 .sidetext {
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
@@ -605,34 +618,34 @@ table tr.grey td {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
-/* line 419, ../../app/views/stylesheets/application.sass */
+/* line 426, ../../app/views/stylesheets/application.sass */
 p.notes {
   margin-bottom: 0.4em;
 }
 
-/* line 421, ../../app/views/stylesheets/application.sass */
+/* line 428, ../../app/views/stylesheets/application.sass */
 .note {
   margin: 0em;
   padding: 0em 0.5em 0.5em 0.5em;
   font-size: 0.8em;
 }
-/* line 425, ../../app/views/stylesheets/application.sass */
+/* line 432, ../../app/views/stylesheets/application.sass */
 .note li {
   padding-top: 0.2em;
   list-style-type: none;
 }
-/* line 428, ../../app/views/stylesheets/application.sass */
+/* line 435, ../../app/views/stylesheets/application.sass */
 .note li label {
   font-style: italic;
   padding-left: 1em;
   margin-right: 1em;
 }
-/* line 433, ../../app/views/stylesheets/application.sass */
+/* line 440, ../../app/views/stylesheets/application.sass */
 .note li.text label {
   vertical-align: top;
   padding-right: 1.5em;
 }
-/* line 437, ../../app/views/stylesheets/application.sass */
+/* line 444, ../../app/views/stylesheets/application.sass */
 .note fieldset.buttons input {
   margin-top: 1em;
 }

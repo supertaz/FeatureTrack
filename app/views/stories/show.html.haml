@@ -88,6 +88,20 @@
     - else
       = get_linked_story_link(@story)
   %p
+    - if @story.defects.count > 0
+      - if @story.defects.open.count > 0
+        %strong Open defects against this story:
+        %ul.defect_list
+          - @story.defects.open.each do |defect|
+            %li= create_story_link(defect)
+      - if @story.defects.resolved.count > 0
+        %strong Resolved defects against this story:
+        %ul.defect_list
+          - @story.defects.resolved.each do |defect|
+            %li= create_story_link(defect)
+    - else
+      %strong No defects reported against this story.
+  %p
     %strong Title:
     %i #{@story.title}
     %br

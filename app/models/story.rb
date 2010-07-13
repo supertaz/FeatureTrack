@@ -9,8 +9,10 @@ class Story < ActiveRecord::Base
   belongs_to :developer, :class_name => 'User'
   belongs_to :reviewer, :class_name => 'User'
   belongs_to :environment
+  belongs_to :reported_against, :class_name => 'Story'
 
   has_many :notes
+  has_many :defects, :class_name => 'Story', :foreign_key => 'against_story_id'
 
   has_and_belongs_to_many :release_notes
 
@@ -18,6 +20,10 @@ class Story < ActiveRecord::Base
 
   named_scope :bugs, :conditions => {:story_type => 'bug'}
   named_scope :features, :conditions => {:story_type => 'feature'}
+  named_scope :accepted, :conditions => {:status => 'accepted'}
+  named_scope :closed, :conditions => {:status => 'closed'}
+  named_scope :open, :conditions => ["status NOT IN ('accepted','closed')"]
+  named_scope :resolved, :conditions => ["status IN ('accepted','closed')"]
   named_scope :project, lambda { |project|
           { :conditions => {:project_id => project.id} }
   }
