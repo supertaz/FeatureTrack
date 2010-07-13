@@ -39,5 +39,7 @@
       = link_to 'accept', accept_story_url(story), :class => 'action'
     - if current_user_can_perform_story_uat(false) && (story.status.downcase == 'delivered' || story.status.downcase == 'accepted')
       = link_to 'reject', reject_story_url(story), :class => 'action'
+    - if current_user_can_create_defects(false) && get_state_step(story.status) >= 6
+      = link_to 'report', new_defect_url(:against_story_source => 'internal', :against_story_id => story.id), :class => 'action'
 -#    - if current_user_can_move_stories(false)
 -#      = link_to 'move', move_story_url(:source => get_story_source(story), :project_id => story.project_id, :story_id => story.id)

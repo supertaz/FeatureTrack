@@ -80,10 +80,13 @@
     =@story.risk.nil? ? '<i>Not assessed</i>' : @story.get_risk_level_string
     %br
     %strong Business impact:
-    =@story.priority.nil? ? '<i>Not assessed</i>' : @story.get_priority_string
+    = @story.priority.nil? ? '<i>Not assessed</i>' : @story.get_priority_string
     %br
     %strong Reported against:
-    #{@story.against_story_id.nil? ? '<i>No story specified</i>' : "#{h @story.against_story_id}"}
+    - if @story.against_story_id.nil?
+      %i No story specified
+    - else
+      = get_linked_story_link(@story)
   %p
     %strong Title:
     %i #{@story.title}

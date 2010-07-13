@@ -23,11 +23,22 @@ class DefectsController < ApplicationController
   def new
     @defect = Story.new
     @defect.story_type = 'bug'
+    @defect.against_story_source = params[:against_story_source]
+    @defect.against_story_id = params[:against_story_id]
+    local_against_story = case params[:against_story_source]
+      when 'pivotal'
+        Story.find_by_source_id(params[:against_story_id])
+      when 'internal'
+        Story.find(params[:against_story_id])
+      else
+        nil
+    end
+    @defect.project = local_against_story.project unless local_against_story.nil?
   end
 
   def create
     @defect = Story.new(params[:story])
-    @defect.story_type = 'bug'
+    @defect.story_type ||= 'bug'
     @defect.status = 'New'
     @defect.requestor = current_user
     @defect.environment = Environment.find(params[:story].delete('environment_id'))

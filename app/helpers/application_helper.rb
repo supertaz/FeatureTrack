@@ -143,4 +143,40 @@ module ApplicationHelper
     Project.unarchived
   end
 
+  def get_linked_story_uri(story)
+    unless story.against_story_source.nil?
+      case story.against_story_source
+        when 'internal'
+          story_url(Story.find(story.against_story_id))
+        when 'pivotal'
+          story_url(Story.find_by_source_id(story.against_story_id))
+      end
+    end
+  end
+
+  def get_linked_story_link(story)
+    linked_story = nil
+    unless story.against_story_source.nil?
+      case story.against_story_source
+        when 'internal'
+          linked_story = Story.find(story.against_story_id)
+        when 'pivotal'
+          linked_story = Story.find_by_source_id(story.against_story_id)
+      end
+    end
+    link_to "#{linked_story.project.nil? ? 'Unassigned' : linked_story.project.name} project - #{linked_story.story_type.upcase} \##{linked_story.id}: #{linked_story.title}", story_url(linked_story) unless linked_story.nil?
+  end
+
+  def get_linked_story_source_name(story)
+    unless story.against_story_source.nil? || story.against_story_source.empty?
+      case story.against_story_source
+        when 'internal'
+          return 'FeatureTrack'
+        else
+          return story.against_story_source.capitalize
+      end
+    else
+      return 'FeatureTrack'
+    end
+  end
 end

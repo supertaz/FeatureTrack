@@ -8,10 +8,14 @@
       = f.input :environment, :label => 'Environment detected in', :include_blank => false
       - if current_user.technology_team || current_user.scrum_master || current_user.global_admin
         = f.input :project, :label => 'Associated with project', :collection => get_active_projects
-        - if current_user.scrum_master || current_user.global_admin
+        - if current_user.technology_team || current_user.scrum_master || current_user.global_admin
           = f.input :story_type, :collection => ['bug', 'chore', 'feature'], :include_blank => false
+      = f.input :against_story_source, :as => :hidden
       - if current_user.business_user || current_user.technology_team || current_user.scrum_master || current_user.global_admin
-        = f.input :against_story_id, :label => 'Associated with story ID', :as => :string, :input_html => {:size => 20, :maxlength => 20}
+        - unless @defect.against_story_id.nil?
+          = f.input :against_story_id, :label => 'Associated with story ID', :as => :string, :hint => "#{get_linked_story_source_name(@defect)} story id", :input_html => {:size => 20, :maxlength => 20, :disabled => 'disabled'}
+        - else
+          = f.input :against_story_id, :label => 'Associated with story ID', :as => :string, :hint => "#{get_linked_story_source_name(@defect)} story id", :input_html => {:size => 20, :maxlength => 20}
       = f.input :title, :label => 'Title'
       = f.input :description, :label => 'Problem description'
       %h3 Impact Analysis
