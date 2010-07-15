@@ -158,7 +158,16 @@ class Api::WebHookController < ApplicationController
           end
         when 'story_delete'
         when 'move_into_project', 'move_from_project'
-          unless !event['project'].instance_of?(Project) && !event['new_project'].instance_of?(Project)
+          active_projects = 'neither'
+          if event['old_project'].instance_of?(Project) && event['new_project'].instance_of?(Project)
+            active_projects = 'both'
+          elsif event['old_project'].instance_of?(Project)
+            active_projects = 'old'
+          elsif event['new_project'].instance_of?(Project)
+            active_projects = 'new'
+          end
+          story = get_or_create_story('pivotal', pivotal_story)
+          unless active_projects == 'neither'
             new_project = nil
             if event['type'] == 'move_into_project'
               new_project = event['new_project'] if event['new_project'].instance_of?(Project)
@@ -166,10 +175,8 @@ class Api::WebHookController < ApplicationController
               new_project = event['project'] if !event['project'].instance_of?(Project)
             end
             event['stories'].each do |pivotal_story|
-              story = get_or_create_story('pivotal', pivotal_story)
               unless new_project.nil?
                 if story.new_record?
-                  story.project = event['project']
                   pivotal_story_id = pivotal_story['source_id']
                   pivotal_project = event['project'].get_source_project
                   pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
@@ -183,7 +190,7 @@ class Api::WebHookController < ApplicationController
                   end
                 end
                 story.project = new_project
-                unless story.project.nil? || (event['project'].instance_of?(Project) && story.project != event['project'])
+                unless story.project.nil?
                   if story.new_record? || story.updated_at.nil? || event['time'] > (story.updated_at - 2.minutes)
                     synchronize_attributes(pivotal_story, story)
                     story.save
@@ -194,9 +201,20 @@ class Api::WebHookController < ApplicationController
                   story.destroy
                 else
                   story.project = nil
+                  story.invalid = true
+                  story.invalid_reason = 'Moved out of scope'
                   story.save
                 end
               end
+            end
+          else
+            unless story.new_record?
+              story.invalid = true
+              story.invalid_reason = 'Moved out of scope'
+              story.project = nil
+              story.save
+            else
+              story.destroy
             end
           end
       end
