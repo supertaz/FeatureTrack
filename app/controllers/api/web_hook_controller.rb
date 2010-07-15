@@ -265,6 +265,7 @@ class Api::WebHookController < ApplicationController
       story_hash['assignee'] = User.find_by_nickname(full_pivotal_story.owned_by)
       story_hash['status'] = full_pivotal_story.current_state
       story_hash['story_type'] = full_pivotal_story.story_type
+      story_hash['estimated_points'] = full_pivotal_story.estimate
       return story_hash
     end
 
