@@ -21,11 +21,19 @@ class StoriesController < ApplicationController
   def update_remote_status
     story = Story.find(params[:id])
     begin
-      unless story.story_source.nil? || story.story_source.empty?
+      unless story.story_source.nil? || story.story_source.empty? || story.story_source != 'pivotal'
         pivotal_project = story.project.get_source_project
         pivotal_story = pivotal_project.stories.find(story.source_id)
         unless pivotal_story.nil?
-          story.update_attribute(:status, pivotal_story.current_state) if pivotal_story.current_state != story.status
+          story.status = pivotal_story.current_state if pivotal_story.current_state != story.status
+          story.estimated_points = pivotal_story.estimate if pivotal_story.estimate != story.estimated_points
+          if story.source_url.nil? && !story.source_id.nil?
+            story_url = pivotal_project.use_https? ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
+            story.source_url = story_url + story.source_id
+          end
+          user = User.find_by_nickname(pivotal_story.owned_by)
+          story.assignee = user unless user.nil?
+          story.save if story.changed?
         end
       end
     rescue => e
