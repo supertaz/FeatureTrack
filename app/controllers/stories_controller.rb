@@ -28,7 +28,7 @@ class StoriesController < ApplicationController
           story.status = pivotal_story.current_state if pivotal_story.current_state != story.status
           story.estimated_points = pivotal_story.estimate if pivotal_story.estimate != story.estimated_points
           if story.source_url.nil? && !story.source_id.nil? && !pivotal_project.nil?
-            story_url = pivotal_project.use_https? ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
+            story_url = pivotal_project.use_https ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
             story.source_url = story_url + story.source_id
           end
           user = User.find_by_nickname(pivotal_story.owned_by)
