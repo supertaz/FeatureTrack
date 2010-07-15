@@ -130,7 +130,7 @@ class Api::WebHookController < ApplicationController
                   end
                   if story.source_url.nil?
                     story_url = pivotal_project.use_https ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
-                    story.source_url = story_url + pivotal_story['source_id']
+                    story.source_url = story_url + pivotal_story['source_id'].to_s
                   end
                   story.save if story.new_record? || story.changed?
                   if new_record
@@ -178,7 +178,7 @@ class Api::WebHookController < ApplicationController
             event['stories'].each do |pivotal_story|
               story = get_or_create_story('pivotal', pivotal_story)
               pivotal_project = event['project'].get_source_project
-              pivotal_story_id = pivotal_story['source_id']
+              pivotal_story_id = pivotal_story['source_id'].to_s
               pivotal_api_story = pivotal_project.stories.find(pivotal_story_id)
               unless new_project.nil?
                 if story.source_url.nil?
