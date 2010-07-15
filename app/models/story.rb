@@ -10,6 +10,7 @@ class Story < ActiveRecord::Base
   belongs_to :reviewer, :class_name => 'User'
   belongs_to :environment
   belongs_to :reported_against, :class_name => 'Story'
+  belongs_to :story, :counter_cache => :linked_story_count
 
   has_many :notes
   has_many :defects, :class_name => 'Story', :foreign_key => 'against_story_id'
