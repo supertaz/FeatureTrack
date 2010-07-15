@@ -110,7 +110,7 @@ class StoriesController < ApplicationController
           story.status = 'Approved' unless story.story_type == 'bug'
           story.save
           flash[:notice] = 'Story successfully promoted to pivotal.'
-          redirect_to story_url(story)
+          redirect_to request.referer
         end
       else
         flash[:error] = 'Story needs to be assigned to a project before it can be promoted.'
@@ -129,9 +129,11 @@ class StoriesController < ApplicationController
           pivotal_story.update(:current_state => 'started') if pivotal_story.current_state != 'started'
           story.update_attribute(:status, 'started') if pivotal_story.current_state == 'started'
         end
+        flash[:notice] = "Started \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\""
       else
         story.status = 'In Dev'
         story.save
+        flash[:notice] = "Started \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\""
       end
     rescue => e
       if e.response.nil?
@@ -140,7 +142,7 @@ class StoriesController < ApplicationController
         flash.now[:error] = "Remote source returned an exception: #{e.response}"
       end
     end
-    redirect_to story_url(story)
+    redirect_to request.referer
   end
 
   def qa
@@ -153,8 +155,10 @@ class StoriesController < ApplicationController
           pivotal_story.update(:current_state => 'finished') if pivotal_story.current_state != 'finished'
           story.update_attribute(:status, 'finished') if pivotal_story.current_state == 'finished'
         end
+        flash[:notice] = "Moved \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\" to QA"
       else
         story.status = 'In QA'
+        flash[:notice] = "Moved \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\" to QA"
         story.save
       end
     rescue => e
@@ -164,7 +168,7 @@ class StoriesController < ApplicationController
         flash.now[:error] = "Remote source returned an exception: #{e.response}"
       end
     end
-    redirect_to story_url(story)
+    redirect_to request.referer
   end
 
   def uat
@@ -177,9 +181,11 @@ class StoriesController < ApplicationController
           pivotal_story.update(:current_state => 'delivered') if pivotal_story.current_state != 'delivered'
           story.update_attribute(:status, 'delivered') if pivotal_story.current_state == 'delivered'
         end
+        flash[:notice] = "Moved \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\" to UAT"
       else
         story.status = 'In UAT'
         story.save
+        flash[:notice] = "Moved \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\" to UAT"
       end
     rescue => e
       if e.response.nil?
@@ -188,7 +194,7 @@ class StoriesController < ApplicationController
         flash.now[:error] = "Remote source returned an exception: #{e.response}"
       end
     end
-    redirect_to story_url(story)
+    redirect_to request.referer
   end
 
   def accept
@@ -201,9 +207,11 @@ class StoriesController < ApplicationController
           pivotal_story.update(:current_state => 'accepted') if pivotal_story.current_state != 'accepted'
           story.update_attribute(:status, 'accepted') if pivotal_story.current_state == 'accepted'
         end
+        flash[:notice] = "Accepted \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\""
       else
         story.status = 'Accepted'
         story.save
+        flash[:notice] = "Accepted \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\""
       end
     rescue => e
       if e.response.nil?
@@ -212,7 +220,7 @@ class StoriesController < ApplicationController
         flash.now[:error] = "Remote source returned an exception: #{e.response}"
       end
     end
-    redirect_to story_url(story)
+    redirect_to request.referer
   end
 
   def reject
@@ -225,9 +233,11 @@ class StoriesController < ApplicationController
           pivotal_story.update(:current_state => 'rejected') if pivotal_story.current_state != 'rejected'
           story.update_attribute(:status, 'rejected') if pivotal_story.current_state == 'rejected'
         end
+        flash[:notice] = "Rejected \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\""
       else
         story.status = 'Rejected'
         story.save
+        flash[:notice] = "Rejected \"#{story.project.nil? ? 'Unassigned' : story.project.name}</i> #{story.story_type.upcase} \##{story.id}: #{story.title}\""
       end
     rescue => e
       if e.response.nil?
@@ -236,7 +246,7 @@ class StoriesController < ApplicationController
         flash.now[:error] = "Remote source returned an exception: #{e.response}"
       end
     end
-    redirect_to story_url(story)
+    redirect_to request.referer
   end
 
   def move
