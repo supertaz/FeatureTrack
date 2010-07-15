@@ -37,10 +37,18 @@ class StoriesController < ApplicationController
         end
       end
     rescue => e
-      if e.response.nil?
-        flash.now[:error] = "#{e.class} exception received."
+      if e.respond_to?(:response)
+        if e.response.nil?
+          flash.now[:error] = "#{e.class} exception received."
+        else
+          flash.now[:error] = "Remote source returned an exception: #{e.response}"
+        end
       else
-        flash.now[:error] = "Remote source returned an exception: #{e.response}"
+        backtrace = String.new
+        e.backtrace.each do |msg|
+          backtrace += "#{msg}\n"
+        end
+        logger.error backtrace
       end
     end
     redirect_to story_url(story)
