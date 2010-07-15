@@ -128,12 +128,14 @@ class Api::WebHookController < ApplicationController
                   else
                     new_record = false
                   end
-                  story.save
+                  if story.source_url.nil?
+                    story_url = pivotal_project.use_https? ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
+                    story.source_url = story_url + pivotal_story['source_id']
+                  end
+                  story.save if story.new_record? || story.changed?
                   if new_record
                     pivotal_project = event['project'].get_source_project
                     pivotal_api_story = pivotal_project.stories.find(pivotal_story['source_id'])
-                    story_url = pivotal_project.use_https? ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
-                    story.source_url = story_url + pivotal_story['source_id']
                     story.save
                     pivotal_notes = pivotal_api_story.notes.all
                     if pivotal_notes.count > 0
@@ -143,7 +145,7 @@ class Api::WebHookController < ApplicationController
                       end
                       skip_note = true
                     end
-                    pivotal_api_story.update(:other_id => story.id)
+                    pivotal_api_story.update(:other_id => story.id, :integration_id => story.project.external_integration_id)
                   end
                 end
               end
@@ -166,7 +168,6 @@ class Api::WebHookController < ApplicationController
           elsif event['new_project'].instance_of?(Project)
             active_projects = 'new'
           end
-          story = get_or_create_story('pivotal', pivotal_story)
           unless active_projects == 'neither'
             new_project = nil
             if event['type'] == 'move_into_project'
@@ -175,12 +176,17 @@ class Api::WebHookController < ApplicationController
               new_project = event['project'] if !event['project'].instance_of?(Project)
             end
             event['stories'].each do |pivotal_story|
+              story = get_or_create_story('pivotal', pivotal_story)
+              pivotal_api_story = pivotal_project.stories.find(pivotal_story_id)
               unless new_project.nil?
+                if story.source_url.nil?
+                  story_url = pivotal_project.use_https? ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
+                  story.source_url = story_url + pivotal_story['source_id']
+                end
                 if story.new_record?
                   pivotal_story_id = pivotal_story['source_id']
                   pivotal_project = event['project'].get_source_project
                   pivotal_story = populate_story_hash_from_pivotal_story(pivotal_story, pivotal_project, pivotal_story_id)
-                  pivotal_api_story = pivotal_project.stories.find(pivotal_story_id)
                   pivotal_notes = pivotal_api_story.notes.all
                   if pivotal_notes.count > 0
                     pivotal_notes.each do |note|
@@ -193,9 +199,10 @@ class Api::WebHookController < ApplicationController
                 unless story.project.nil?
                   if story.new_record? || story.updated_at.nil? || event['time'] > (story.updated_at - 2.minutes)
                     synchronize_attributes(pivotal_story, story)
-                    story.save
                   end
                 end
+                story.save if story.new_record? || story.changed?
+                pivotal_api_story.update(:other_id => story.id, :integration_id => story.project.external_integration_id)
               else
                 if story.new_record?
                   story.destroy
