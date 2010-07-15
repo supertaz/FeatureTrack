@@ -29,7 +29,7 @@ class StoriesController < ApplicationController
           story.estimated_points = pivotal_story.estimate if pivotal_story.estimate != story.estimated_points
           if story.source_url.nil? && !story.source_id.nil? && !pivotal_project.nil?
             story_url = pivotal_project.use_https ? 'https://www.pivotaltracker.com/story/show/' : 'http://www.pivotaltracker.com/story/show/'
-            story.source_url = story_url + story.source_id
+            story.source_url = story_url + story.source_id.to_s
           end
           user = User.find_by_nickname(pivotal_story.owned_by)
           story.assignee = user unless user.nil?
