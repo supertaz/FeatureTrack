@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20100715223520) do
     t.integer  "execution_priority"
     t.string   "affected"
     t.string   "functional_area"
+    t.integer  "against_story_id"
     t.string   "against_story_source"
     t.integer  "developer_id"
     t.integer  "environment_id"
@@ -45,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20100715223520) do
     t.boolean  "invalid",              :default => false
   end
 
-  add_index "defects", ["against_story_source", "status", "id"], :name => "dfct_story_stat"
+  add_index "defects", ["against_story_source", "against_story_id", "status", "id"], :name => "dfct_story_stat"
   add_index "defects", ["developer_id", "status", "id"], :name => "dfct_dev_stat"
   add_index "defects", ["environment_id", "status", "id"], :name => "dfct_env_stat"
   add_index "defects", ["execution_priority", "status", "id"], :name => "dfct_execpri_stat"
@@ -126,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20100715223520) do
 
   add_index "notes", ["author_id"], :name => "index_notes_on_author_id"
   add_index "notes", ["story_id"], :name => "index_notes_on_story_id"
+  add_index "notes", ["story_source", "source_id"], :name => "index_notes_on_story_source_and_source_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -266,8 +268,8 @@ ActiveRecord::Schema.define(:version => 20100715223520) do
   add_index "stories", ["project_id", "story_type"], :name => "index_stories_on_project_id_and_story_type"
   add_index "stories", ["requestor_id"], :name => "index_stories_on_requestor_id"
   add_index "stories", ["status", "against_story_id"], :name => "index_stories_on_status_and_against_story_id"
+  add_index "stories", ["status", "linked_story_count"], :name => "index_stories_on_status_and_linked_story_count"
   add_index "stories", ["status"], :name => "index_stories_on_status"
-  add_index "stories", ["status"], :name => "index_stories_on_status_and_linked_story_count"
   add_index "stories", ["story_source", "source_id"], :name => "index_stories_on_story_source_and_source_id", :unique => true
   add_index "stories", ["story_type"], :name => "index_stories_on_story_type"
 
