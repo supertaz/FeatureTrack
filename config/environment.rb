@@ -26,15 +26,16 @@ Rails::Initializer.run do |config|
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
 
-  config.gem 'haml', :version => '>=3.0.12'
-  config.gem 'formtastic', :version => '>=0.9.8'
-  config.gem 'validation_reflection'
-  config.gem 'pivotal-tracker', :version => '>= 0.2.0.2'
-  config.gem 'authlogic'
-  config.gem 'compass', :version => '>=0.10.2'
-  config.gem 'searchlogic'
-  config.gem 'rdiscount'
-  config.gem 'sanitize'
+  config.gem 'haml', :version => '>= 3.0.15'
+  config.gem 'formtastic', :version => '>= 0.9.10'
+  config.gem 'validation_reflection', :version => '>= 0.3.7'
+  config.gem 'pivotal-tracker', :version => '>= 0.2.0.6'
+  config.gem 'paperclip', :version => '>= 2.3.3'
+  config.gem 'authlogic', :version => '>= 2.1.5'
+  config.gem 'compass', :version => '>= 0.10.2'
+  config.gem 'searchlogic', :version => '>= 2.4.21'
+  config.gem 'rdiscount', :version => '>= 1.6.5'
+  config.gem 'sanitize', :version => '>= 1.2.1'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

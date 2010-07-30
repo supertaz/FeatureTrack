@@ -16,6 +16,8 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     @note = Note.new(:story => @story)
+    @notes = @story.notes
+    @attachments = @story.attached_files
   end
 
   def update_remote_status
@@ -52,6 +54,11 @@ class StoriesController < ApplicationController
       end
     end
     redirect_to story_url(story)
+  end
+
+  def attach_file
+    @story = Story.find(params[:id])
+    @story.attached_files
   end
 
   def promote
@@ -252,32 +259,48 @@ class StoriesController < ApplicationController
   def move
     case request.method
       when :get
-        key_object = current_user.get_api_key('pivotal')
-        unless key_object.nil?
-          PivotalTracker::Client.token = key_object.api_key
-          project = PivotalTracker::Project.find(params[:project_id])
-          @story = project.stories.find(params[:story_id].to_i)
-          @story.project_id = Project.find_by_source_id(params[:project_id]).id
-          render 'project_options'
-        end
+        project = Project.find(params[:project_id])
+        @story = project.stories.find(params[:story_id].to_i)
+        render 'project_options'
       when :put
-        key_object = current_user.get_api_key('pivotal')
-        unless key_object.nil?
-          PivotalTracker::Client.token = key_object.api_key
-          project = PivotalTracker::Project.find(params[:project_id])
+          project = Project.find(params[:project_id])
           @story = project.stories.find(params[:story_id].to_i)
-          target_project = Project.find(params[:pivotal_tracker_story][:project_id])
-          new_project = target_project.get_source_project
-          if @story.update({:project_id => new_project.id})
+          target_project = Project.find(params[:story][:project_id])
+          success = false
+          case @story.story_source
+            when 'pivotal'
+              pivotal_project = project.get_source_project
+              pivotal_story = pivotal_project.stories.find(@story.source_id)
+              case target_project.source
+                when 'pivotal'
+                  if pivotal_story.move_to_project(target_project.source_id)
+                    success = true
+                  end
+                when 'internal'
+                  if pivotal_story.delete
+                    success = true
+                  end
+              end
+            when 'internal'
+              case target_project.source
+                when 'pivotal'
+                  @story.status = 'New'
+                  success = true
+                when 'internal'
+                  success = true
+              end
+          end
+          if success
+            @story.project = target_project
+            @story.save
             flash[:notice] = 'Story successfully moved'
           else
             flash[:error] = 'Unable to move story'
           end
-          redirect_to root_url
-        end
+          redirect_to @story
       else
         flash[:error] = 'Illegal request method: ' + request.method.to_s
-        redirect_to root_url
+        redirect_to @story
     end
   end
 end

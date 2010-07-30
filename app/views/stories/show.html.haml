@@ -109,10 +109,23 @@
     %br
     #{markdown @story.description}
 
-  - if @story.notes.count > 0
+    %p.attachments
+      %strong Attachments:
+      - if @attachments.count > 0
+        - @attachments.each do |attachment|
+          .attachment
+            = link_to attachment.attached_file_name, attachment.attached_url
+      - else
+        This story currently has no attachments
+      - form_for @story, :html => {:multipart => true } do |f|
+        - f.fields_for :attached_files do |file_form|
+          = file_form.file_field :attached
+        = f.submit 'Upload file'
+
+  - if @notes.count > 0
     %p.notes
       %strong Notes:
-    - @story.notes.each do |note|
+    - @notes.each do |note|
       .note
         %strong
           %i
