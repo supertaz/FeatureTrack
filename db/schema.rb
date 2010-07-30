@@ -273,15 +273,18 @@ ActiveRecord::Schema.define(:version => 20100729195530) do
     t.integer  "original_points"
     t.string   "against_story_source"
     t.integer  "linked_story_count",   :default => 0, :null => false
+    t.integer  "open_story_count"
   end
 
   add_index "stories", ["against_story_id"], :name => "index_stories_on_against_story_id"
   add_index "stories", ["linked_story_count"], :name => "index_stories_on_linked_story_count"
+  add_index "stories", ["open_story_count"], :name => "index_stories_on_open_story_count"
   add_index "stories", ["project_id", "status"], :name => "index_stories_on_project_id_and_status"
   add_index "stories", ["project_id", "story_type"], :name => "index_stories_on_project_id_and_story_type"
   add_index "stories", ["requestor_id"], :name => "index_stories_on_requestor_id"
   add_index "stories", ["status", "against_story_id"], :name => "index_stories_on_status_and_against_story_id"
   add_index "stories", ["status", "linked_story_count"], :name => "index_stories_on_status_and_linked_story_count"
+  add_index "stories", ["status", "open_story_count"], :name => "index_stories_on_status_and_open_story_count"
   add_index "stories", ["status"], :name => "index_stories_on_status"
   add_index "stories", ["story_source", "source_id"], :name => "index_stories_on_story_source_and_source_id", :unique => true
   add_index "stories", ["story_type"], :name => "index_stories_on_story_type"
