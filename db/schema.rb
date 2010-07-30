@@ -9,7 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100715223520) do
+ActiveRecord::Schema.define(:version => 20100729195530) do
+
+  create_table "attached_files", :force => true do |t|
+    t.integer  "story_id"
+    t.integer  "attached_by_id"
+    t.string   "attached_file_name"
+    t.string   "attached_content_type"
+    t.integer  "attached_file_size"
+    t.datetime "attached_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attached_files", ["story_id", "id"], :name => "index_attached_files_on_story_id_and_id"
 
   create_table "defects", :force => true do |t|
     t.string   "status"

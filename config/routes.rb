@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :stories, :except => [:destroy], :member =>
           {       :update_remote_status => :get,
+                  :attach_file => [:post, :put],
                   :promote => :get,
                   :start => :get,
                   :qa => :get,

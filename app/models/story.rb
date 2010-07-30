@@ -14,6 +14,8 @@ class Story < ActiveRecord::Base
 
   has_many :notes
   has_many :defects, :class_name => 'Story', :foreign_key => 'against_story_id'
+  has_many :attached_files
+  accepts_nested_attributes_for :attached_files
 
   has_and_belongs_to_many :release_notes
 
